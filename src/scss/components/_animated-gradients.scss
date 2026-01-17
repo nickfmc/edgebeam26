@@ -1,0 +1,245 @@
+/* ==========================================================================
+   ANIMATED GRADIENTS
+   Subtle animated gradient backgrounds for landing page sections
+   ========================================================================== */
+
+// Keyframes for gradient animations
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient-rotate {
+  0% {
+    transform: rotate(0deg) scale(1.5);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.5);
+  }
+  100% {
+    transform: rotate(360deg) scale(1.5);
+  }
+}
+
+@keyframes gradient-pulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-10px);
+  }
+  75% {
+    transform: translateY(-30px) translateX(5px);
+  }
+}
+
+// Base animated gradient class
+.c-animated-gradient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background-size: 200% 200%;
+    animation: gradient-shift 15s ease infinite;
+  }
+}
+
+// Hero gradient - Main colorful gradient from Figma
+.c-animated-gradient--hero {
+  background: linear-gradient(135deg, 
+    var(--color-blue-3) 0%, 
+    var(--color-blue-5) 25%,
+    var(--color-yellow-1) 50%,
+    var(--color-orange) 75%,
+    var(--color-blue-3) 100%
+  );
+  background-size: 400% 400%;
+  animation: gradient-shift 20s ease infinite;
+  
+  // Overlay for better text contrast
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
+  }
+}
+
+// Leadership section gradient - Blue tones
+.c-animated-gradient--leadership {
+  background: linear-gradient(135deg,
+    var(--color-blue-2) 0%,
+    var(--color-blue-3) 50%,
+    var(--color-blue-2) 100%
+  );
+  background-size: 300% 300%;
+  animation: gradient-shift 25s ease infinite;
+  
+  // Decorative circles overlay
+  &::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--color-blue-4) 0%, transparent 70%);
+    opacity: 0.3;
+    top: -200px;
+    right: -200px;
+    animation: float 20s ease-in-out infinite;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--color-blue-5) 0%, transparent 70%);
+    opacity: 0.2;
+    bottom: -100px;
+    left: -100px;
+    animation: float 15s ease-in-out infinite reverse;
+  }
+}
+
+// Contact section gradient overlay
+.c-animated-gradient--contact {
+  background: linear-gradient(90deg,
+    rgba(var(--color-blue-6), 0.3) 0%,
+    transparent 50%
+  );
+}
+
+// Decorative floating elements mixin
+@mixin floating-decoration($size, $color, $duration: 20s) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  position: absolute;
+  background: radial-gradient(circle, #{$color} 0%, transparent 70%);
+  animation: float $duration ease-in-out infinite;
+  pointer-events: none;
+}
+
+// Gradient text effect
+.c-gradient-text {
+  background: var(--gradient-blue-3-blue-2-yellow-1-orange);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+// Gradient border effect
+.c-gradient-border {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    border-radius: inherit;
+    background: var(--gradient-blue-3-purple-orange);
+    background-size: 200% 200%;
+    animation: gradient-shift 10s ease infinite;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+  }
+}
+
+// Animated gradient button
+.c-btn--gradient {
+  position: relative;
+  overflow: hidden;
+  background: var(--gradient-orange-yellow-1);
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+  border: none;
+  color: var(--color-blue-1);
+  
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+// Subtle shimmer effect
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.c-shimmer {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .c-animated-gradient,
+  .c-animated-gradient::before,
+  .c-animated-gradient::after,
+  .c-animated-gradient--hero,
+  .c-animated-gradient--leadership::before,
+  .c-animated-gradient--leadership::after,
+  .c-gradient-text,
+  .c-gradient-border::before,
+  .c-btn--gradient,
+  .c-shimmer::after {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}

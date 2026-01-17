@@ -1,0 +1,21 @@
+/* ==========================================================================
+   MAIN LOGO
+   ========================================================================== */
+
+.c-logo-main {
+  position: absolute;
+  top: 38px;
+  z-index: z(default);
+  & a {
+    display: block;
+  }
+  & img {
+    display: block;
+    width: 170px;
+    height: auto;
+    max-height: $page-header-height;
+    @media (width >= $bp-large) {
+      width: 255px;
+     } 
+  }
+}

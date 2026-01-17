@@ -1,0 +1,104 @@
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.c-page-footer {
+  // padding-top: 100px;
+a[href^="tel"] {
+  color: #fff; /* Your desired color */
+  text-decoration: none; /* Removes underline */
+}
+
+}
+
+
+.c-page-footer-upper {
+  background-color: var(--color-blue-2);
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 40px;
+  padding-top: 50px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  color: #fff;
+  .o-wrapper-wide {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-5xl, 40px);
+    flex-wrap: wrap;
+  }
+  img {
+    width: 340px;
+    height: 74px;
+
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.c-page-footer-lower {
+  color: #fff;
+  font-size: 15px;
+  display: flex;
+padding: 25px 25px;
+flex-direction: column;
+align-items: center;
+gap: var(--spacing-7xl, 64px);
+align-self: stretch; 
+background: linear-gradient(270deg, #147BD1 1.25%, #82D5FD 11.21%, #C7E6FF 15.07%, #FFE5D2 24.78%, #FDCF12 36.14%, #FF9332 51.76%, #D5A797 57.65%, #B0B7ED 64.13%, #669EE5 72.8%, #087DDA 78.31%, #0321D1 86.32%);
+  > div {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .o-wrapper-wide {
+    > div {
+      display: flex;
+justify-content: space-between;
+align-items: center;
+align-content: center;
+row-gap: var(--spacing-3xl, 24px);
+align-self: stretch;
+flex-wrap: wrap;
+    }
+  }
+}
+
+.c-footer-social {
+  display: flex;
+align-items: center;
+gap: 24px;
+}
+
+.c-footer-navigation {
+  ul {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    li {
+      a {
+        color: #fff;
+      }
+    }
+  }
+}
+
+/* Example CSS for .stretch-link */
+.stretch-link {
+  position: relative; /* Establishes a positioning context */
+}
+
+.stretch-link a { /* Target your linked elements */
+  position: relative; /* Or absolute, depending on setup */
+  z-index: 1; /* Ensures link is clickable */
+}
+
+.stretch-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Below the actual link */
+}
