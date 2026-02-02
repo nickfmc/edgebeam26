@@ -22,3 +22,11 @@
   max-width: $wrapper-width-narrow;
   width: 100%;
 }
+
+// Backgrounds
+.u-blue-burst {
+  // blue radial gradient background --color-blue-3 to trasparent
+  background: radial-gradient(circle at center, #0047BB 0%, rgba(15, 47, 95, 0) 50%);
+
+
+}

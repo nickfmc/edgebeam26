@@ -167,6 +167,21 @@ add_action('admin_head', 'custom_acf_repeater_colors');
 // add_filter('acf/settings/show_admin', '__return_false');
 
 
+/************* ACF OPTIONS PAGES *****************/
+
+// Register Bottom Banner Options Page
+if( function_exists('acf_add_options_page') ) {
+  acf_add_options_page(array(
+    'page_title'  => 'Bottom Banner Settings',
+    'menu_title'  => 'Bottom Banner',
+    'menu_slug'   => 'bottom-banner-settings',
+    'capability'  => 'edit_posts',
+    'icon_url'    => 'dashicons-megaphone',
+    'position'    => 60,
+    'redirect'    => false
+  ));
+}
+
 
 /************* CUSTOM BACKEND FOOTER **************/
 // function gdt_custom_admin_footer() {

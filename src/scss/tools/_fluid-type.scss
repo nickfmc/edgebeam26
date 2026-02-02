@@ -14,7 +14,7 @@ $default-min-bp: map.get($media-breakpoints, "mobile");
 $default-max-bp: map.get($media-breakpoints, "desktop");
 
 @function to-rems($px) {
-  $rems: math.div($px, 16px) * 1rem;
+  $rems: math.div($px, 18px) * 1rem;
   @return $rems;
 }
 

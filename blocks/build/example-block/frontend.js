@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".c-example-block").forEach(function(e){e.classList.add("c-example-block--loaded")})});

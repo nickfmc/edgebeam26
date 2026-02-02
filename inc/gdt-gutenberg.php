@@ -36,49 +36,100 @@ add_action( 'enqueue_block_editor_assets', 'gdt_customizing_blocks' );
 
 
 
-function custom_block_category( $categories ) {
-  return array_merge(
+function gdt_custom_block_categories( $categories ) {
+  // Check if our custom category already exists
+  $category_exists = false;
+  foreach ( $categories as $category ) {
+    if ( $category['slug'] === 'gdt-blocks' ) {
+      $category_exists = true;
+      break;
+    }
+  }
+  
+  // Add our custom category if it doesn't exist
+  if ( ! $category_exists ) {
+    $categories = array_merge(
       array(
-          array(
-              'slug' => 'myblocks',
-              'title' => __( 'Custom Blocks', 'myblocks' ),
-          ),
+        array(
+          'slug'  => 'gdt-blocks',
+          'title' => __( 'Custom Blocks', 'gdt-theme' ),
+          'icon'  => 'block-default',
+        ),
       ),
       $categories
-  );
+    );
+  }
+  
+  return $categories;
 }
-add_filter( 'block_categories_all', 'custom_block_category', 10, 2 );
+add_filter( 'block_categories_all', 'gdt_custom_block_categories' );
 
 
-// Register Block Scripts
-function maw_register_guten_script() {
-  function get_script_version($script_path) {
-    $file_path = get_template_directory() . $script_path;
-    if (file_exists($file_path)) {
-        return filemtime($file_path);
+
+
+/**
+ * Register custom blocks
+ */
+function gdt_register_custom_blocks() {
+  // Get the build directory (centralized build system)
+  $build_dir = get_template_directory() . '/blocks/build';
+  
+  if ( ! file_exists( $build_dir ) ) {
+    error_log( 'GDT Blocks: Build directory does not exist: ' . $build_dir );
+    return;
+  }
+  
+  // Scan for block directories in the build folder
+  $block_folders = array_filter( glob( $build_dir . '/*' ), 'is_dir' );
+  
+  if ( empty( $block_folders ) ) {
+    error_log( 'GDT Blocks: No block folders found in: ' . $build_dir );
+    return;
+  }
+  
+  // Register each block
+  foreach ( $block_folders as $block_folder ) {
+    $block_json = $block_folder . '/block.json';
+    $block_name = basename( $block_folder );
+    
+    if ( file_exists( $block_json ) ) {
+      $result = register_block_type( $block_folder );
+      
+      // Log registration attempts for debugging
+      if ( $result ) {
+        error_log( 'GDT Blocks: Successfully registered block: ' . $block_name );
+        
+        // Extra logging for keller-cares-card
+        if ( $block_name === 'keller-cares-card' ) {
+          error_log( 'GDT Blocks: Keller Cares Card block registered with name: ' . $result->name );
+        }
+      } else {
+        error_log( 'GDT Blocks: Failed to register block: ' . $block_name );
+      }
+    } else {
+      error_log( 'GDT Blocks: Missing block.json in: ' . $block_folder );
     }
-    return false; 
+  }
 }
-  wp_register_script( 'splide', get_template_directory_uri() .'/src/js/splide.min.js', [ 'acf' ], get_script_version('/src/js/splide.min.js'));
-  wp_register_script( 'slider', get_template_directory_uri() .'/template-part/block/slider/slider.js', [ 'splide' , 'acf' ], get_script_version('/template-part/block/slider/slider.js'));
-  wp_register_script( 'swiper', get_template_directory_uri() .'/dist/swiper-bundle.min.js', [], get_script_version('/dist/swiper-bundle.min.js')); 
-  wp_register_script( 'effects', get_template_directory_uri() .'/template-part/block/swiper-material/effect-material.min.js', [], get_script_version('/template-part/block/swiper-material/effect-material.min.js'));
-  wp_register_script( 'material-slider', get_template_directory_uri() .'/template-part/block/swiper-material/slider.js', [ 'swiper' ,'effects' , 'acf' ], get_script_version('/template-part/block/swiper-material/slider.js'));
-  wp_register_script( 'project-slider', get_template_directory_uri() .'/template-part/block/swiper-projects/project-slider.js', [ 'swiper' ,'effects' , 'acf' ], get_script_version('/template-part/block/swiper-projects/project-slider.js'));
+add_action( 'init', 'gdt_register_custom_blocks' );
+
+/**
+ * Enqueue block styles for both editor and frontend
+ */
+function gdt_enqueue_block_styles() {
+  // Check if blocks CSS file exists
+  $blocks_css = get_template_directory() . '/dist/blocks.css';
+  
+  if ( file_exists( $blocks_css ) ) {
+    wp_enqueue_style(
+      'gdt-blocks-style',
+      get_theme_file_uri( '/dist/blocks.css' ),
+      array(),
+      filemtime( $blocks_css )
+    );
+  }
 }
-  add_action( 'init', 'maw_register_guten_script' );
-
-// Add ACF json blocks.
-
-function register_acf_blocks() { 
-  register_block_type(  get_stylesheet_directory() . '/template-part/block/button/block.json' );
-  register_block_type(  get_stylesheet_directory() . '/template-part/block/swiper-material/block.json' );
-  register_block_type(  get_stylesheet_directory() . '/template-part/block/swiper-projects/block.json' );
-}
-
-add_action( 'init', 'register_acf_blocks', 5 );
-
-
-
-
+add_action( 'wp_enqueue_scripts', 'gdt_enqueue_block_styles' );
+add_action( 'enqueue_block_editor_assets', 'gdt_enqueue_block_styles' );
 ?>
+

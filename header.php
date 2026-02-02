@@ -5,18 +5,25 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  
   <!-- we can safely use the favicon uploader in customizer now. plugins such as perf matters will add the missing black favicon.io -->
-  <?php // Load Typekit fonts ------------------------------- ?>
-<link rel="stylesheet" href="https://use.typekit.net/kyw6yru.css">
+  <?php // Load google fonts ------------------------------- ?>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   <?php // other html head stuff (before WP/theme scripts are loaded) ------- ?>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
   <?php wp_head(); // wordpress head functions -- DONOTREMOVE ?>
 
   <?php // START Google Analytics here ?>
   <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HF3P5GCYB"></script> <script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-1HF3P5GCYB'); </script>
   <?php // END Analytics ?>
+  <!-- GSAP Core Library (Required) -->
+
+
 </head>
- 
+
+
 <body <?php body_class(pretty_body_class()); ?> itemscope itemtype="https://schema.org/WebPage">
 <!-- Skip links should be the first focusable elements -->
 <div class="skip-links" role="navigation" aria-label="Skip links navigation">
@@ -25,7 +32,7 @@
     <a href="#c-page-footer" class="skip-link" role="link" aria-label="Skip to page footer">Skip to page footer</a>
 </div>
 <!-- END Skip links should be the first focusable elements -->
- <header class="pre-header"><p>New Website Coming March 2026!</p></header>
+
   <header id="c-page-header" class="o-section c-page-header" role="banner" itemscope itemtype="https://schema.org/WPHeader">
     <div class="o-wrapper-wide  u-relative">
       <?php get_template_part( 'template-part/header/logo' ); ?>

@@ -99,7 +99,7 @@
 .u-multigrad {
   position: relative;
   &::after {
-  background: linear-gradient(270deg, rgba(253, 207, 18, 0.00) -6.12%, rgba(248, 224, 142, 0.53) 6.56%, rgba(255, 246, 210, 0.60) 15.91%, rgba(0, 71, 187, 0.88) 28.28%, var(--Blue-2, #001871) 52.9%);
+  background: linear-gradient(270deg, rgba(253, 207, 18, 0.00) -6.12%, rgba(248, 224, 142, 0.53) 6.56%, rgba(255, 246, 210, 0.60) 15.91%, rgba(0, 71, 187, 0.88) 28.28%, var(--color-blue-3) 52.9%);
   content: '';
   position: absolute;
   top: 0;

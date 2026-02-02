@@ -1,0 +1,482 @@
+/* ==========================================================================
+   VID// Modal-specific adaptations (extends existing .c-popup-form styles)
+.c-video-modal__popup {
+  // Single column layout for full-width video
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: none !important; // Override any inherited grid layout
+  max-width: 90vw;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto; // Allow the entire modal to scroll
+  padding: 0;
+  margin: auto; // Ensure centering
+  
+  // Custom scrollbar for the modal
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(1, 41, 87, 0.6);
+    border-radius: 4px;
+    
+    &:hover {
+      background: rgba(1, 41, 87, 0.8);
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 40px);
+  }
+}LES
+   Uses existing popup form styles from _popup-form.scss
+   ========================================================================== */
+
+// Video modal cover (the clickable trigger)
+.c-video-modal {
+  &__container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  &__cover {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  &__image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(1, 41, 87, 0.9) 0%, rgba(1, 41, 87, 0.6) 20%, transparent 100%);
+    color: white;
+    
+    // &::before {
+    //   content: '';
+    //   position: absolute;
+    //   bottom: 0;
+    //   left: 1px;
+    //   right: 0;
+    //   height: 1px;
+    //   background: white;
+    // }
+  }
+  
+  &__overlay-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px 0;
+    margin: 0 20px;
+    border-top: 1px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  &__title {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #ffffff;
+    flex: 1;
+    margin: 0;
+  }
+  
+  &__play-button {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    margin-left: 20px;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+      transition: transform 0.2s ease;
+    }
+    
+    &:hover svg {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Modal-specific adaptations (extends existing .c-popup-form styles)
+.c-popup-form.c-video-modal__popup {
+  // Single column layout for full-width video
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: none !important; // Override any inherited grid layout
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto !important; // Override the hidden overflow from base popup form
+  padding: 0;
+  margin: auto; // Ensure centering
+  
+  // Custom scrollbar for the modal
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(1, 41, 87, 0.6);
+    border-radius: 4px;
+    
+    &:hover {
+      background: rgba(1, 41, 87, 0.8);
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 40px);
+  }
+}
+
+// Ensure video modal overlay stays fixed and centered
+.c-popup-overlay.c-video-modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+// Video section (flexible height)
+.c-video-modal__video-section {
+  padding: 10px;
+  background: #000000;
+  border-radius: 30px 30px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-shrink: 0; // Prevent video from shrinking
+  
+  @media (max-width: 1024px) {
+    border-radius: 20px 20px 0 0;
+    padding: 8px;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 5px;
+  }
+}
+
+.c-video-modal__video-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.c-video-modal__video-wrapper {
+  width: 100%;
+  max-width: 100%;
+}
+
+// Transcript section (below video)
+.c-video-modal__transcript-section {
+  background: rgba(1, 41, 87, 0.95);
+  border-radius: 0 0 30px 30px;
+  flex-shrink: 0; // Prevent shrinking
+  
+  @media (max-width: 1024px) {
+    border-radius: 0 0 20px 20px;
+  }
+}
+
+// Transcript accordion
+.c-video-modal__transcript-accordion {
+  width: 100%;
+}
+
+.c-video-modal__transcript-toggle {
+  width: 100%;
+  padding: 30px;
+  background: transparent;
+  border: none;
+  color: #ffffff !important;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease;
+  
+  &:hover,
+  &:focus,
+  &:active,
+  &[aria-expanded="true"] {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  &:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: -2px;
+  }
+  
+  &[aria-expanded="true"] {
+    .c-video-modal__transcript-icon svg {
+      transform: rotate(180deg);
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    padding: 25px;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 20px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.c-video-modal__transcript-title {
+  flex: 1;
+}
+
+.c-video-modal__transcript-icon {
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+  
+  svg {
+    transition: transform 0.3s ease;
+  }
+}
+
+.c-video-modal__transcript-content {
+  padding: 0 30px 0; // Remove bottom padding when closed
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  
+  &.is-open {
+    max-height: 1000px; // Set a very high max height to allow expansion
+    padding: 0 30px 30px; // Add bottom padding when open
+  }
+  
+  @media (max-width: 1024px) {
+    padding: 0 25px 0;
+    
+    &.is-open {
+      padding: 0 25px 25px;
+      max-height: calc(25vh);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0 20px 0;
+    
+    &.is-open {
+      padding: 0 20px 20px;
+      max-height: calc(20vh);
+    }
+  }
+  
+  .c-video-modal__transcript-text {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    
+    @media (max-width: 768px) {
+      font-size: 14px;
+      line-height: 20px;
+    }
+    
+    p {
+      margin: 0 0 15px 0;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Close button positioning adjustment for new layout
+.c-video-modal__popup .c-popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  
+  @media (max-width: 768px) {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+// Editor-specific styles
+.wp-block-gdt-theme-video-modal {
+  .c-video-modal__upload-button {
+    padding: 20px;
+    border: 2px dashed #ccc;
+    background: #f9f9f9;
+    border-radius: 8px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    
+    &:hover {
+      border-color: #999;
+    }
+  }
+  
+  .c-video-modal__image-wrapper {
+    position: relative;
+    
+    .c-video-modal__image-controls {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+      
+      .c-video-modal__replace-image,
+      .c-video-modal__remove-image {
+        font-size: 12px;
+        padding: 6px 12px;
+        min-height: auto;
+        line-height: 1.2;
+      }
+    }
+    
+    // Legacy support for direct button placement
+    .c-video-modal__remove-image:not(.c-video-modal__image-controls .c-video-modal__remove-image) {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+    }
+  }
+  
+  .c-video-modal__preview-info {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    font-size: 14px;
+    
+    p {
+      margin: 0 0 10px 0;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    strong {
+      color: #333;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .c-video-modal {
+    &__overlay {
+      padding: 20px;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+    
+    &__title {
+      font-size: 16px;
+      line-height: 20px;
+      margin-bottom: 10px;
+    }
+    
+    &__play-button {
+      margin-left: 0;
+      width: 40px;
+      height: 40px;
+      align-self: flex-end;
+    }
+  }
+}
+
+// Alternate style (no gradient, centered play button)
+.c-video-modal--alternate {
+  .c-video-modal__overlay--alternate {
+    background: none !important; // Remove gradient background
+    
+    .c-video-modal__overlay-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 0;
+      margin: 0;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
+    }
+    
+    .c-video-modal__play-button {
+      margin: 0;
+      // Play button inherits existing styles but is now centered
+    }
+    
+    .c-video-modal__title {
+      display: none; // Hide title in alternate style
+    }
+  }
+}

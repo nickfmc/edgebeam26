@@ -1,0 +1,153 @@
+{
+    "key": "group_bottom_banner",
+    "title": "Bottom Banner Settings",
+    "fields": [
+        {
+            "key": "field_banner_enabled",
+            "label": "Enable Bottom Banner",
+            "name": "banner_enabled",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Turn on to display the bottom banner popup across the site",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled",
+            "ui": 1
+        },
+        {
+            "key": "field_banner_title",
+            "label": "Banner Title",
+            "name": "banner_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Main heading for the banner",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_banner_enabled",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Come Meet Us at AIoT World Expo",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_banner_text",
+            "label": "Banner Text",
+            "name": "banner_text",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Main description text for the banner",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_banner_enabled",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Discover the transformative power of one-to-many data distribution where it counts most, in the last mile.",
+            "maxlength": "",
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_banner_link_text",
+            "label": "Link Text",
+            "name": "banner_link_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Text for the call-to-action link",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_banner_enabled",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Schedule a Meeting",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_banner_link_url",
+            "label": "Link URL",
+            "name": "banner_link_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "URL for the call-to-action link",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_banner_enabled",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "mailto:sbrumer@edgebeamwireless.com",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "bottom-banner-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

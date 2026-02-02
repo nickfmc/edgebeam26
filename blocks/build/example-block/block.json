@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gdt-theme/example-block",
+  "version": "1.0.0",
+  "title": "Example Block",
+  "category": "gdt-blocks",
+  "icon": "block-default",
+  "description": "An example block to use as a template for future blocks.",
+  "keywords": ["example", "template", "gdt"],
+  "textdomain": "gdt-theme",
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Example Block Title"
+    },
+    "content": {
+      "type": "string",
+      "default": "This is example content for the block."
+    },
+    "alignment": {
+      "type": "string",
+      "default": "left"
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true,
+    "className": true,
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "script": "file:./frontend.js",
+  "render": "file:./render.php"
+}

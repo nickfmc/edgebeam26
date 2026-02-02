@@ -4,6 +4,7 @@
 
 p {
   line-height: $line-height-loose;
+  letter-spacing: -0.18px;
   margin: 0 0 1rem 0;
   padding: 0;
 }
@@ -14,4 +15,8 @@ p {
 
 p + .c-btn {
   margin-top: 15px;
+}
+
+p.has-large-font-size {
+  line-height: 1.54;
 }

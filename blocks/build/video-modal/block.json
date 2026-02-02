@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gdt-theme/video-modal",
+  "version": "1.2.0",
+  "title": "Video Modal",
+  "category": "gdt-blocks",
+  "icon": "video-alt3",
+  "description": "A video modal block with cover image, title, YouTube video, and transcript. Can also be used for testimonials with featured image and ACF video_url field.",
+  "keywords": ["video", "modal", "youtube", "transcript", "gdt"],
+  "textdomain": "gdt-theme",
+  "attributes": {
+    "useTestimonialFields": {
+      "type": "boolean",
+      "default": false
+    },
+    "coverImage": {
+      "type": "object",
+      "default": null
+    },
+    "title": {
+      "type": "string",
+      "default": "Watch Video"
+    },
+    "youtubeVideoId": {
+      "type": "string",
+      "default": ""
+    },
+    "transcript": {
+      "type": "string",
+      "default": ""
+    },
+    "alignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "useAlternateStyle": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true,
+    "className": true,
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "script": "file:./frontend.js",
+  "render": "file:./render.php"
+}

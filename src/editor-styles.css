@@ -6,8 +6,8 @@
    VARIABLES
    ========================================================================== */
 :root {
-  --font-primary: "Gravita GEO", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-secondary: "Gravita GEO", Georgia, serif;
+  --font-primary: "Outfit", sans-serif;
+  --font-secondary: "Outfit", sans-serif;
   --line-height-tight: 1.2;
   --line-height-normal: 1.5;
   --line-height-loose: 1.8;
@@ -38,8 +38,9 @@
   --color-purple: #8f1a95;
   --color-gray-1: #1d252d;
   --color-gray-2: #333f48;
-  --color-gray-3: #c1c6c8;
-  --color-gray-4: #e9e9e9;
+  --color-gray-3: #7c878e;
+  --color-gray-4: #c1c6c8;
+  --color-gray-5: #e9e9e9;
   --color-warm-gray-1: #aea8a5;
   --color-warm-gray-2: #cfcdc9;
   --gradient-blue-3-blue-2-yellow-1-orange: linear-gradient(90deg, #0047bb 0%, #8dc8e8 47%, #fdcf12 77%, #ff9425 97%);
@@ -133,6 +134,10 @@
   margin-right: auto;
   max-width: 760px;
   width: 100%;
+}
+
+.u-blue-burst {
+  background: radial-gradient(circle at center, #0047BB 0%, rgba(15, 47, 95, 0) 50%);
 }
 
 /* ==========================================================================
@@ -3244,7 +3249,7 @@
     - root font sizes set here so REMs scale with screen size increases
    ========================================================================== */
 html {
-  font-size: 16px;
+  font-size: 18px;
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
@@ -3252,8 +3257,8 @@ html {
 body {
   overflow-x: hidden;
   color: #000;
-  font-family: "gravita-geo-variable", sans-serif;
-  line-height: 1.5;
+  font-family: "Outfit", sans-serif;
+  line-height: 1.55;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
 }
@@ -3265,7 +3270,7 @@ blockquote {
   position: relative;
   padding: 1em 1.5em;
   margin: 30px 0;
-  font-size: clamp(1.13rem, 0.6vw + 0.98rem, 1.5rem);
+  font-size: clamp(1rem, 0.6vw + 0.87rem, 1.33rem);
   color: #323232;
 }
 blockquote::before {
@@ -3305,11 +3310,10 @@ blockquote::before {
   vertical-align: -0.4rem;
 }*/
 h1, .h1-style, h2, .h2-style, h3, .h3-style, h4, .h4-style, h5, .h5-style, h6, .h6-style {
-  color: var(--Blue-2, #001871);
-  font-family: "gravita-geo-variable", serif;
-  font-weight: 700;
+  color: #0f105f;
+  font-family: "Outfit", sans-serif;
+  font-weight: 500;
   line-height: 1.1;
-  margin: 0 0 1.5rem 0;
 }
 
 h1 a, .h1-style a, h2 a, .h2-style a, h3 a, .h3-style a, h4 a, .h4-style a, h5 a, .h5-style a, h6 a, .h6-style a {
@@ -3317,57 +3321,66 @@ h1 a, .h1-style a, h2 a, .h2-style a, h3 a, .h3-style a, h4 a, .h4-style a, h5 a
 }
 
 h1 {
-  font-size: clamp(2.5rem, 2vw + 2rem, 3.75rem);
+  font-size: clamp(2.22rem, 2vw + 1.78rem, 3.33rem);
+  margin: 0 0 1.5rem 0;
 }
 @media (width >= 768px) {
   h1 {
-    font-size: clamp(3.75rem, 2vw + 3.25rem, 5rem);
+    font-size: clamp(3.33rem, 2.6vw + 2.76rem, 4.78rem);
   }
 }
 
 h2 {
-  font-size: clamp(2.5rem, 1vw + 2.25rem, 3.13rem);
+  font-size: clamp(2.22rem, 2vw + 1.78rem, 3.33rem);
+  margin: 0 0 1.5rem 0;
 }
 
 h3 {
-  font-size: clamp(2rem, 1.2vw + 1.7rem, 2.75rem);
+  font-size: clamp(1.67rem, 1.8vw + 1.27rem, 2.67rem);
+  font-weight: 600;
+  margin: 0 0 1rem 0;
 }
 
 h4 {
-  font-size: clamp(2rem, 1.2vw + 1.7rem, 2.75rem);
+  font-size: clamp(1.33rem, 1.2vw + 1.07rem, 2rem);
+  margin: 0 0 1rem 0;
 }
 
 h5 {
-  font-size: clamp(1.5rem, 0.4vw + 1.4rem, 1.75rem);
-  margin-bottom: 1.2rem;
+  font-size: clamp(1.33rem, 0.4vw + 1.24rem, 1.56rem);
+  margin: 0 0 1rem 0;
 }
 
 h6 {
-  font-size: clamp(1.25rem, 0.2vw + 1.2rem, 1.38rem);
+  font-size: clamp(1.11rem, 0.4vw + 1.02rem, 1.33rem);
+  margin: 0 0 1rem 0;
 }
 
 p:not(.is-style-eyebrow) + h1, p:not(.is-style-eyebrow) + .h1-style, ol + h1, ol + .h1-style, ul + h1, ul + .h1-style,
-p:not(.is-style-eyebrow) + h2, p:not(.is-style-eyebrow) + .h2-style, ol + h2, ol + .h2-style, ul + h2, ul + .h2-style,
+p:not(.is-style-eyebrow) + h2, p:not(.is-style-eyebrow) + .h2-style, ol + h2, ol + .h2-style, ul + h2, ul + .h2-style {
+  margin-top: 2.5rem;
+}
+
 p:not(.is-style-eyebrow) + h3, p:not(.is-style-eyebrow) + .h3-style, ol + h3, ol + .h3-style, ul + h3, ul + .h3-style,
 p:not(.is-style-eyebrow) + h4, p:not(.is-style-eyebrow) + .h4-style, ol + h4, ol + .h4-style, ul + h4, ul + .h4-style,
 p:not(.is-style-eyebrow) + h5, p:not(.is-style-eyebrow) + .h5-style, ol + h5, ol + .h5-style, ul + h5, ul + .h5-style,
 p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol + .h6-style, ul + h6, ul + .h6-style {
-  margin-top: 2.8rem;
+  margin-top: 1.5rem;
 }
 
 .editor-content .h1-style,
 .h1-style,
 .is-style-h1-style {
   line-height: 1.1;
-  font-weight: 700;
+  margin: 0 0 1.5rem 0;
   letter-spacing: -0.48px;
-  font-size: clamp(2.5rem, 2vw + 2rem, 3.75rem);
+  font-size: clamp(2.22rem, 2vw + 1.78rem, 3.33rem);
 }
 @media (width >= 768px) {
   .editor-content .h1-style,
   .h1-style,
   .is-style-h1-style {
-    font-size: clamp(3.75rem, 2vw + 3.25rem, 5rem);
+    font-size: clamp(3.33rem, 2.6vw + 2.76rem, 4.78rem);
   }
 }
 
@@ -3375,63 +3388,56 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .h2-style,
 .is-style-h2-style {
   line-height: 1.1;
-  font-size: clamp(2.5rem, 1vw + 2.25rem, 3.13rem);
-  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  font-size: clamp(2.22rem, 2vw + 1.78rem, 3.33rem);
   letter-spacing: -0.48px;
-}
-@media (width >= 768px) {
-  .editor-content .h2-style,
-  .h2-style,
-  .is-style-h2-style {
-    font-size: clamp(2.5rem, 1vw + 2.25rem, 3.13rem);
-  }
 }
 
 .editor-content .h3-style,
 .h3-style,
 .is-style-h3-style {
   line-height: 1.1;
-  font-size: clamp(2rem, 1.2vw + 1.7rem, 2.75rem);
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.67rem, 1.8vw + 1.27rem, 2.67rem);
+  font-weight: 600;
   letter-spacing: -0.48px;
-  font-weight: 700;
 }
 
 .editor-content .h4-style,
 .h4-style,
 .is-style-h4-style {
   line-height: 1.1;
-  font-size: clamp(2rem, 1.2vw + 1.7rem, 2.75rem);
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.33rem, 1.2vw + 1.07rem, 2rem);
   letter-spacing: -0.48px;
-  font-weight: 700;
 }
 
 .editor-content .h5-style,
 .h5-style,
 .is-style-h5-style {
   line-height: 1.1;
-  font-size: clamp(1.5rem, 0.3vw + 1.43rem, 1.69rem);
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.33rem, 0.4vw + 1.24rem, 1.56rem);
   letter-spacing: -0.48px;
-  margin-bottom: 1.2rem;
-  font-weight: 700;
 }
 
 .editor-content .h6-style,
 .h6-style,
 .is-style-h6-style {
   line-height: 1.1;
-  font-size: clamp(1.25rem, 0.2vw + 1.2rem, 1.38rem);
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.11rem, 0.4vw + 1.02rem, 1.33rem);
   letter-spacing: -0.48px;
-  font-weight: 700;
 }
 
 .is-eyebrow, h1.is-eyebrow, .h1-style.is-eyebrow, h2.is-eyebrow, .h2-style.is-eyebrow, h3.is-eyebrow, .h3-style.is-eyebrow, h4.is-eyebrow, .h4-style.is-eyebrow, h5.is-eyebrow, .h5-style.is-eyebrow, h6.is-eyebrow, .h6-style.is-eyebrow, .is-style-eyebrow, span.is-eyebrow {
   text-transform: uppercase;
-  font-size: 18px !important;
+  font-size: 22px !important;
   letter-spacing: 1.32px !important;
   line-height: 1.2;
   letter-spacing: 1.19px;
-  font-weight: 800;
-  margin-bottom: 5px;
+  font-weight: 600;
+  margin-bottom: 13px;
 }
 @media (width >= 768px) {
   .is-eyebrow, h1.is-eyebrow, .h1-style.is-eyebrow, h2.is-eyebrow, .h2-style.is-eyebrow, h3.is-eyebrow, .h3-style.is-eyebrow, h4.is-eyebrow, .h4-style.is-eyebrow, h5.is-eyebrow, .h5-style.is-eyebrow, h6.is-eyebrow, .h6-style.is-eyebrow, .is-style-eyebrow, span.is-eyebrow {
@@ -3575,7 +3581,7 @@ button:focus {
   color: #323232;
 }
 
-.editor-content a {
+.editor-content a:not([class^=c-btn-]):not([class*=" c-btn-"]) {
   text-decoration: underline;
 }
 
@@ -3596,6 +3602,7 @@ a[href^="mailto:"] {
    ========================================================================== */
 p {
   line-height: 1.8;
+  letter-spacing: -0.18px;
   margin: 0 0 1rem 0;
   padding: 0;
 }
@@ -3608,139 +3615,19 @@ p + .c-btn {
   margin-top: 15px;
 }
 
-/* ==========================================================================
-   LINK BUTTON STYLES
-   ========================================================================== */
-.c-btn-primary {
-  display: block;
-  text-align: center;
-  margin: 1rem 0 1.75rem 0;
+p.has-large-font-size {
+  line-height: 1.54;
 }
 
-.c-blk-btn a, .c-btn-primary a, .wp-block-button.is-style-standard a.wp-block-button__link, .wp-block-button.is-style-standard .wp-block-button__link {
-  background-color: #ACACAC;
-  border: none;
-  color: #FFF;
-  display: inline-block;
-  font-weight: 700;
-  line-height: 1;
-  text-transform: uppercase;
-  padding: 0.75rem 1.25rem;
-  -webkit-transition: all 250ms ease;
-  transition: all 250ms ease;
-  white-space: nowrap;
-}
-.c-blk-btn a:hover, .c-btn-primary a:hover, .wp-block-button.is-style-standard a.wp-block-button__link:hover, .wp-block-button.is-style-standard .wp-block-button__link:hover {
-  background-color: #EAEAEA;
-  color: #000;
+.c-btn--primary, .c-btn--secondary {
+  -webkit-box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
 }
 
-.c-btn-textonly svg {
-  -webkit-transition: all 250ms ease;
-  transition: all 250ms ease;
-  position: relative;
-  top: 3px;
-}
-
-.c-btn, .c-menu-btn a {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  padding: 10px 50px 10px 50px;
-  font-family: var(--font-primary);
-  font-size: var(--cta-size);
-  font-weight: 700;
-  text-decoration: none !important;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: none;
-  text-transform: capitalize;
-  position: relative;
-  -webkit-transition: all 250ms ease;
-  transition: all 250ms ease;
-}
-.c-btn--primary, .c-menu-btn a--primary {
-  -webkit-transition: all 250ms ease;
-  transition: all 250ms ease;
-  background-color: #001871;
-  background: linear-gradient(200deg, #147BD1 0%, #147BD1 50%, var(--Blue-3, #0047BB) 75%, var(--Blue-2, #001871) 100%);
-  background-size: 200% 100%;
-  background-position: 0% 0;
-  color: var(--color-white);
-  clip-path: polygon(0 0, 85% 0, 100% 50%, 100% 100%, 15% 100%, 0 50%);
-  -webkit-filter: drop-shadow(0 2px 4px rgba(0, 24, 113, 0.3));
-          filter: drop-shadow(0 2px 4px rgba(0, 24, 113, 0.3));
-}
-.c-btn--primary:hover, .c-menu-btn a--primary:hover {
-  color: #fff;
-  background-position: 100% 0;
-}
-.c-btn--primary:focus, .c-menu-btn a--primary:focus {
-  outline: 2px solid var(--color-blue-5);
-  outline-offset: 2px;
-}
-.c-btn--primary:active, .c-menu-btn a--primary:active {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-}
-.c-btn--secondary, .c-menu-btn a--secondary {
-  background: transparent;
-  color: var(--color-blue-3);
-  border: 2px solid var(--color-blue-3);
-  clip-path: polygon(0 0, 85% 0, 100% 50%, 100% 100%, 15% 100%, 0 50%);
-}
-.c-btn--secondary:hover, .c-menu-btn a--secondary:hover {
-  background: -webkit-gradient(linear, left top, right top, from(var(--color-blue-3)), to(var(--color-blue-2)));
-  background: linear-gradient(90deg, var(--color-blue-3) 0%, var(--color-blue-2) 100%);
-  color: white;
-  border-color: transparent;
-}
-.c-btn--arrow, .c-menu-btn a--arrow {
-  clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%);
-  padding: 10px 32px;
-}
-
-.c-menu-btn a {
-  -webkit-transition: all 250ms ease;
-  transition: all 250ms ease;
-  padding: 9px 50px 11px 50px !important;
-  color: #fff !important;
-  line-height: 1 !important;
-  margin-left: 50px !important;
-  top: 0;
-  background-color: #001871;
-  background: linear-gradient(200deg, #147BD1 0%, #147BD1 50%, var(--Blue-3, #0047BB) 75%, var(--Blue-2, #001871) 100%);
-  background-size: 200% 100%;
-  background-position: 0% 0;
-  color: var(--color-white);
-  clip-path: polygon(0 0, 85% 0, 100% 50%, 100% 100%, 15% 100%, 0 50%);
-  -webkit-filter: drop-shadow(0 2px 4px rgba(0, 24, 113, 0.3));
-          filter: drop-shadow(0 2px 4px rgba(0, 24, 113, 0.3));
-}
-.c-menu-btn a:hover {
-  color: #fff;
-  background-position: 100% 0;
-}
-.c-menu-btn a:focus {
-  outline: 2px solid var(--color-blue-5);
-  outline-offset: 2px;
-}
-.c-menu-btn a:active {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-}
-
-.c-btn-inline {
-  text-decoration: none !important;
-  -webkit-transition: all 250ms ease;
-  transition: all 250ms ease;
+.c-btn--secondary:hover {
+  -o-border-image: linear-gradient(to right bottom, #071d49 0%, #0047bb 100%) 1;
+     border-image: -webkit-gradient(linear, left top, right bottom, from(#071d49), to(#0047bb)) 1;
+     border-image: linear-gradient(to right bottom, #071d49 0%, #0047bb 100%) 1;
 }
 
 /* ==========================================================================
@@ -6679,8 +6566,8 @@ p + .c-btn {
   position: relative;
 }
 .u-multigrad::after {
-  background: -webkit-gradient(linear, right top, left top, color-stop(-6.12%, rgba(253, 207, 18, 0)), color-stop(6.56%, rgba(248, 224, 142, 0.53)), color-stop(15.91%, rgba(255, 246, 210, 0.6)), color-stop(28.28%, rgba(0, 71, 187, 0.88)), color-stop(52.9%, var(--Blue-2, #001871)));
-  background: linear-gradient(270deg, rgba(253, 207, 18, 0) -6.12%, rgba(248, 224, 142, 0.53) 6.56%, rgba(255, 246, 210, 0.6) 15.91%, rgba(0, 71, 187, 0.88) 28.28%, var(--Blue-2, #001871) 52.9%);
+  background: -webkit-gradient(linear, right top, left top, color-stop(-6.12%, rgba(253, 207, 18, 0)), color-stop(6.56%, rgba(248, 224, 142, 0.53)), color-stop(15.91%, rgba(255, 246, 210, 0.6)), color-stop(28.28%, rgba(0, 71, 187, 0.88)), color-stop(52.9%, var(--color-blue-3)));
+  background: linear-gradient(270deg, rgba(253, 207, 18, 0) -6.12%, rgba(248, 224, 142, 0.53) 6.56%, rgba(255, 246, 210, 0.6) 15.91%, rgba(0, 71, 187, 0.88) 28.28%, var(--color-blue-3) 52.9%);
   content: "";
   position: absolute;
   top: 0;
@@ -6917,7 +6804,7 @@ p + .c-btn {
 }
 
 .is-style-secondaryfont {
-  font-family: "gravita-geo-variable", serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .wp-block[data-align=full] .wp-block-group .wp-block {

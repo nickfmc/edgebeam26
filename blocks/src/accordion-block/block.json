@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gdt-theme/accordion-block",
+  "version": "1.0.0",
+  "title": "Accordion Block",
+  "category": "gdt-blocks",
+  "icon": "list-view",
+  "description": "A two-column accordion block with load more functionality and full accessibility support.",
+  "keywords": ["accordion", "faq", "toggle", "expandable", "gdt"],
+  "textdomain": "gdt-theme",
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "accordionItems": {
+      "type": "array",
+      "default": [
+        {
+          "title": "What is EdgeBeam Wireless?",
+          "content": "EdgeBeam Wireless, LLC is the world's first hybrid network operator expanding one-to-many data distribution for today's wireless networks by offering a foundational layer at the edge.",
+          "isOpen": false
+        }
+      ]
+    },
+    "itemsToShow": {
+      "type": "number",
+      "default": 10
+    },
+    "showLoadMore": {
+      "type": "boolean",
+      "default": true
+    },
+    "loadMoreText": {
+      "type": "string",
+      "default": "Load More"
+    },
+    "columns": {
+      "type": "number",
+      "default": 2
+    },
+    "style": {
+      "type": "string",
+      "default": "default",
+      "enum": ["default", "faq"]
+    },
+    "enableFaqSchema": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true,
+    "className": true,
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "script": "file:./frontend.js",
+  "render": "file:./render.php"
+}

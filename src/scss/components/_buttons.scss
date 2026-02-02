@@ -1,145 +1,152 @@
-/* ==========================================================================
-   LINK BUTTON STYLES
-   ========================================================================== */
+// /* ==========================================================================
+//    LINK BUTTON STYLES
+//    ========================================================================== */
 
-.c-btn-primary {
-  display: block;
-  text-align: center;
-  margin: 1rem 0 1.75rem 0;
-}
-.c-blk-btn a, .c-btn-primary a, .wp-block-button.is-style-standard a.wp-block-button__link, .wp-block-button.is-style-standard .wp-block-button__link {
-  background-color: $color-gray-med;
-  border: none; 
-  color: $color-white;
-  display: inline-block;
-  font-weight: 700;
-  line-height: 1;
-  text-transform: uppercase;
-  padding: 0.75rem 1.25rem;
-  transition: $transition-ease;
-  white-space: nowrap;
-  &:hover {
-    background-color: $color-gray-light;
-    color: $color-black;
-  }
+.c-btn--primary, .c-btn--secondary {
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
 }
 
-
-.c-btn-textonly {
-  svg {
-    transition: $transition-ease;
-    position: relative;
-    top: 3px;
-  }
+.c-btn--secondary:hover {
+  border-image: linear-gradient(to right bottom, #071d49 0%, #0047bb 100%) 1;
 }
+// .c-btn-primary {
+//   display: block;
+//   text-align: center;
+//   margin: 1rem 0 1.75rem 0;
+// }
+// .c-blk-btn a, .c-btn-primary a, .wp-block-button.is-style-standard a.wp-block-button__link, .wp-block-button.is-style-standard .wp-block-button__link {
+//   background-color: $color-gray-med;
+//   border: none; 
+//   color: $color-white;
+//   display: inline-block;
+//   font-weight: 700;
+//   line-height: 1;
+//   text-transform: uppercase;
+//   padding: 0.75rem 1.25rem;
+//   transition: $transition-ease;
+//   white-space: nowrap;
+//   &:hover {
+//     background-color: $color-gray-light;
+//     color: $color-black;
+//   }
+// }
 
 
-$btn-clip-path:  polygon(0 0, 85% 0, 100% 50%, 100% 100%, 15% 100%, 0 50%);
+// .c-btn-textonly {
+//   svg {
+//     transition: $transition-ease;
+//     position: relative;
+//     top: 3px;
+//   }
+// }
 
-.c-btn, .c-menu-btn a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center; 
-  padding: 10px 50px 10px 50px; // Extra right padding for the angled edge
-  font-family: var(--font-primary);
-  font-size: var(--cta-size);
-  font-weight: 700;
-  text-decoration: none !important;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: none;
-  text-transform: capitalize; 
-  position: relative;
-  transition: $transition-ease;
+
+// $btn-clip-path:  polygon(0 0, 85% 0, 100% 50%, 100% 100%, 15% 100%, 0 50%);
+
+// .c-btn, .c-menu-btn a {
+//   display: inline-flex;
+//   align-items: center;
+//   justify-content: center; 
+//   padding: 10px 50px 10px 50px; // Extra right padding for the angled edge
+//   font-family: var(--font-primary);
+//   font-size: var(--cta-size);
+//   font-weight: 700;
+//   text-decoration: none !important;
+//   transition: all 0.3s ease;
+//   cursor: pointer;
+//   border: none;
+//   text-transform: capitalize; 
+//   position: relative;
+//   transition: $transition-ease;
   
-  &--primary,  {
-    transition: $transition-ease;
-    // Blue gradient from Figma (Blue 2 to Blue 3)
-    background-color: #001871;
-    background: linear-gradient(200deg, #147BD1 0%, #147BD1 50%, var(--Blue-3, #0047BB) 75%, var(--Blue-2, #001871) 100%);
-    background-size: 200% 100%;
-    background-position: 0% 0;
-    color: var(--color-white);
+//   &--primary,  {
+//     transition: $transition-ease;
+//     // Blue gradient from Figma (Blue 2 to Blue 3)
+//     background-color: #001871;
+//     background: linear-gradient(200deg, #147BD1 0%, #147BD1 50%, var(--Blue-3, #0047BB) 75%, var(--Blue-2, #001871) 100%);
+//     background-size: 200% 100%;
+//     background-position: 0% 0;
+//     color: var(--color-white);
     
-    // Apply the angled clip-path mask
-    clip-path: $btn-clip-path;
+//     // Apply the angled clip-path mask
+//     clip-path: $btn-clip-path;
     
-    // Subtle shadow
-    filter: drop-shadow(0 2px 4px rgba(0, 24, 113, 0.3));
+//     // Subtle shadow
+//     filter: drop-shadow(0 2px 4px rgba(0, 24, 113, 0.3));
     
-    &:hover {
-      color: #fff;
-      background-position: 100% 0;
-    }
+//     &:hover {
+//       color: #fff;
+//       background-position: 100% 0;
+//     }
     
-    &:focus {
-      outline: 2px solid var(--color-blue-5);
-      outline-offset: 2px;
-    }
+//     &:focus {
+//       outline: 2px solid var(--color-blue-5);
+//       outline-offset: 2px;
+//     }
     
-    &:active {
-      transform: translateX(0);
-    }
-  }
+//     &:active {
+//       transform: translateX(0);
+//     }
+//   }
   
-  &--secondary {
-    background: transparent;
-    color: var(--color-blue-3);
-    border: 2px solid var(--color-blue-3);
-    clip-path: $btn-clip-path;
+//   &--secondary {
+//     background: transparent;
+//     color: var(--color-blue-3);
+//     border: 2px solid var(--color-blue-3);
+//     clip-path: $btn-clip-path;
     
-    &:hover {
-      background: linear-gradient(90deg, var(--color-blue-3) 0%, var(--color-blue-2) 100%);
-      color: white;
-      border-color: transparent;
-    }
-  }
+//     &:hover {
+//       background: linear-gradient(90deg, var(--color-blue-3) 0%, var(--color-blue-2) 100%);
+//       color: white;
+//       border-color: transparent;
+//     }
+//   }
   
-  // Alternative: Full arrow shape (both sides angled)
-  &--arrow {
-    clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%);
-    padding: 10px 32px;
-  }
-}
+//   // Alternative: Full arrow shape (both sides angled)
+//   &--arrow {
+//     clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%);
+//     padding: 10px 32px;
+//   }
+// }
 
 
-.c-menu-btn a {
+// .c-menu-btn a {
 
-transition: $transition-ease;
-    // Blue gradient from Figma (Blue 2 to Blue 3)
-  padding: 9px 50px 11px 50px !important; // Extra right padding for the angled edge
-color: #fff !important;
-line-height: 1 !important;
-margin-left: 50px !important;
-top: 0;
-    background-color: #001871;
-    background: linear-gradient(200deg, #147BD1 0%, #147BD1 50%, var(--Blue-3, #0047BB) 75%, var(--Blue-2, #001871) 100%);
-    background-size: 200% 100%;
-    background-position: 0% 0;
-    color: var(--color-white);
+// transition: $transition-ease;
+//     // Blue gradient from Figma (Blue 2 to Blue 3)
+//   padding: 9px 50px 11px 50px !important; // Extra right padding for the angled edge
+// color: #fff !important;
+// line-height: 1 !important;
+// margin-left: 50px !important;
+// top: 0;
+//     background-color: #001871;
+//     background: linear-gradient(200deg, #147BD1 0%, #147BD1 50%, var(--Blue-3, #0047BB) 75%, var(--Blue-2, #001871) 100%);
+//     background-size: 200% 100%;
+//     background-position: 0% 0;
+//     color: var(--color-white);
     
-    // Apply the angled clip-path mask
-    clip-path: $btn-clip-path;
+//     // Apply the angled clip-path mask
+//     clip-path: $btn-clip-path;
     
-    // Subtle shadow
-    filter: drop-shadow(0 2px 4px rgba(0, 24, 113, 0.3));
+//     // Subtle shadow
+//     filter: drop-shadow(0 2px 4px rgba(0, 24, 113, 0.3));
     
-    &:hover {
-      color: #fff;
-      background-position: 100% 0;
-    }
+//     &:hover {
+//       color: #fff;
+//       background-position: 100% 0;
+//     }
     
-    &:focus {
-      outline: 2px solid var(--color-blue-5);
-      outline-offset: 2px;
-    }
+//     &:focus {
+//       outline: 2px solid var(--color-blue-5);
+//       outline-offset: 2px;
+//     }
     
-    &:active {
-      transform: translateX(0);
-    }
-  }
+//     &:active {
+//       transform: translateX(0);
+//     }
+//   }
 
-  .c-btn-inline {
-    text-decoration: none !important;
-    transition: $transition-ease;
-  }
+//   .c-btn-inline {
+//     text-decoration: none !important;
+//     transition: $transition-ease;
+//   }

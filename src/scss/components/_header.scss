@@ -2,20 +2,10 @@
    HEADER
    ========================================================================== */
 
-.pre-header {
-  background-color: var(--color-blue-3);
-  color: #fff;
-  text-align: center;
-  padding: 10px 25px;
-  font-size: 17px;
-  p {
-    margin-bottom: 0;
-  }
-}
    .c-page-header {
   background: #fff;
   box-shadow: 0 3px 4px rgba(0,0,0,0.07);
-  height: 100px;  
+  height: 80px;  
   padding-left: 25px;
   padding-right: 25px;
   // enable styles below for usage with headroom.js
@@ -24,7 +14,7 @@
   // width: 100%;
   // z-index: z(overlay);
   @media(width >= $bp-large) {
-  height: 121px;  
+  height: 80px;  
   
   } 
 }

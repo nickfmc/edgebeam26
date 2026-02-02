@@ -1,0 +1,20 @@
+{
+  "name": "gdt-blocks",
+  "version": "1.0.0",
+  "description": "Custom blocks build system for GDT theme",
+  "private": true,
+  "scripts": {
+    "build": "wp-scripts build",
+    "build:watch": "wp-scripts build --watch",
+    "start": "wp-scripts start"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^31.3.0"
+  },
+  "dependencies": {
+    "@wordpress/block-editor": "^12.0.0",
+    "@wordpress/blocks": "^12.0.0",
+    "@wordpress/components": "^25.0.0",
+    "@wordpress/i18n": "^4.0.0"
+  }
+}

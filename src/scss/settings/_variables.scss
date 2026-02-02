@@ -24,15 +24,12 @@ $page-header-height: 100px;
 
 // ++ COLOURS +++++++++++++++++++++++++++++++++
 $color-red:         #A82313;
- 
 $color-primary:       #0f105f; 
 $color-secondary:       #0f2f5f;
-
 $color-gray-light:        #EAEAEA;
 $color-gray-med:        #ACACAC;
 $color-gray-dark:        #323232;
 
- 
 $color-black:           #000;
 $color-white:           #FFF;
 
@@ -55,14 +52,14 @@ $logo-size: 300px;
 
 // ++ TYPOGRAPHY +++++++++++++++++++++++++++++++++
 // Fonts
-$font-primary: 'gravita-geo-variable', sans-serif;
-$font-secondary: 'gravita-geo-variable', serif;
+$font-primary: 'Outfit', sans-serif;
+$font-secondary: 'Outfit', sans-serif;
 
 // Spacing
-$line-height-normal: 1.50;
+$line-height-normal: 1.55;
 $line-height-tight: 1.10;
 $line-height-loose: 1.80;
-$letter-spacing: 0.125em; //2px
+$letter-spacing:  -0.18px; 
 
 // Glyphs
 $double-arrow: "\u21d2";
@@ -81,8 +78,8 @@ $transition-ease-slow: all 400ms ease;
 // ========================================
 :root {
   // Font families
-  --font-primary: "Gravita GEO", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-secondary: "Gravita GEO", Georgia, serif;
+  --font-primary: "Outfit",  sans-serif;
+  --font-secondary: "Outfit",  sans-serif;
   
   // Line height variables
   --line-height-tight: 1.2;
@@ -123,8 +120,9 @@ $transition-ease-slow: all 400ms ease;
   --color-purple: #8f1a95;
   --color-gray-1: #1d252d;
   --color-gray-2: #333f48;
-  --color-gray-3: #c1c6c8;
-  --color-gray-4: #e9e9e9;
+  --color-gray-3: #7c878e;
+  --color-gray-4: #c1c6c8;
+  --color-gray-5: #e9e9e9;
   --color-warm-gray-1: #aea8a5;
   --color-warm-gray-2: #cfcdc9;
 
