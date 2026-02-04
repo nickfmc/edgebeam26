@@ -3,30 +3,68 @@
    ========================================================================== */
 
 // ideally this file is forever blank. likely it won't be. :(
+
+// ++ REVEAL CONTAINER +++++++++++++++++++++++++++++++++
 .reveal-container {
   position: relative;
-  width: 300px;
-  height: 300px;
+  display: inline-block;
   overflow: hidden;
-}
-
-.reveal-base {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-
-.image-reveal {
-  mask: radial-gradient(circle at center, #000 0%, #000 0%, transparent 100%);
-  animation: revealFromCenter 1s ease-out forwards;
-}
-
-@keyframes revealFromCenter {
-  from {
-    mask: radial-gradient(circle at center, #000 0%, transparent 30%);
+  
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
-  to {
-    mask: radial-gradient(circle at center, #000 100%, transparent 100%);
+  
+  .reveal-base {
+    position: relative;
+  }
+  
+  .reveal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path 0s;
+    opacity: 1;
+    
+    &.active {
+      animation: revealPulse 1.2s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    }
+  }
+}
+
+@keyframes revealPulse {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  25% {
+    clip-path: circle(35% at 50% 50%);
+  }
+  35% {
+    clip-path: circle(32% at 50% 50%);
+  }
+  50% {
+    clip-path: circle(55% at 50% 50%);
+  }
+  60% {
+    clip-path: circle(53% at 50% 50%);
+  }
+  75% {
+    clip-path: circle(80% at 50% 50%);
+  }
+  85% {
+    clip-path: circle(78% at 50% 50%);
+  }
+  100% {
+    clip-path: circle(100% at 50% 50%);
+    opacity: 1;
   }
 }
 

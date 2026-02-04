@@ -9395,43 +9395,94 @@ body.has-bottom-banner {
    ========================================================================== */
 .reveal-container {
   position: relative;
-  width: 300px;
-  height: 300px;
+  display: inline-block;
   overflow: hidden;
 }
-
-.reveal-base {
+.reveal-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.reveal-container .reveal-base {
+  position: relative;
+}
+.reveal-container .reveal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  position: absolute;
+  clip-path: circle(0% at 50% 50%);
+  -webkit-transition: clip-path 0s;
+  transition: clip-path 0s;
+  opacity: 1;
+}
+.reveal-container .reveal-overlay.active {
+  -webkit-animation: revealPulse 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          animation: revealPulse 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.image-reveal {
-  -webkit-mask: radial-gradient(circle at center, #000 0%, #000 0%, transparent 100%);
-          mask: radial-gradient(circle at center, #000 0%, #000 0%, transparent 100%);
-  -webkit-animation: revealFromCenter 1s ease-out forwards;
-          animation: revealFromCenter 1s ease-out forwards;
+@-webkit-keyframes revealPulse {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  25% {
+    clip-path: circle(35% at 50% 50%);
+  }
+  35% {
+    clip-path: circle(32% at 50% 50%);
+  }
+  50% {
+    clip-path: circle(55% at 50% 50%);
+  }
+  60% {
+    clip-path: circle(53% at 50% 50%);
+  }
+  75% {
+    clip-path: circle(80% at 50% 50%);
+  }
+  85% {
+    clip-path: circle(78% at 50% 50%);
+  }
+  100% {
+    clip-path: circle(100% at 50% 50%);
+    opacity: 1;
+  }
 }
 
-@-webkit-keyframes revealFromCenter {
-  from {
-    -webkit-mask: radial-gradient(circle at center, #000 0%, transparent 30%);
-            mask: radial-gradient(circle at center, #000 0%, transparent 30%);
+@keyframes revealPulse {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
   }
-  to {
-    -webkit-mask: radial-gradient(circle at center, #000 100%, transparent 100%);
-            mask: radial-gradient(circle at center, #000 100%, transparent 100%);
+  5% {
+    opacity: 1;
   }
-}
-
-@keyframes revealFromCenter {
-  from {
-    -webkit-mask: radial-gradient(circle at center, #000 0%, transparent 30%);
-            mask: radial-gradient(circle at center, #000 0%, transparent 30%);
+  25% {
+    clip-path: circle(35% at 50% 50%);
   }
-  to {
-    -webkit-mask: radial-gradient(circle at center, #000 100%, transparent 100%);
-            mask: radial-gradient(circle at center, #000 100%, transparent 100%);
+  35% {
+    clip-path: circle(32% at 50% 50%);
+  }
+  50% {
+    clip-path: circle(55% at 50% 50%);
+  }
+  60% {
+    clip-path: circle(53% at 50% 50%);
+  }
+  75% {
+    clip-path: circle(80% at 50% 50%);
+  }
+  85% {
+    clip-path: circle(78% at 50% 50%);
+  }
+  100% {
+    clip-path: circle(100% at 50% 50%);
+    opacity: 1;
   }
 }
 /* ==========================================================================

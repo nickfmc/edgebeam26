@@ -659,4 +659,25 @@ jQuery( document ).ready(function( $ ) {
 // *********************** END CUSTOM JQUERY DOC READY SCRIPTS *********************************
 
 
+// ++ IMAGE REVEAL ANIMATION +++++++++++++++++++++++++++++++++
+document.addEventListener('DOMContentLoaded', () => {
+  const revealButton = document.getElementById('reveal');
+  const revealOverlay = document.querySelector('.reveal-overlay');
+  
+  if (revealButton && revealOverlay) {
+    revealButton.addEventListener('click', () => {
+      // Remove the active class first to reset the animation
+      revealOverlay.classList.remove('active');
+      
+      // Force a reflow to restart the animation
+      void revealOverlay.offsetWidth;
+      
+      // Add the active class to trigger the animation
+      revealOverlay.classList.add('active');
+    });
+  }
+});
+
+
+
 
