@@ -132,4 +132,3 @@ function gdt_enqueue_block_styles() {
 add_action( 'wp_enqueue_scripts', 'gdt_enqueue_block_styles' );
 add_action( 'enqueue_block_editor_assets', 'gdt_enqueue_block_styles' );
 ?>
-

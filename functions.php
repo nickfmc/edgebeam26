@@ -8,7 +8,7 @@ Probably best to not edit anything in here.
 
 // CORE FLEXDEV FUNCTIONS 
 require_once('inc/gdt-cleanup.php'); // if you remove this the Internet blows up, just sayin'
-require_once('inc/gdt-gutenberg.php'); // all the Gutenberg theme support and customizations
+require_once('inc/gdt-gutenberg.php'); // all th1e Gutenberg theme support and customizations
 require_once('inc/gdt-enqueues.php'); // WP enqueues
 require_once('inc/gdt-menus.php'); // declare and create menus / navigation
 require_once('inc/gdt-content.php'); // functions that alter, edits, and assist with pure content (text mostly)

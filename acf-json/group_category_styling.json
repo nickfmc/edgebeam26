@@ -1,0 +1,70 @@
+{
+    "key": "group_category_styling",
+    "title": "Category Styling",
+    "fields": [
+        {
+            "key": "field_category_color",
+            "label": "Category Color",
+            "name": "category_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Select a color for this category. This will be used for the active state in filters.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#0073aa",
+            "enable_opacity": 0,
+            "return_format": "string",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_category_icon",
+            "label": "Category Icon",
+            "name": "category_icon",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Upload an icon for this category. Recommended: SVG or PNG, 50x50px.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "svg,png,jpg,jpeg",
+            "preview_size": "thumbnail",
+            "allow_in_bindings": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "category"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Add color and icon styling options to blog categories for use in filters and facets.",
+    "show_in_rest": 0,
+    "modified": 1739318400
+}

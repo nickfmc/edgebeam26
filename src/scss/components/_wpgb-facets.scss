@@ -1,0 +1,92 @@
+/*
+ * WP Grid Builder - Category Facets Styling
+ * Custom styles for category facets with icons and colors
+ */
+
+.wpgb-button-facet {
+  
+  // Category Icon Styling
+  .category-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+    object-fit: contain;
+    transition: all 0.3s ease;
+  }
+
+  // Facet Button Base Styling
+  .wpgb-button[data-category-color] {
+    position: relative;
+    transition: all 0.3s ease;
+    
+    // Default state - subtle border with category color
+    &[aria-pressed="false"] {
+      
+      &:hover {
+        border-color: var(--category-color);
+        background-color: rgba(0, 0, 0, 0.02);
+        
+        .wpgb-button-label {
+          color: var(--category-color);
+        }
+      }
+    }
+    
+    // Active state - full category color background
+    &[aria-pressed="true"] {
+      background-color: var(--category-color) !important;
+      border-color: var(--category-color) !important;
+      
+      .wpgb-button-label {
+        color: #ffffff !important;
+      }
+      
+      .category-icon {
+        // Invert icon color for better visibility on colored background
+        filter: brightness(0) invert(1);
+      }
+    }
+    
+    // Hover state for active button
+    &[aria-pressed="true"]:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+// WP Grid Builder wrapper styles
+.wpgb-facet-wrapper {
+  .wpgb-button[data-category-color] {
+    // Ensure category color takes precedence
+    --wpgb-facet-color: var(--category-color);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .wpgb-button-facet {
+    .category-icon {
+      width: 18px;
+      height: 18px;
+      margin-right: 6px;
+    }
+    
+    .wpgb-button[data-category-color] {
+      font-size: 14px;
+      padding: 6px 12px;
+    }
+  }
+}
+
+// Dark mode support (if theme uses it)
+@media (prefers-color-scheme: dark) {
+  .wpgb-button-facet {
+    .wpgb-button[data-category-color][aria-pressed="false"] {
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+}

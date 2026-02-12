@@ -188,6 +188,21 @@
           "name": "Style",
           "slug": "style",
           "gradient": "linear-gradient(270deg, #147bd1 1%, #82d5fd 13%, #c7e6ff 17%, #ffe5d2 29%, #fdcf12 42%, #ff9332 60%, #d5a797 67%, #b0b7ed 74%, #669ee5 84%, #087dda 91%, #0321d1 100%)"
+        },
+        {
+          "name": "Blue 6 White Yellow 2",
+          "slug": "blue-6-white-yellow-2",
+          "gradient": "linear-gradient(157deg, #B9D9EB -0.7%, #FFF 14.25%, #F8E08E 69.92%, #FFF 100%)"
+        },
+        {
+          "name": "Feather Yellow White Transparent",
+          "slug": "feather-yellow-white-transparent",
+          "gradient": "linear-gradient(132deg, rgba(255, 246, 210, 0.40) 52.38%, rgba(253, 207, 18, 0.50) 88.95%, #FFF 100.11%)"
+        },
+        {
+          "name": "Blue 2 Blue 3 Diagonal",
+          "slug": "blue-2-blue-3-diagonal",
+          "gradient": "linear-gradient(132deg, #0047BB 0%, #001871 100.77%)"
         }
       ],
       "duotone": [
