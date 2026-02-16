@@ -3408,6 +3408,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .is-style-h4-style {
   line-height: 1.1;
   margin: 0 0 1rem 0;
+  font-weight: 500 !important;
   font-size: clamp(1.33rem, 1.2vw + 1.07rem, 2rem);
   letter-spacing: -0.48px;
 }
@@ -3417,6 +3418,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .is-style-h5-style {
   line-height: 1.1;
   margin: 0 0 1rem 0;
+  font-weight: 500;
   font-size: clamp(1.33rem, 0.4vw + 1.24rem, 1.56rem);
   letter-spacing: -0.48px;
 }
@@ -3425,6 +3427,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .h6-style,
 .is-style-h6-style {
   line-height: 1.1;
+  font-weight: 500;
   margin: 0 0 1rem 0;
   font-size: clamp(1.11rem, 0.4vw + 1.02rem, 1.33rem);
   letter-spacing: -0.48px;

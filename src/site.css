@@ -3865,6 +3865,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .is-style-h4-style {
   line-height: 1.1;
   margin: 0 0 1rem 0;
+  font-weight: 500 !important;
   font-size: clamp(1.33rem, 1.2vw + 1.07rem, 2rem);
   letter-spacing: -0.48px;
 }
@@ -3874,6 +3875,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .is-style-h5-style {
   line-height: 1.1;
   margin: 0 0 1rem 0;
+  font-weight: 500;
   font-size: clamp(1.33rem, 0.4vw + 1.24rem, 1.56rem);
   letter-spacing: -0.48px;
 }
@@ -3882,6 +3884,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .h6-style,
 .is-style-h6-style {
   line-height: 1.1;
+  font-weight: 500;
   margin: 0 0 1rem 0;
   font-size: clamp(1.11rem, 0.4vw + 1.02rem, 1.33rem);
   letter-spacing: -0.48px;
@@ -4725,6 +4728,10 @@ body.a11y-focus-visible [tabindex]:focus {
   margin-top: 10px;
 }
 
+p + .c-btn--primary {
+  margin-top: 16px;
+}
+
 .c-btn--primary, .c-btn--secondary {
   -webkit-box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
@@ -5147,20 +5154,52 @@ body.a11y-focus-visible [tabindex]:focus {
 }
 
 #search-button {
-  width: 40px;
+  border: 2px solid var(--Blue-2, #001871);
   position: relative;
-  border-radius: 5px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  line-height: 1;
+  padding: 14px 50px;
 }
 #search-button svg {
   position: relative;
-  left: 10px;
   top: 0;
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
   color: #0f105f;
+}
+#search-button span {
+  font-weight: 600;
+  font-size: 16px;
 }
 #search-button:hover::after {
   opacity: 1;
+}
+
+.c-contact-link {
+  background: var(--Blue-5-Yellow-1-Orange, linear-gradient(90deg, var(--Blue-5, #8DC8E8) 12.62%, var(--Yellow-1, #FDCF12) 62.28%, var(--Orange, #FF9425) 92.81%));
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 14px 50px;
+  line-height: 1;
+  margin-left: 28px;
 }
 
 #search-popup {
@@ -5409,6 +5448,105 @@ body.a11y-focus-visible [tabindex]:focus {
   pointer-events: none;
 }
 
+.c-resource-query a {
+  text-decoration: none !important;
+}
+.c-resource-query a:hover {
+  color: inherit !important;
+}
+
+.c-card-hover {
+  position: relative;
+  -webkit-transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+.c-card-hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: inherit;
+  opacity: 0;
+  -webkit-transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+}
+.c-card-hover:hover {
+  -webkit-transform: translateY(-8px) translateZ(20px) rotateX(1deg);
+          transform: translateY(-8px) translateZ(20px) rotateX(1deg);
+  -webkit-filter: brightness(1.05);
+          filter: brightness(1.05);
+}
+.c-card-hover:hover::before {
+  opacity: 1;
+  border-color: rgba(243, 177, 79, 0.4);
+  -webkit-box-shadow: 0 0 20px rgba(243, 177, 79, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          box-shadow: 0 0 20px rgba(243, 177, 79, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.c-card-hover:not(:hover) {
+  -webkit-transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.c-card-hover-transparent {
+  position: relative;
+  -webkit-transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.c-card-hover-transparent > div:first-of-type {
+  position: relative;
+  -webkit-transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.c-card-hover-transparent > div:first-of-type::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  -webkit-box-shadow: 0 0 0 0 rgba(243, 177, 79, 0);
+          box-shadow: 0 0 0 0 rgba(243, 177, 79, 0);
+  opacity: 0;
+  -webkit-transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: -1;
+}
+.c-card-hover-transparent:hover {
+  -webkit-transform: translateY(-8px);
+          transform: translateY(-8px);
+}
+.c-card-hover-transparent:hover > div::before {
+  opacity: 1;
+  -webkit-box-shadow: 0 0 30px rgba(243, 177, 79, 0.5), 0 0 60px rgba(243, 177, 79, 0.3);
+          box-shadow: 0 0 30px rgba(243, 177, 79, 0.5), 0 0 60px rgba(243, 177, 79, 0.3);
+}
+.c-card-hover-transparent:not(:hover) {
+  -webkit-transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.category-icon-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.category-icon-wrapper img {
+  width: 40px;
+  height: 40px;
+}
+
 /* ==========================================================================
    MAIN LOGO
    ========================================================================== */
@@ -5446,7 +5584,7 @@ body.a11y-focus-visible [tabindex]:focus {
     width: 100%;
     position: absolute;
     right: 0;
-    top: 20px;
+    top: 16px;
     min-width: 60%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -5461,9 +5599,9 @@ body.a11y-focus-visible [tabindex]:focus {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     position: relative;
     list-style: none;
     margin: 0;
@@ -5500,7 +5638,6 @@ body.a11y-focus-visible [tabindex]:focus {
     margin: 0;
     line-height: 1;
     position: relative;
-    white-space: nowrap;
   }
   .c-main-menu > li > a {
     color: #001871;

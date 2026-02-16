@@ -277,127 +277,127 @@ menuItems.forEach(function(menuItem) {
 
 
 // Accessible Search Popup
-// document.addEventListener('DOMContentLoaded', function() {
-//   const searchButton = document.getElementById('search-button');
-//   const searchPopup = document.getElementById('search-popup');
-//   const searchSubmit = document.getElementById('search-submit');
-//   const searchField = document.getElementById('s'); // Corrected ID for the search field
-//   const closeSearchPopupButton = document.getElementById('close-search-popup');
+document.addEventListener('DOMContentLoaded', function() {
+  const searchButton = document.getElementById('search-button');
+  const searchPopup = document.getElementById('search-popup');
+  const searchSubmit = document.getElementById('search-submit');
+  const searchField = document.getElementById('s'); // Corrected ID for the search field
+  const closeSearchPopupButton = document.getElementById('close-search-popup');
 
-//   if (!searchButton || !searchPopup || !searchField || !closeSearchPopupButton) {
-//       console.error('One or more elements are not found:', {
-//           searchButton,
-//           searchPopup,
-//           searchField,
-//           closeSearchPopupButton
-//       });
-//       return;
-//   }
+  if (!searchButton || !searchPopup || !searchField || !closeSearchPopupButton) {
+      console.error('One or more elements are not found:', {
+          searchButton,
+          searchPopup,
+          searchField,
+          closeSearchPopupButton
+      });
+      return;
+  }
 
-//   window.closeSearchPopup = function() {
-//       searchButton.setAttribute('aria-expanded', 'false');
-//       searchPopup.setAttribute('aria-hidden', 'true');
-//       searchPopup.setAttribute('inert', '');
-//       searchButton.focus();
-//       releaseFocus();
-//   };
+  window.closeSearchPopup = function() {
+      searchButton.setAttribute('aria-expanded', 'false');
+      searchPopup.setAttribute('aria-hidden', 'true');
+      searchPopup.setAttribute('inert', '');
+      searchButton.focus();
+      releaseFocus();
+  };
 
-//   searchButton.addEventListener('click', function() {
-//       const isExpanded = searchButton.getAttribute('aria-expanded') === 'true';
-//       searchButton.setAttribute('aria-expanded', !isExpanded);
-//       searchPopup.setAttribute('aria-hidden', isExpanded);
-//       searchPopup.removeAttribute('inert');
-//       if (!isExpanded) {
-//           searchField.focus();
-//           trapFocus(searchPopup);
-//       } else {
-//           window.closeSearchPopup(); 
-//       }
-//   }); 
+  searchButton.addEventListener('click', function() {
+      const isExpanded = searchButton.getAttribute('aria-expanded') === 'true';
+      searchButton.setAttribute('aria-expanded', !isExpanded);
+      searchPopup.setAttribute('aria-hidden', isExpanded);
+      searchPopup.removeAttribute('inert');
+      if (!isExpanded) {
+          searchField.focus();
+          trapFocus(searchPopup);
+      } else {
+          window.closeSearchPopup(); 
+      }
+  }); 
 
-//   // Add keydown event listener to trigger click on Enter key press for the search field
-//   searchField.addEventListener('keydown', function(event) {
-//       if (event.key === 'Enter') { 
-//           event.preventDefault();
-//           searchSubmit.click();
-//       }
-//   });
+  // Add keydown event listener to trigger click on Enter key press for the search field
+  searchField.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') { 
+          event.preventDefault();
+          searchSubmit.click();
+      }
+  });
 
-//   // Add keydown event listener to trigger click on Enter key press for the search submit button
-//   searchSubmit.addEventListener('keydown', function(event) {
-//       if (event.key === 'Enter') {
-//           event.preventDefault();
-//           searchSubmit.click();
-//       }
-//   });
+  // Add keydown event listener to trigger click on Enter key press for the search submit button
+  searchSubmit.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+          event.preventDefault();
+          searchSubmit.click();
+      }
+  });
 
-//   closeSearchPopupButton.addEventListener('click', function() {
-//       window.closeSearchPopup();
-//   });
+  closeSearchPopupButton.addEventListener('click', function() {
+      window.closeSearchPopup();
+  });
 
-//   function trapFocus(element) {
-//       const focusableElements = element.querySelectorAll('a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])');
+  function trapFocus(element) {
+      const focusableElements = element.querySelectorAll('a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])');
       
-//       if (focusableElements.length === 0) {
-//           console.error('No focusable elements found within the element.');
-//           return;
-//       }
+      if (focusableElements.length === 0) {
+          console.error('No focusable elements found within the element.');
+          return;
+      }
 
-//       const firstElement = focusableElements[0];
-//       const lastElement = focusableElements[focusableElements.length - 1];
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
 
-//       if (!firstElement || !lastElement) {
-//           console.error('First or last focusable element is null.');
-//           return;
-//       }
+      if (!firstElement || !lastElement) {
+          console.error('First or last focusable element is null.');
+          return;
+      }
 
-//       function handleFocus(event) {
-//           if (event.shiftKey) {
-//               if (document.activeElement === firstElement) {
-//                   event.preventDefault();
-//                   lastElement.focus();
-//               }
-//           } else {
-//               if (document.activeElement === lastElement) {
-//                   event.preventDefault();
-//                   firstElement.focus();
-//               }
-//           }
-//       }
+      function handleFocus(event) {
+          if (event.shiftKey) {
+              if (document.activeElement === firstElement) {
+                  event.preventDefault();
+                  lastElement.focus();
+              }
+          } else {
+              if (document.activeElement === lastElement) {
+                  event.preventDefault();
+                  firstElement.focus();
+              }
+          }
+      }
 
-//       element.addEventListener('keydown', handleFocus);
-//       element.dataset.trapFocus = 'true';
-//   }
+      element.addEventListener('keydown', handleFocus);
+      element.dataset.trapFocus = 'true';
+  }
 
-//   function releaseFocus() {
-//       const element = document.querySelector('[data-trap-focus="true"]');
-//       if (element) {
-//           element.removeEventListener('keydown', handleFocus);
-//           delete element.dataset.trapFocus;
-//       }
-//   }
+  function releaseFocus() {
+      const element = document.querySelector('[data-trap-focus="true"]');
+      if (element) {
+          element.removeEventListener('keydown', handleFocus);
+          delete element.dataset.trapFocus;
+      }
+  }
 
-//   function handleFocus(event) {
-//       const element = document.querySelector('[data-trap-focus="true"]');
-//       if (!element) return;
+  function handleFocus(event) {
+      const element = document.querySelector('[data-trap-focus="true"]');
+      if (!element) return;
 
-//       const focusableElements = element.querySelectorAll('a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])');
-//       const firstElement = focusableElements[0];
-//       const lastElement = focusableElements[focusableElements.length - 1];
+      const focusableElements = element.querySelectorAll('a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])');
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
 
-//       if (event.shiftKey) {
-//           if (document.activeElement === firstElement) {
-//               event.preventDefault();
-//               lastElement.focus();
-//           }
-//       } else {
-//           if (document.activeElement === lastElement) {
-//               event.preventDefault();
-//               firstElement.focus();
-//           }
-//       }
-//   }
-// });
+      if (event.shiftKey) {
+          if (document.activeElement === firstElement) {
+              event.preventDefault();
+              lastElement.focus();
+          }
+      } else {
+          if (document.activeElement === lastElement) {
+              event.preventDefault();
+              firstElement.focus();
+          }
+      }
+  }
+});
 
 // END Accessible Search Popup
 

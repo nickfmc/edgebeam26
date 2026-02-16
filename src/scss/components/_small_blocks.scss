@@ -14,3 +14,103 @@
         pointer-events: none;
     }
 }
+
+.c-resource-query {
+  a {
+    text-decoration: none !important;
+     &:hover {
+      color: inherit !important;
+    }
+  }
+}
+
+.c-card-hover {
+  position: relative;
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+
+  // Subtle border that intensifies on hover
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    opacity: 0;
+    transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-8px) translateZ(20px) rotateX(1deg);
+    filter: brightness(1.05);
+
+    &::before {
+      opacity: 1;
+      border-color: rgba(243, 177, 79, 0.4);
+      box-shadow: 
+        0 0 20px rgba(243, 177, 79, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  // Smooth transition back
+  &:not(:hover) {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+.c-card-hover-transparent {
+  position: relative;
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  > div:first-of-type {
+    position: relative;
+    transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    // Glow effect behind image container
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: 
+        0 0 0 0 rgba(243, 177, 79, 0);
+      opacity: 0;
+      transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: -1;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+
+    > div::before {
+      opacity: 1;
+      box-shadow: 
+        0 0 30px rgba(243, 177, 79, 0.5),
+        0 0 60px rgba(243, 177, 79, 0.3);
+    }
+  }
+
+  // Smooth transition back
+  &:not(:hover) {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+.category-icon-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
