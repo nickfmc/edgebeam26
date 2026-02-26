@@ -72,7 +72,6 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .h2-style,
 .is-style-h2-style {
     line-height: $line-height-tight;
-  margin: 0 0 1.5rem 0;
   font-size: clamped(40px, 60px);
   letter-spacing: -0.48px;
 }
@@ -81,9 +80,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .h3-style,
 .is-style-h3-style {
     line-height: $line-height-tight;
-  margin: 0 0 1rem 0;
   font-size: clamped(30px, 48px);
-  font-weight: 600;
   letter-spacing: -0.48px;
 }
 
@@ -91,8 +88,6 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .h4-style,
 .is-style-h4-style {
   line-height: $line-height-tight;
-  margin: 0 0 1rem 0;
-    font-weight: 500 !important;
   font-size: clamped(24px, 36px);
   letter-spacing: -0.48px;
 }
@@ -101,8 +96,6 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .h5-style,
 .is-style-h5-style {
   line-height: $line-height-tight;
-  margin: 0 0 1rem 0;
-    font-weight: 500;
   font-size: clamped(24px, 28px);
   letter-spacing: -0.48px;
 }
@@ -111,8 +104,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .h6-style,
 .is-style-h6-style {
   line-height: $line-height-tight;
-    font-weight: 500;
-  margin: 0 0 1rem 0;
+
   font-size: clamped(20px, 24px);
   letter-spacing: -0.48px;
 }
@@ -123,7 +115,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
   letter-spacing: 1.32px !important;
   line-height: 1.2;
   letter-spacing: 1.19px;
-  font-weight: 600;
+  font-weight: 600 !important;
   margin-bottom: 13px;
   @media(width >= $bp-medium) {
   font-size: 22px !important;

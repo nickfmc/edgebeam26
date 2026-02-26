@@ -17,7 +17,7 @@ button:focus { // Added button states
   color: $link-hover;
 }
 
-.editor-content a:not([class^="c-btn-"]):not([class*=" c-btn-"]) {
+.editor-content a:not([class^="c-btn-"]):not([class*=" c-btn-"]):not(.c-btn) {
   text-decoration: underline;
 }
 

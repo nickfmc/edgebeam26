@@ -39,8 +39,8 @@
    Uses existing popup form styles from _popup-form.scss
    ========================================================================== */
 
-// Video modal cover (the clickable trigger)
-.c-video-modal {
+// Video modal cover (the clickable trigger) 
+.c-video-modal { 
   &__container {
     position: relative;
     display: inline-block;
@@ -51,7 +51,7 @@
     position: relative;
     display: block;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 0;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     
@@ -93,12 +93,10 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 25px 0;
-    margin: 0 20px;
-    border-top: 1px solid #fff;
+    padding: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
   }
   
   &__title {
@@ -112,8 +110,8 @@
   }
   
   &__play-button {
-    width: 45px;
-    height: 45px;
+    width: 75px;
+    height: 75px;
     flex-shrink: 0;
     margin-left: 20px;
     
@@ -135,14 +133,19 @@
   // Single column layout for full-width video
   display: flex;
   flex-direction: column;
-  grid-template-columns: none !important; // Override any inherited grid layout
+  grid-template-columns: none !important;
   max-width: 900px;
   width: 100%;
   max-height: 90vh;
-  overflow-y: auto !important; // Override the hidden overflow from base popup form
+  overflow-y: auto !important;
   padding: 0;
-  margin: auto; // Ensure centering
-  
+  margin: auto;
+  background: #ffffff;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  padding: 30px;
+
   // Custom scrollbar for the modal
   &::-webkit-scrollbar {
     width: 8px;
@@ -170,36 +173,32 @@
 
 // Ensure video modal overlay stays fixed and centered
 .c-popup-overlay.c-video-modal-overlay {
+  display: none;
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
   z-index: 9999 !important;
-  display: flex !important;
+  background: rgba(0, 0, 0, 0.8) !important;
   align-items: center !important;
   justify-content: center !important;
+
+  &.is-active {
+    display: flex !important;
+  }
 }
 
 // Video section (flexible height)
 .c-video-modal__video-section {
-  padding: 10px;
+  padding: 0;
   background: #000000;
-  border-radius: 30px 30px 0 0;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  flex-shrink: 0; // Prevent video from shrinking
-  
-  @media (max-width: 1024px) {
-    border-radius: 20px 20px 0 0;
-    padding: 8px;
-  }
-  
-  @media (max-width: 768px) {
-    padding: 5px;
-  }
+  flex-shrink: 0;
 }
 
 .c-video-modal__video-container {
@@ -219,12 +218,8 @@
 // Transcript section (below video)
 .c-video-modal__transcript-section {
   background: rgba(1, 41, 87, 0.95);
-  border-radius: 0 0 30px 30px;
-  flex-shrink: 0; // Prevent shrinking
-  
-  @media (max-width: 1024px) {
-    border-radius: 0 0 20px 20px;
-  }
+  border-radius: 0;
+  flex-shrink: 0;
 }
 
 // Transcript accordion
@@ -345,16 +340,54 @@
   }
 }
 
-// Close button positioning adjustment for new layout
+// Close button — visible X on white background, AA-compliant
 .c-video-modal__popup .c-popup-close {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 10px;
+  right: 10px;
   z-index: 10;
-  
-  @media (max-width: 768px) {
-    top: 10px;
-    right: 10px;
+  width: 44px;  // Meets WCAG 2.5.5 minimum target size
+  height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 2px solid #1a1a1a; // #1a1a1a on #fff = 17.1:1 contrast — AAA
+  border-radius: 50%;
+  color: #1a1a1a;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  // X icon via pseudo-elements
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+  }
+
+  &::before { transform: rotate(45deg); }
+  &::after  { transform: rotate(-45deg); }
+
+  &:hover {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+
+  // AA-compliant focus indicator: 3px solid offset outline
+  &:focus-visible {
+    outline: 3px solid #005fcc;
+    outline-offset: 3px;
+  }
+
+  // Fallback for browsers that don't support :focus-visible
+  &:focus:not(:focus-visible) {
+    outline: none;
   }
 }
 
@@ -364,7 +397,7 @@
     padding: 20px;
     border: 2px dashed #ccc;
     background: #f9f9f9;
-    border-radius: 8px;
+    border-radius: 0;
     width: 100%;
     text-align: center;
     cursor: pointer;
@@ -408,7 +441,7 @@
     margin-top: 15px;
     padding: 15px;
     background: #f5f5f5;
-    border-radius: 8px;
+    border-radius: 0;
     font-size: 14px;
     
     p {

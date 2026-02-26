@@ -5,8 +5,8 @@
     "appearanceTools": true,
     "useRootPaddingAwareAlignments": true,
     "layout": {
-      "contentSize": "1024px",
-      "wideSize": "1280px",
+      "contentSize": "1440px",
+      "wideSize": "1440px",
       "allowEditing": false
     },
     "color": {
@@ -253,6 +253,11 @@
           "name": "X Large",
           "slug": "xlarge",
           "size": "24px"
+        },
+        {
+          "name": "XX Large",
+          "slug": "xxlarge",
+          "size": "28px"
         }
       ],
       "fontStyle": true,

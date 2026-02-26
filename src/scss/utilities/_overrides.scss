@@ -41,30 +41,28 @@
     clip-path: circle(0% at 50% 50%);
     opacity: 0;
   }
-  5% {
+  10% {
     opacity: 1;
   }
-  25% {
-    clip-path: circle(35% at 50% 50%);
-  }
-  35% {
-    clip-path: circle(32% at 50% 50%);
-  }
   50% {
-    clip-path: circle(55% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    opacity: 1;
   }
-  60% {
-    clip-path: circle(53% at 50% 50%);
-  }
-  75% {
-    clip-path: circle(80% at 50% 50%);
-  }
-  85% {
-    clip-path: circle(78% at 50% 50%);
+  70% {
+    clip-path: circle(30% at 50% 50%);
+    opacity: 1;
   }
   100% {
     clip-path: circle(100% at 50% 50%);
     opacity: 1;
-  }
+  } 
 }
 
+.gb-tabs .gb-tabs__menu-item.gb-block-is-current{
+background-repeat: repeat !important;
+}
+
+.c-tab-trigger.is-active {
+  background-color: #071D49;
+  color: #fff;
+}

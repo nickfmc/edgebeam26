@@ -1,27 +1,360 @@
-.c-search-content {
-    
-    width: 900px;
-    max-width: 100%;
-    margin: 0 auto;
-    article {
-        position: relative;
-        margin-bottom: 20px;
-        display: flex;
-padding: 32px;
-flex-direction: column;
-align-items: flex-start;
-align-self: stretch;
-border-radius: var(--radius-2xl, 16px);
-background: var(--Colors-Background-bg-secondary, #FAFAFA);
-    }
-    h1 {
-        text-align: center;
-        margin-bottom: 40px;
-    }
+// ========================================
+// Search Results Page Styles
+// ========================================
 
-    .c-pill-wrap {
-        position: absolute;
-        top: 10px;
-        right: 10px;
+// Hero Section with Gradient Background
+.c-search-hero {
+  position: relative;
+  min-height: 523px;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 20px;
+  overflow: hidden;
+  background-image: url('../img/banner_defualt.jpg');
+  
+  // Background with gradient overlay
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     background: linear-gradient(163.62deg, var(--color-blue-3, #0047bb) 0%, var(--color-blue-2, #001871) 100.77%);
+//     z-index: 1;
+//   }
+  
+  &__content {
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  &__title {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 60px;
+    line-height: 70px;
+    color: var(--color-white, #ffffff);
+    margin: 0 0 32px 0;
+    
+    @media (max-width: $bp-medium) {
+      font-size: 44px;
+      line-height: 54px;
     }
+    
+    @media (max-width: $bp-small) {
+      font-size: 36px;
+      line-height: 46px;
+    }
+  }
+  
+  &__description {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 34px;
+    letter-spacing: -0.22px;
+    color: var(--color-white, #ffffff);
+    margin: 0;
+    max-width: 707px;
+    margin: 0 auto;
+    
+    @media (max-width: $bp-medium) {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+  
+  &__link {
+    color: var(--color-white, #ffffff);
+    text-decoration: underline;
+    transition: opacity 0.3s ease;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// Search Bar Section
+.c-search-bar-section {
+  width: 100%;
+  padding: 80px 0 60px;
+  background: var(--gradient-orange-yellow-1, linear-gradient(90deg, var(--color-orange, #FF9425) 2.77%, var(--color-yellow-1, #FDCF12) 96.04%));
+  
+  @media (max-width: $bp-medium) {
+    padding: 60px 0 40px;
+  }
+}
+
+.c-search-bar-container {
+justify-content: flex-end;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  position: relative;
+  
+  @media (max-width: $bp-large) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+.c-search-bar-label {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 34px;
+  letter-spacing: -0.22px;
+  color: var(--color-blue-1, #071d49);
+  flex-shrink: 0;
+  
+  @media (max-width: $bp-large) {
+    margin-bottom: 10px;
+  }
+}
+
+.c-search-bar-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 833px;
+  width: 100%;
+}
+
+.c-search-bar-input {
+  width: 100%;
+  height: 48px;
+  padding: 12px 50px 12px 20px;
+  border: 2px solid var(--color-blue-2, #001871);
+  background: var(--color-white, #ffffff);
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-blue-1, #071d49);
+  
+  &::placeholder {
+    color: var(--color-gray-4, #c1c6c8);
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: var(--color-blue-3, #0047bb);
+  }
+}
+
+.c-search-bar-button {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-blue-2, #001871);
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: var(--color-blue-3, #0047bb);
+  }
+  
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// Popular Searches Dropdown
+.c-search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 215px;
+  width: 833px;
+  background: var(--color-white, #ffffff);
+  box-shadow: 4px 4px 4px 0px rgba(193, 198, 200, 0.3);
+  padding: 25px 49px;
+  margin-top: 20px;
+  z-index: 10;
+  
+  @media (max-width: $bp-large) {
+    left: 0;
+    width: 100%;
+    max-width: 833px;
+  }
+  
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+    li {
+      font-family: var(--font-primary);
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      color: var(--color-blue-1, #071d49);
+      margin-bottom: 16px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      &:hover {
+        color: var(--color-blue-3, #0047bb);
+      }
+    }
+  }
+}
+
+// Search Results Section
+.c-search-results {
+    margin-top: 100px;
+  padding: 0 20px 100px;
+  
+  @media (max-width: $bp-medium) {
+    padding: 0 20px 60px;
+  }
+}
+
+.c-search-content {
+  max-width: 1441px;
+  margin: 0 auto;
+}
+
+.c-search-results-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+}
+
+// Individual Search Result Card
+.c-search-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 32px;
+  padding: 32px;
+  background: var(--color-white, #ffffff);
+  border: 2px solid var(--color-yellow-2, #f8e08e);
+  min-height: 194px;
+  align-items: flex-start;
+  
+  @media (max-width: $bp-medium) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  &__image {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    
+    @media (max-width: $bp-medium) {
+      width: 100%;
+      max-width: 200px;
+    }
+  }
+  
+  &__thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--color-gray-5, #e9e9e9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+      opacity: 0.5;
+    }
+  }
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  &__header {
+    margin: 0;
+  }
+  
+  &__title {
+    margin: 0;
+       font-size: 28px;
+      line-height: 40px;
+    a {
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 40px;
+      color: var(--color-blue-2, #001871);
+      text-decoration: underline;
+      text-decoration-color: var(--color-blue-2, #001871);
+      text-underline-offset: 4px;
+      transition: color 0.3s ease, text-decoration-color 0.3s ease;
+      
+      @media (max-width: $bp-medium) {
+        font-size: 22px;
+        line-height: 32px;
+      }
+      
+      &:hover {
+        color: var(--color-blue-3, #0047bb);
+        text-decoration-color: var(--color-blue-3, #0047bb);
+      }
+    }
+  }
+  
+  &__excerpt {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.18px;
+    color: var(--color-blue-1, #071d49);
+    margin: 0;
+  }
+}
+
+// No Results Message
+.c-search-no-results {
+  text-align: center;
+  padding: 80px 20px;
+  
+  &__title {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 40px;
+    color: var(--color-blue-1, #071d49);
+    margin: 0 0 16px 0;
+  }
+  
+  &__text {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--color-blue-1, #071d49);
+    margin: 0;
+  }
 }

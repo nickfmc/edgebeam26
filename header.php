@@ -12,7 +12,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   <?php // other html head stuff (before WP/theme scripts are loaded) ------- ?>
+<!-- GSAP Core Library (Required) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+
+<!-- ScrollTrigger Plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+
   <?php wp_head(); // wordpress head functions -- DONOTREMOVE ?>
 
   <?php // START Google Analytics here ?>

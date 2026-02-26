@@ -680,4 +680,88 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    // Find all elements that have id starting with "tab-"
+    const customTriggers = document.querySelectorAll('[id^="tab-"]');
+    
+    customTriggers.forEach(tabTrigger => {
+        // Extract the number part (tab-1 → 1, tab-2 → 2, etc.)
+        const number = tabTrigger.id.replace('tab-', '');
+        
+        // Find the corresponding tab content/class element
+        const target = document.querySelector(`.tab-${number}`);
+        
+        if (target) {
+            // Set up accessibility attributes
+            tabTrigger.setAttribute('role', 'tab');
+            tabTrigger.setAttribute('tabindex', '0');
+            
+            // Get the aria-controls from the target tab if it exists
+            const ariaControls = target.getAttribute('aria-controls');
+            if (ariaControls) {
+                tabTrigger.setAttribute('aria-controls', ariaControls);
+            }
+            
+            // Sync initial aria-selected state
+            const isSelected = target.getAttribute('aria-selected') === 'true';
+            tabTrigger.setAttribute('aria-selected', isSelected);
+            if (isSelected) {
+                tabTrigger.classList.add('is-active');
+            }
+            
+            // Function to activate tab
+            const activateTab = (e) => {
+                if (e) {
+                    e.preventDefault();
+                }
+                
+                // Remove active state from all custom triggers
+                customTriggers.forEach(trigger => {
+                    trigger.setAttribute('aria-selected', 'false');
+                    trigger.classList.remove('is-active');
+                });
+                
+                // Set active state on this trigger
+                tabTrigger.setAttribute('aria-selected', 'true');
+                tabTrigger.classList.add('is-active');
+                
+                // Trigger click on the real tab element
+                target.click();
+            };
+            
+            // Click event
+            tabTrigger.addEventListener('click', activateTab);
+            
+            // Keyboard support (Enter and Space)
+            tabTrigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    activateTab();
+                }
+            });
+            
+            // Observe changes to the actual tab's aria-selected state
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === 'aria-selected') {
+                        const isSelected = target.getAttribute('aria-selected') === 'true';
+                        tabTrigger.setAttribute('aria-selected', isSelected);
+                        if (isSelected) {
+                            tabTrigger.classList.add('is-active');
+                        } else {
+                            tabTrigger.classList.remove('is-active');
+                        }
+                    }
+                });
+            });
+            
+            observer.observe(target, { attributes: true });
+        }
+    });
+});
 
+// (function() {
+//   'use strict';
+
+//   window._mp_1771551893 = gsap.timeline({scrollTrigger:{"scrub":1,"trigger":".gb-element-e18edd94","start":"clamp(top)","end":"top -100%","pin":".gb-element-e18edd94","pinSpacing":true}}).from(".c-freeze-pane", {"stagger":{"from":"start","each":11},"autoAlpha":0,"yPercent":100,"duration":1}, 0).to(".c-freeze-pane", {"scale":0,"stagger":{"from":"start","each":11},"duration":0.4}, 4.9);
+// })();

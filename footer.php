@@ -1,10 +1,3 @@
-<section class="c-animated-gradient c-animated-gradient--blocks">
-  <?php include get_template_directory() . '/template-part/block/blocks-animated-bg.php'; ?>
-  
-  <div class="o-container" style="position: relative; z-index: 1;">
-    <!-- Your content here -->
-  </div>
-</section>
 
 <footer class="o-section c-page-footer" id="c-page-footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
 

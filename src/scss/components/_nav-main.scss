@@ -151,55 +151,30 @@
     visibility: visible;
   }
   .c-main-menu ul {
-    background-color: #fff;
-    box-shadow: 0px 12px 16px -4px rgba(0, 0, 0, 0.25);
-    border: 1px solid var(--Colors-Border-border-secondary, #E9EAEB);
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 100%;
-    min-width: 336px;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 200ms linear;
-    z-index: z(dropdown);
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
+   
   }
   .c-main-menu ul li {
-    position: relative;
-    max-height: 0;
-    transition: max-height 300ms linear;
-    overflow: hidden;
-    display: flex;
-    // align-self: stretch;
-    // align-items: flex-start;
-    // gap: var(--spacing-lg, 12px);
-    
-   
+   &:first-of-type a {
+    color: var(--Blue-2, #001871);
+font-size: 22px;
+font-style: normal;
+font-weight: 600;
+line-height: 34px; /* 154.545% */
+letter-spacing: -0.22px;
+   }
 
   }
-  .c-main-menu li:hover ul li,
-  .c-main-menu li:focus ul li,
-  .c-main-menu .sub-menu.is-active li {
-    max-height: 140px;
-  }
+
   .c-main-menu ul li a {
     color: $color-primary;
     font-size: 0.938rem;
-    padding: 15px 15px;
+    padding: 10px 0;
     width: 100%;
     display: block;
     transition: $transition-ease;
   }
   .c-main-menu ul li a:focus {
-    color: #000;
-    border-radius: var(--radius-md, 8px);
-    background-color: #FAFAFA;
+    
     outline: 2px solid $color-primary; // Add a visible focus outline
     outline-offset: -2px;
   }
@@ -212,7 +187,7 @@
   .c-main-menu ul .current_page_ancestor > a {
     color: #000;
     border-radius: var(--radius-md, 8px);
-    background-color: #FAFAFA;
+
     // text-decoration: underline;
   }
 }

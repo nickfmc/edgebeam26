@@ -73,14 +73,18 @@ $modal_id = 'video-modal-' . uniqid();
                 />
                 <div class="c-video-modal__overlay<?php echo $use_alternate_style ? ' c-video-modal__overlay--alternate' : ''; ?>">
                     <div class="c-video-modal__overlay-content">
-                        <?php if ( ! $use_alternate_style && ! empty( $title ) ) : ?>
-                            <div class="c-video-modal__title"><?php echo wp_kses_post( $title ); ?></div>
-                        <?php endif; ?>
                         <div class="c-video-modal__play-button">
-                            <svg width="45" height="45" viewBox="0 0 45 45" fill="none">
-                                <rect x="1" y="1" width="43" height="43" rx="21.5" stroke="white" stroke-width="2"/>
-                                <path d="M30.5 21.634C31.1667 22.0189 31.1667 22.9811 30.5 23.366L18.5 30.2942C17.8333 30.6791 17 30.198 17 29.4282L17 15.5718C17 14.802 17.8333 14.3209 18.5 14.7058L30.5 21.634Z" fill="white"/>
-                            </svg>
+                            <?php if ( $use_alternate_style ) : ?>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none">
+                                    <rect width="100" height="100" rx="50" fill="#BCBACD"/>
+                                    <path d="M46.2184 37.3223C43.4593 35.6991 39.9807 37.6885 39.9807 40.8897V59.1108C39.9807 62.3119 43.459 64.3013 46.2181 62.6784L61.7054 53.5687C64.426 51.9685 64.4261 48.0342 61.7057 46.4338L46.2184 37.3223Z" fill="white"/>
+                                </svg>
+                            <?php else : ?>
+                                <svg width="45" height="45" viewBox="0 0 45 45" fill="none">
+                                    <rect x="1" y="1" width="43" height="43" rx="21.5" stroke="white" stroke-width="2"/>
+                                    <path d="M30.5 21.634C31.1667 22.0189 31.1667 22.9811 30.5 23.366L18.5 30.2942C17.8333 30.6791 17 30.198 17 29.4282L17 15.5718C17 14.802 17.8333 14.3209 18.5 14.7058L30.5 21.634Z" fill="white"/>
+                                </svg>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -96,15 +100,10 @@ $modal_id = 'video-modal-' . uniqid();
     id="<?php echo esc_attr( $modal_id ); ?>"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="<?php echo esc_attr( $modal_id ); ?>-title"
+    aria-label="<?php echo esc_attr( $title ); ?>"
     aria-hidden="true"
 >
     <div class="c-popup-form c-video-modal__popup">
-        <!-- Hidden title for accessibility -->
-        <h2 id="<?php echo esc_attr( $modal_id ); ?>-title" class="sr-only">
-            <?php echo wp_kses_post( $title ); ?>
-        </h2>
-        
         <button 
             class="c-popup-close" 
             type="button" 
