@@ -1,29 +1,30 @@
 <?php get_header(); ?>
 
-<!-- Hero Section with Blue Gradient Background -->
+<!-- Hero Section with Light Blue Background -->
 <section class="c-search-hero">
-  <div class="c-search-hero__overlay"></div>
-  <div class="c-search-hero__content">
+  <div class="c-search-hero__inner o-wrapper-wide">
     <h1 class="c-search-hero__title">Search Results</h1>
     <p class="c-search-hero__description">
       Didn't find what you're looking for? Try adjusting your keywords and querying again using the search bar below. Still have questions or want to see how this works in practice? <a href="<?php echo esc_url(home_url('/contact')); ?>" class="c-search-hero__link">Contact our team</a>.
     </p>
-  </div>
-</section>
 
+        
+  </div>
+  <div class="o-wrapper-wide">
     <!-- Search Bar Section -->
-    <section class="c-search-bar-section">
-      <div class="c-search-bar-container o-wrapper-wide">
+    <div class="c-search-bar-section">
+      <form role="search" method="get" class="c-search-bar-container o-wrapper-wide" action="<?php echo esc_url(home_url('/')); ?>">
         <label for="search-page-input" class="c-search-bar-label">Search</label>
         <div class="c-search-bar-wrapper">
           <input 
             type="search" 
             id="search-page-input" 
+            name="s"
             class="c-search-bar-input" 
             placeholder="Search field goes here"
             value="<?php echo esc_attr(get_search_query()); ?>"
           />
-          <button type="button" class="c-search-bar-button">
+          <button type="submit" class="c-search-bar-button" aria-label="Submit search">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M6.5 11.5C9.26142 11.5 11.5 9.26142 11.5 6.5C11.5 3.73858 9.26142 1.5 6.5 1.5C3.73858 1.5 1.5 3.73858 1.5 6.5C1.5 9.26142 3.73858 11.5 6.5 11.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M12.5 12.5L10.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -39,8 +40,12 @@
             <li>Popular search item lorem ipsum dolor sit amet consectur</li>
           </ul>
         </div> -->
-      </div>
-    </section>
+      </form>
+    </div>
+  </div>
+</section>
+
+
 
 <div class="o-layout-row">
   <main id="main-content" class="o-wrapper-wide" role="main" itemscope itemprop="mainContentOfPage" itemtype="https://schema.org/WebPageElement">

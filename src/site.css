@@ -5157,6 +5157,7 @@ p + .c-btn--primary {
    HEADER
    ========================================================================== */
 .c-page-header {
+  position: relative;
   background: #fff;
   -webkit-box-shadow: 0 3px 4px rgba(0, 0, 0, 0.07);
           box-shadow: 0 3px 4px rgba(0, 0, 0, 0.07);
@@ -5224,9 +5225,10 @@ p + .c-btn--primary {
   position: absolute;
   top: -100%; /* Start off-screen */
   right: 0;
-  background: #fff;
+  background: var(--gradient-style);
   border: 1px solid #D5D7DA;
-  border-radius: 0 0 8px 8px;
+  border-bottom: 0;
+  border-radius: 0;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   max-width: 100%;
@@ -5264,16 +5266,13 @@ p + .c-btn--primary {
 }
 #search-popup .c-search-form > div input {
   max-width: 100%;
-  border-radius: var(--radius-md, 8px);
   background: #FAFAFA;
-  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), inset 0 -1px 2px rgba(0, 0, 0, 0.24);
-          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), inset 0 -1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 0;
   border: 0;
 }
 #search-popup .c-search-form > div input input:focus, #search-popup .c-search-form > div input input:active, #search-popup .c-search-form > div input input:focus-within {
   outline: 2px solid #0f2f5f;
   outline-offset: 2px;
-  border-radius: 2px;
 }
 @media (forced-colors: active) {
   #search-popup .c-search-form > div input input:focus:focus, #search-popup .c-search-form > div input input:active:focus, #search-popup .c-search-form > div input input:focus-within:focus {
@@ -5299,7 +5298,7 @@ p + .c-btn--primary {
   position: absolute;
   width: 33px;
   height: 33px;
-  color: #abadaf;
+  color: #fff;
   top: 5px;
   right: 5px;
   cursor: pointer;
@@ -5308,18 +5307,19 @@ p + .c-btn--primary {
 #search-popup .search-submit {
   -webkit-transition: all 250ms ease;
   transition: all 250ms ease;
-  border-radius: 8px;
+  border-radius: 0;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  padding: 10px var(--spacing-xl, 16px);
+  padding: 5px 20px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: var(--spacing-lg, 12px);
+  background-color: #fff;
+  color: var(--color-blue-1);
   /* Shadows/shadow-xs-skeuomorphic */
   -webkit-box-shadow: 0px 0px 0px 1px var(--Colors-Effects-Shadows-shadow-skeumorphic-inner-border, rgba(10, 13, 18, 0.18)) inset, 0px -2px 0px 0px var(--Colors-Effects-Shadows-shadow-skeumorphic-inner, rgba(10, 13, 18, 0.05)) inset, 0px 1px 2px 0px var(--Colors-Effects-Shadows-shadow-xs, rgba(10, 13, 18, 0.05));
           box-shadow: 0px 0px 0px 1px var(--Colors-Effects-Shadows-shadow-skeumorphic-inner-border, rgba(10, 13, 18, 0.18)) inset, 0px -2px 0px 0px var(--Colors-Effects-Shadows-shadow-skeumorphic-inner, rgba(10, 13, 18, 0.05)) inset, 0px 1px 2px 0px var(--Colors-Effects-Shadows-shadow-xs, rgba(10, 13, 18, 0.05));
@@ -5382,39 +5382,53 @@ p + .c-btn--primary {
 
 .c-search-hero {
   position: relative;
-  min-height: 523px;
+  background-color: var(--blue-6, #b9d9eb);
+  padding: 50px 20px 0 20px;
+  overflow: hidden;
+}
+.c-search-hero__inner {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  text-align: center;
-  padding: 80px 20px;
-  overflow: hidden;
-  background-image: url("../img/banner_defualt.jpg");
+  gap: 60px;
 }
-.c-search-hero__content {
-  position: relative;
-  z-index: 2;
-  max-width: 1000px;
-  margin: 0 auto;
+@media (max-width: 768px) {
+  .c-search-hero__inner {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    gap: 24px;
+  }
 }
 .c-search-hero__title {
   font-family: var(--font-primary);
   font-weight: 500;
   font-size: 60px;
   line-height: 70px;
-  color: var(--color-white, #ffffff);
-  margin: 0 0 32px 0;
+  color: var(--color-blue-1, #071d49);
+  margin: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  width: 30%;
+}
+@media (max-width: 992px) {
+  .c-search-hero__title {
+    font-size: 48px;
+    line-height: 58px;
+  }
 }
 @media (max-width: 768px) {
   .c-search-hero__title {
     font-size: 44px;
     line-height: 54px;
+    width: 100%;
   }
 }
 @media (max-width: 500px) {
@@ -5429,10 +5443,11 @@ p + .c-btn--primary {
   font-size: 22px;
   line-height: 34px;
   letter-spacing: -0.22px;
-  color: var(--color-white, #ffffff);
+  color: var(--color-blue-1, #071d49);
   margin: 0;
-  max-width: 707px;
-  margin: 0 auto;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 @media (max-width: 768px) {
   .c-search-hero__description {
@@ -5441,24 +5456,38 @@ p + .c-btn--primary {
   }
 }
 .c-search-hero__link {
-  color: var(--color-white, #ffffff);
+  color: var(--color-blue-1, #071d49);
   text-decoration: underline;
   -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
 }
 .c-search-hero__link:hover {
-  opacity: 0.8;
+  opacity: 0.7;
+}
+.c-search-hero::after {
+  content: "";
+  width: 100%;
+  background-color: #fff;
+  height: 52px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 .c-search-bar-section {
   width: 100%;
-  padding: 80px 0 60px;
+  min-height: 108px;
+  margin-top: 80px;
+  padding: 20px 0 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  z-index: 10;
   background: var(--gradient-orange-yellow-1, linear-gradient(90deg, var(--color-orange, #FF9425) 2.77%, var(--color-yellow-1, #FDCF12) 96.04%));
-}
-@media (max-width: 768px) {
-  .c-search-bar-section {
-    padding: 60px 0 40px;
-  }
 }
 
 .c-search-bar-container {
