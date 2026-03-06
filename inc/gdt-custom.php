@@ -66,13 +66,30 @@ add_filter( 'wp_grid_builder/facet/html', function( $html, $facet_id ) {
   if ( strpos( $html, 'name="cats"' ) === false ) {
     return $html;
   }
+
+  /**
+   * Helper: convert a hex color (#rrggbb or #rgb) to "r, g, b" string
+   * used for --category-color-rgb so the glow box-shadow alpha works.
+   */
+  $hex_to_rgb = function( $hex ) {
+    $hex = ltrim( $hex, '#' );
+    if ( strlen( $hex ) === 3 ) {
+      $hex = $hex[0].$hex[0].$hex[1].$hex[1].$hex[2].$hex[2];
+    }
+    $r = hexdec( substr( $hex, 0, 2 ) );
+    $g = hexdec( substr( $hex, 2, 2 ) );
+    $b = hexdec( substr( $hex, 4, 2 ) );
+    return "$r, $g, $b";
+  };
   
   // Get all categories and their data
   $categories = get_categories( array( 'hide_empty' => false ) );
   
   foreach ( $categories as $category ) {
-    $category_color = get_field( 'category_color', 'category_' . $category->term_id );
-    $category_icon = get_field( 'category_icon', 'category_' . $category->term_id );
+    $category_color      = get_field( 'category_color',       'category_' . $category->term_id );
+    $category_icon       = get_field( 'category_icon',        'category_' . $category->term_id );
+    // ACF select field: "invert" (default) or "glow" — controls active-state styling
+    $category_active_style = get_field( 'category_active_style', 'category_' . $category->term_id );
     
     // Skip if no color or icon
     if ( ! $category_color && ! $category_icon ) {
@@ -81,17 +98,26 @@ add_filter( 'wp_grid_builder/facet/html', function( $html, $facet_id ) {
     
     // FIRST: Add color attributes to the button div (do this before modifying label)
     if ( $category_color ) {
-      // Simple pattern: find button div followed by input with our category slug
       $slug_escaped = preg_quote( $category->slug, '/' );
       $button_pattern = '/(<div class="wpgb-button")((?:\s+[^>]*)?>)(\s*<input[^>]*?name="cats"[^>]*?value="' . $slug_escaped . '")/';
       
-      $html = preg_replace_callback( $button_pattern, function( $matches ) use ( $category_color ) {
+      $html = preg_replace_callback( $button_pattern, function( $matches ) use ( $category_color, $category_active_style, $hex_to_rgb ) {
         $div_start = $matches[1];  // <div class="wpgb-button"
         $div_attrs = $matches[2];   // any existing attributes + >
         $input = $matches[3];       // the input tag
-        
-        // Insert our attributes before the closing >
-        $new_attrs = ' data-category-color="' . esc_attr( $category_color ) . '" style="--category-color: ' . esc_attr( $category_color ) . ';"';
+
+        $rgb = $hex_to_rgb( $category_color );
+
+        // Build data attributes
+        $new_attrs = ' data-category-color="' . esc_attr( $category_color ) . '"';
+
+        // Only add data-active-style when the "dark" option is chosen in ACF
+        if ( 'dark' === $category_active_style ) {
+          $new_attrs .= ' data-active-style="dark"';
+        }
+
+        // CSS custom properties: color + RGB breakdown for glow opacity
+        $new_attrs .= ' style="--category-color: ' . esc_attr( $category_color ) . '; --category-color-rgb: ' . esc_attr( $rgb ) . ';"';
         
         return $div_start . $new_attrs . $div_attrs . $input;
       }, $html );
@@ -355,9 +381,13 @@ class GB_Pro_Mega_Menu_Walker extends Walker_Nav_Menu {
 		 */
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 		
+		$arrow = ( $has_mega_menu && 0 === $depth )
+			? '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none" class="mega-menu-arrow" aria-hidden="true" style="margin-left: 10px;"><path d="M0.733398 0.679562L5.7334 6.07728L10.7334 0.679562" stroke="#0047BB" stroke-width="2" stroke-linejoin="round"/></svg>'
+			: '';
+
 		$item_output = $args->before ?? '';
 		$item_output .= '<a' . $attributes . '>';
-		$item_output .= ( $args->link_before ?? '' ) . $title . ( $args->link_after ?? '' );
+		$item_output .= ( $args->link_before ?? '' ) . $title . $arrow . ( $args->link_after ?? '' );
 		$item_output .= '</a>';
 		$item_output .= $args->after ?? '';
 		

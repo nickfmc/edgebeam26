@@ -6823,6 +6823,22 @@ p.has-large-font-size {
   color: #fff;
 }
 
+.u-600 {
+  font-weight: 600;
+}
+
+.u-500 {
+  font-weight: 500 !important;
+}
+
+.u-tdn, .u-tdn a {
+  text-decoration: none !important;
+}
+
+.c-card-hover-transparent a {
+  text-decoration: none !important;
+}
+
 .is-style-secondaryfont {
   font-family: "Outfit", sans-serif;
 }

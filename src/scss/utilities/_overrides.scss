@@ -66,3 +66,26 @@ background-repeat: repeat !important;
   background-color: #071D49;
   color: #fff;
 }
+
+.card-carousel:focus, .u-no-focus:focus, .vertical-slider__slides-container:focus  {
+outline: 0 !important;
+}
+
+.c-device-terms {
+  span {
+    font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 25px; /* 178.571% */
+letter-spacing: 0.7px;
+text-transform: uppercase;
+color: var(--Gray-3, #7C878E);
+text-align: center;
+padding: 0px 5px;
+border: 1px solid #D9D9D9;
+  }
+}
+
+.u-no-underline, .u-no-underline a {
+  text-decoration: none !important;
+}

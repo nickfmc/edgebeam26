@@ -3,6 +3,23 @@
  * Custom styles for category facets with icons and colors
  */
 
+ .c-resource-filters {
+
+ 
+
+ .wpgb-inline-list {
+  list-style: none;
+  li {
+    &::before {
+      display: none !important;
+    }
+  }
+ }
+
+ .wpgb-button {
+  border-radius: 30px !important;
+ }
+
 .wpgb-button-facet {
   
   // Category Icon Styling
@@ -14,44 +31,58 @@
     vertical-align: middle;
     object-fit: contain;
     transition: all 0.3s ease;
+    position: absolute;
+    left: 17px;
+  top: 50%;
+  transform: translateY(-50%);
   }
 
   // Facet Button Base Styling
   .wpgb-button[data-category-color] {
     position: relative;
     transition: all 0.3s ease;
-    
-    // Default state - subtle border with category color
+
+    // ── Hover: glow + lift applies to ALL buttons ─────────────────────────
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 0 3px rgba(var(--category-color-rgb, 0, 30, 80), 0.3),
+                  0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    // Inactive state
     &[aria-pressed="false"] {
-      
       &:hover {
         border-color: var(--category-color);
         background-color: rgba(0, 0, 0, 0.02);
-        
-        .wpgb-button-label {
-          color: var(--category-color);
-        }
+        // Label color intentionally not changed on hover
       }
     }
-    
-    // Active state - full category color background
+
+    // ── Active state: "Invert" variant (light/bright active bg) ───────────
+    // Default — icon inverted to white
     &[aria-pressed="true"] {
       background-color: var(--category-color) !important;
       border-color: var(--category-color) !important;
-      
+
       .wpgb-button-label {
         color: #ffffff !important;
       }
-      
+
       .category-icon {
-        // Invert icon color for better visibility on colored background
         filter: brightness(0) invert(1);
       }
     }
-    
-    // Hover state for active button
-    &[aria-pressed="true"]:hover {
-      opacity: 0.9;
+
+    // ── Active state: "Dark" variant (dark active bg) ──────────────────────
+    // data-active-style="dark" set via ACF — icon stays as-is, label stays dark
+    &[data-active-style="dark"][aria-pressed="true"] {
+      .wpgb-button-label {
+        color: #1a1a1a !important;
+      }
+
+      .category-icon {
+        filter: none;
+      }
     }
   }
 }
@@ -90,3 +121,28 @@
     }
   }
 }
+
+
+  .wpgb-button {
+    padding: 10px 20px !important;
+    .wpgb-button-label {
+      line-height: 1 !important;
+      padding-left: 22px;
+    }
+  }
+
+  .wpgb-button-facet {
+    .wpgb-inline-list {
+      li:first-of-type {
+        .wpgb-button[aria-pressed="true"] {
+            background: var(--Blue-5-Yellow-1-Orange, linear-gradient(90deg, var(--Blue-5, #8DC8E8) 12.62%, var(--Yellow-1, #FDCF12) 62.28%, var(--Orange, #FF9425) 92.81%));
+            border-color: #fff;
+        }
+        .wpgb-button-label {
+          padding-left: 8px;
+        }
+      }
+    }
+  }
+
+ }

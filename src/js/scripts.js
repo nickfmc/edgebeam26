@@ -105,14 +105,6 @@ document.getElementById('open-modal-nav').addEventListener('click', function(){
     document.getElementById('open-modal-nav').setAttribute('aria-expanded', 'false'); 
   });
 
-  // Close modal nav when clicking a link (for anchor/one-page navigation)
-  document.querySelectorAll('.c-modal-nav-wrap a').forEach(function(link) {
-    link.addEventListener('click', function() {
-      document.querySelector('html').classList.remove('has-modal-nav-open');
-      document.getElementById('open-modal-nav').setAttribute('aria-expanded', 'false');
-    });
-  });
-  
   // Close modal nav when clicking outside of it when it already open
     document.addEventListener('click', function(e){
       var isClickOnButton = e.target.closest('#open-modal-nav') !== null;

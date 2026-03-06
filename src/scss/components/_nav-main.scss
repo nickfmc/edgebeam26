@@ -192,3 +192,13 @@ letter-spacing: -0.22px;
   }
 }
 // END drop down styling
+
+// ++ Mega menu arrow +++++++++++++++++++++++++++++++++
+.mega-menu-arrow {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+a[aria-expanded="true"] .mega-menu-arrow {
+  transform: rotate(180deg);
+}
