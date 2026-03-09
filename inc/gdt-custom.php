@@ -86,13 +86,14 @@ add_filter( 'wp_grid_builder/facet/html', function( $html, $facet_id ) {
   $categories = get_categories( array( 'hide_empty' => false ) );
   
   foreach ( $categories as $category ) {
-    $category_color      = get_field( 'category_color',       'category_' . $category->term_id );
-    $category_icon       = get_field( 'category_icon',        'category_' . $category->term_id );
-    // ACF select field: "invert" (default) or "glow" — controls active-state styling
+    $category_color        = get_field( 'category_color',       'category_' . $category->term_id );
+    $category_icon         = get_field( 'category_icon',        'category_' . $category->term_id );
+    $category_icon_svg     = get_field( 'category_icon_svg',    'category_' . $category->term_id );
+    // ACF select field: "invert" (default) or "dark" — controls active-state styling
     $category_active_style = get_field( 'category_active_style', 'category_' . $category->term_id );
     
     // Skip if no color or icon
-    if ( ! $category_color && ! $category_icon ) {
+    if ( ! $category_color && ! $category_icon && ! $category_icon_svg ) {
       continue;
     }
     
@@ -124,16 +125,35 @@ add_filter( 'wp_grid_builder/facet/html', function( $html, $facet_id ) {
     }
     
     // SECOND: Add icon to the button label (after color is added)
-    if ( $category_icon ) {
+    if ( $category_icon_svg || $category_icon ) {
       $label_pattern = '/(<input[^>]*?name="cats"[^>]*?value="' . preg_quote( $category->slug, '/' ) . '"[^>]*>.*?<span class="wpgb-button-label">)(' . preg_quote( $category->name, '/' ) . ')(<\/span>)/s';
       
-      $html = preg_replace_callback( $label_pattern, function( $matches ) use ( $category_icon ) {
+      $html = preg_replace_callback( $label_pattern, function( $matches ) use ( $category_icon, $category_icon_svg ) {
         $before_label = $matches[1];
         $label_text = $matches[2];
         $after_label = $matches[3];
         
-        // Add icon before label text
-        $icon_html = '<img src="' . esc_url( $category_icon ) . '" alt="" class="category-icon" />';
+        if ( $category_icon_svg ) {
+          // Inline SVG — use currentColor so CSS fully controls the colour.
+          // SVG must have fill="currentColor" on its paths for this to work.
+          $allowed_svg = wp_kses( $category_icon_svg, [
+            'svg'      => [ 'xmlns' => [], 'viewbox' => [], 'width' => [], 'height' => [], 'fill' => [], 'class' => [], 'aria-hidden' => [], 'role' => [] ],
+            'path'     => [ 'd' => [], 'fill' => [], 'stroke' => [], 'stroke-width' => [], 'stroke-linejoin' => [], 'stroke-linecap' => [], 'fill-rule' => [], 'clip-rule' => [] ],
+            'circle'   => [ 'cx' => [], 'cy' => [], 'r' => [], 'fill' => [], 'stroke' => [], 'stroke-width' => [] ],
+            'rect'     => [ 'x' => [], 'y' => [], 'width' => [], 'height' => [], 'fill' => [], 'rx' => [], 'ry' => [], 'stroke' => [], 'stroke-width' => [] ],
+            'g'        => [ 'fill' => [], 'stroke' => [], 'transform' => [], 'fill-rule' => [], 'clip-rule' => [] ],
+            'polygon'  => [ 'points' => [], 'fill' => [], 'stroke' => [], 'stroke-width' => [] ],
+            'polyline' => [ 'points' => [], 'fill' => [], 'stroke' => [], 'stroke-width' => [] ],
+            'line'     => [ 'x1' => [], 'y1' => [], 'x2' => [], 'y2' => [], 'stroke' => [], 'stroke-width' => [], 'stroke-linecap' => [] ],
+            'defs'     => [],
+            'clippath' => [ 'id' => [] ],
+            'use'      => [ 'href' => [], 'xlink:href' => [] ],
+          ] );
+          $icon_html = '<span class="category-icon" aria-hidden="true">' . $allowed_svg . '</span>';
+        } else {
+          // Fallback to <img> if no SVG code entered
+          $icon_html = '<img src="' . esc_url( $category_icon ) . '" alt="" class="category-icon" />';
+        }
         
         return $before_label . $icon_html . $label_text . $after_label;
       }, $html );

@@ -26,6 +26,8 @@ require_once('inc/admin.php'); // things that happen only in the admin
 
 // CUSTOM FUNCTIONS FOR EACH WEBSITE
 require_once('inc/gdt-custom.php'); // per project custom functions
+require_once('inc/table-of-contents.php'); // table of contents module
+
 
 
 define('NXT_VERSION', '1.0.0'); // You can set any version number

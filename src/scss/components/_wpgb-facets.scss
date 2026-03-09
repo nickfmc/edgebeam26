@@ -35,6 +35,15 @@
     left: 17px;
   top: 50%;
   transform: translateY(-50%);
+  // Normal state: all icons appear as dark navy
+  color: #071d49;
+  // Ensure inline SVGs inherit this colour via currentColor
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+  }
   }
 
   // Facet Button Base Styling
@@ -58,8 +67,7 @@
       }
     }
 
-    // ── Active state: "Invert" variant (light/bright active bg) ───────────
-    // Default — icon inverted to white
+    // ── Active state: default variant (coloured bg → white icon) ──────────
     &[aria-pressed="true"] {
       background-color: var(--category-color) !important;
       border-color: var(--category-color) !important;
@@ -69,19 +77,19 @@
       }
 
       .category-icon {
-        filter: brightness(0) invert(1);
+        color: #ffffff; // SVG paths inherit → white
       }
     }
 
-    // ── Active state: "Dark" variant (dark active bg) ──────────────────────
-    // data-active-style="dark" set via ACF — icon stays as-is, label stays dark
+    // ── Active state: "dark" variant (light bg → dark icon) ──────────────
+    // data-active-style="dark" set via ACF — icon stays dark navy
     &[data-active-style="dark"][aria-pressed="true"] {
       .wpgb-button-label {
         color: #1a1a1a !important;
       }
 
       .category-icon {
-        filter: none;
+        color: #071d49; // SVG paths inherit → dark navy
       }
     }
   }

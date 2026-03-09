@@ -51,6 +51,26 @@
             "allow_in_bindings": 0
         },
         {
+            "key": "field_category_icon_svg",
+            "label": "Category Icon SVG (Facet Buttons)",
+            "name": "category_icon_svg",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Paste raw SVG code here for use in the filter facet buttons. All fills/strokes in the SVG should use fill=\"currentColor\" so CSS can control the colour (dark navy in normal state, white or dark in active state). The image field above is still used on post cards etc.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "new_lines": "",
+            "maxlength": "",
+            "rows": 4,
+            "allow_in_bindings": 0
+        },
+        {
             "key": "field_69ab63faf4e92",
             "label": "Active Style",
             "name": "category_active_style",
