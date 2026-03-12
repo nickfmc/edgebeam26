@@ -1,16 +1,19 @@
 <?php
 /*
-Template Name: Pillar Page
+Template Name: TOC Page
 */
 ?>
 
 <?php get_header(); ?>
 <?php
-$hero_bg_id  = get_field( 'hero_background' );
-$hero_bg_url = $hero_bg_id ? wp_get_attachment_image_url( $hero_bg_id, 'full' ) : '';
-$hero_style  = $hero_bg_url ? ' style="background-image: url(' . esc_url( $hero_bg_url ) . ');"' : '';
+$hero_bg_url  = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+$hero_style   = $hero_bg_url ? ' style="background-image: url(' . esc_url( $hero_bg_url ) . ');"' : '';
+$hero_classes = 'o-layout-row c-pillar-hero' . ( $hero_bg_url ? ' has-featured-bg' : '' );
 ?>
-<div class="o-layout-row c-pillar-hero"<?php echo $hero_style; ?>>
+<div class="<?php echo esc_attr( $hero_classes ); ?>"<?php echo $hero_style; ?>>
+  <?php if ( $hero_bg_url ) : ?>
+  <div class="c-pillar-hero__overlay" aria-hidden="true"></div>
+  <?php endif; ?>
   <div class="o-wrapper-wide">
     <h1 class="h2-style"><?php echo the_title(); ?></h1>
   </div>

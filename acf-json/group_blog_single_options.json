@@ -1,0 +1,97 @@
+{
+    "key": "group_blog_single_options",
+    "title": "Blog Single Options",
+    "fields": [
+        {
+            "key": "field_blog_s_show_toc",
+            "label": "Show Table of Contents",
+            "name": "show_toc",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Enable the sticky sidebar Table of Contents for this post.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ui_on_text": "Yes",
+            "ui_off_text": "No"
+        },
+        {
+            "key": "field_blog_s_show_author",
+            "label": "Show Author and Read Time",
+            "name": "show_author_read_time",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Show the author name and estimated read time in the hero banner.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ui_on_text": "Yes",
+            "ui_off_text": "No"
+        },
+        {
+            "key": "field_blog_s_hero_bg_pos",
+            "label": "Hero Banner Background Position",
+            "name": "hero_bg_position",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Controls the vertical alignment of the featured image within the hero banner.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "top": "Top",
+                "center": "Center",
+                "bottom": "Bottom"
+            },
+            "default_value": "center",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "ajax": 0,
+            "search_placeholder": "",
+            "allow_custom": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1773790800
+}

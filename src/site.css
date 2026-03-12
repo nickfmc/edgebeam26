@@ -5811,7 +5811,13 @@ p + .c-btn--primary {
 .c-blog-header {
   padding-top: 80px;
   padding-bottom: 80px;
+  padding-right: 25px;
+  padding-left: 25px;
+  text-align: center;
+  position: relative;
   background-color: #000;
+  background-size: cover;
+  background-repeat: no-repeat;
   color: #fff;
 }
 @media (width >= 768px) {
@@ -5831,10 +5837,105 @@ p + .c-btn--primary {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.c-blog-header.has-featured-bg .c-blog-header__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #1C5195;
+  mix-blend-mode: multiply;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .c-blog-title {
   color: #fff;
+}
+
+.c-single-post__widget-divider {
+  height: 1px;
+  background: #EAEAEA;
+  margin: 1.25rem 0;
+}
+
+.c-single-post__share-widget {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.75rem;
+}
+
+.c-single-post__share-title {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #0f105f;
+  margin: 0;
+}
+
+.c-single-post__share-buttons .a2a_kit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 8px;
+  line-height: 1;
+}
+.c-single-post__share-buttons .a2a_button_facebook,
+.c-single-post__share-buttons .a2a_button_x,
+.c-single-post__share-buttons .a2a_button_linkedin,
+.c-single-post__share-buttons .a2a_button_email {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1.5px solid #EAEAEA;
+  background: #FFF;
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease;
+  text-decoration: none;
+}
+.c-single-post__share-buttons .a2a_button_facebook svg,
+.c-single-post__share-buttons .a2a_button_x svg,
+.c-single-post__share-buttons .a2a_button_linkedin svg,
+.c-single-post__share-buttons .a2a_button_email svg {
+  display: block;
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease;
+}
+.c-single-post__share-buttons .a2a_button_facebook:hover,
+.c-single-post__share-buttons .a2a_button_x:hover,
+.c-single-post__share-buttons .a2a_button_linkedin:hover,
+.c-single-post__share-buttons .a2a_button_email:hover {
+  background: #0f105f;
+  border-color: #0f105f;
+}
+.c-single-post__share-buttons .a2a_button_facebook:hover svg path,
+.c-single-post__share-buttons .a2a_button_x:hover svg path,
+.c-single-post__share-buttons .a2a_button_linkedin:hover svg path,
+.c-single-post__share-buttons .a2a_button_email:hover svg path {
+  fill: #FFF;
 }
 
 .c-corner-cap {
@@ -9511,6 +9612,10 @@ body.has-bottom-banner {
   padding-left: 25px;
   padding-right: 25px;
   text-align: center;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 .c-pillar-hero .o-wrapper-wide {
   display: -webkit-box;
@@ -9519,9 +9624,19 @@ body.has-bottom-banner {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 .c-pillar-hero h1 {
   color: #fff;
+}
+.c-pillar-hero.has-featured-bg .c-pillar-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #1C5195;
+  mix-blend-mode: multiply;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .c-pillar-content {
@@ -9659,6 +9774,17 @@ body.has-bottom-banner {
   gap: 32px;
   padding-top: 48px;
   padding-bottom: 80px;
+}
+.c-pillar-content-inner main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  min-width: 0;
+}
+.c-pillar-content-inner main article {
+  width: auto;
+  max-width: 100%;
+  margin: 0;
 }
 .c-pillar-content-inner aside {
   width: 100%;

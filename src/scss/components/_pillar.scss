@@ -4,12 +4,29 @@
     padding-left: 25px;
     padding-right: 25px;
     text-align: center;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
     .o-wrapper-wide {
         display: flex;
         justify-content: center;
+        position: relative;
+        z-index: 1;
     }
+
     h1 {
         color: #fff;
+    }
+
+    &.has-featured-bg .c-pillar-hero__overlay {
+        position: absolute;
+        inset: 0;
+        background-color: #1C5195;
+        mix-blend-mode: multiply;
+        z-index: 0;
+        pointer-events: none;
     }
 }
 
@@ -146,6 +163,19 @@
     gap: 32px;
     padding-top: 48px;
     padding-bottom: 80px;
+
+    // Main must be allowed to shrink into remaining flex space
+    main {
+        flex: 1;
+        min-width: 0; // prevents flex overflow
+
+        // Override the fixed-width rule from .post-editor-content
+        article {
+            width: auto;
+            max-width: 100%;
+            margin: 0;
+        }
+    }
 
     aside {
         width: 100%;

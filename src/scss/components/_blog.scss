@@ -8,21 +8,103 @@
 .c-blog-header {
     padding-top: 80px;
     padding-bottom: 80px;
-   
+    padding-right: 25px;
+    padding-left: 25px;
+    text-align: center;
+    position: relative;
     background-color: #000;
+    background-size: cover;
+    background-repeat: no-repeat;
     color: #fff;
+
     @media(width >= $bp-medium) {
         padding-top: 140px;
-    padding-bottom: 140px;
-    } 
+        padding-bottom: 140px;
+    }
 
     .o-wrapper-wide {
- display: flex;
-    flex-direction: column;
-    align-items: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        z-index: 1;
     }
-    
+
+    // Blue multiply overlay when a featured image is present
+    &.has-featured-bg .c-blog-header__overlay {
+        position: absolute;
+        inset: 0;
+        background-color: #1C5195;
+        mix-blend-mode: multiply;
+        z-index: 0;
+        pointer-events: none;
+    }
 }
 .c-blog-title {
     color: #fff;
+}
+
+// ++ SIDEBAR WIDGET DIVIDER ++++++++++++++++++++++++++
+.c-single-post__widget-divider {
+    height: 1px;
+    background: $color-gray-light;
+    margin: 1.25rem 0;
+}
+
+// ++ SHARE WIDGET ++++++++++++++++++++++++++++++++++++
+.c-single-post__share-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.c-single-post__share-title {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: $color-primary;
+    margin: 0;
+}
+
+.c-single-post__share-buttons {
+    // AddToAny kit overrides
+    .a2a_kit {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        line-height: 1;
+    }
+
+    .a2a_button_facebook,
+    .a2a_button_x,
+    .a2a_button_linkedin,
+    .a2a_button_email {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        border: 1.5px solid $color-gray-light;
+        background: $color-white;
+        transition: $transition-ease;
+        text-decoration: none;
+
+        svg {
+            display: block;
+            transition: $transition-ease;
+        }
+
+        &:hover {
+            background: $color-primary;
+            border-color: $color-primary;
+
+            svg path {
+                fill: $color-white;
+            }
+        }
+    }
 }
