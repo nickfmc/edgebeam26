@@ -784,4 +784,49 @@ function gdt_first_category_icon_shortcode( $atts ) {
 }
 add_shortcode( 'first_category_icon', 'gdt_first_category_icon_shortcode' );
 
+
+// ++ LOTTIE HERO SEQUENCE SHORTCODE ++++++++++++++++++++++++++
+
+/**
+ * [lottie_hero] shortcode
+ *
+ * Outputs a sequenced Lottie animation hero container.
+ *
+ * Attributes:
+ *   files  Comma-separated filenames from /img/lottie/ (default: all three)
+ *   fade   Crossfade duration in milliseconds (default: 600)
+ *
+ * Example: [lottie_hero files="lottie1.json,lottie2.json,lottie3.json" fade="600"]
+ */
+function lottie_hero_shortcode( $atts ) {
+	$atts = shortcode_atts(
+		array(
+			'files' => 'lottie1.json,lottie2.json,lottie3.json',
+			'fade'  => 600,
+		),
+		$atts,
+		'lottie_hero'
+	);
+
+	// Sanitize each filename to prevent directory traversal
+	$file_names = array_map( 'trim', explode( ',', $atts['files'] ) );
+	$file_urls  = array();
+	foreach ( $file_names as $file ) {
+		$safe_name    = basename( $file );
+		$file_urls[]  = get_stylesheet_directory_uri() . '/img/lottie/' . rawurlencode( $safe_name );
+	}
+
+	$fade       = absint( $atts['fade'] );
+	$files_json = wp_json_encode( $file_urls );
+
+	$output  = '<div class="c-lottie-hero" data-lottie-files="' . esc_attr( $files_json ) . '" data-fade="' . esc_attr( $fade ) . '">';
+	foreach ( $file_urls as $url ) {
+		$output .= '<div class="c-lottie-hero__slide"></div>';
+	}
+	$output .= '</div>';
+
+	return $output;
+}
+add_shortcode( 'lottie_hero', 'lottie_hero_shortcode' );
+
 ?>

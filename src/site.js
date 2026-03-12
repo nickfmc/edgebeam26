@@ -17,3 +17,6 @@ require('./js/scripts');
 
 // Landing Page scripts
 require('./js/landing-page');
+
+// Lottie Hero Sequence
+require('./js/lottie-hero');

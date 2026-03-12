@@ -67,7 +67,7 @@ background-repeat: repeat !important;
   color: #fff;
 }
 
-.card-carousel:focus, .u-no-focus:focus, .vertical-slider__slides-container:focus  {
+.card-carousel:focus, .u-no-focus:focus, .vertical-slider__slides-container:focus, .vertical-slider:focus  {
 outline: 0 !important;
 }
 
@@ -88,4 +88,14 @@ border: 1px solid #D9D9D9;
 
 .u-no-underline, .u-no-underline a {
   text-decoration: none !important;
+}
+
+.u-linkedin {
+  a {
+    text-decoration: none !important;
+    color: #fff !important;
+    &:hover {
+      color: #fff !important;
+    }
+  }
 }

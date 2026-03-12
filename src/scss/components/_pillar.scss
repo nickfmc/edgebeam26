@@ -142,19 +142,35 @@
 
 .c-pillar-content-inner {
     display: flex;
-    flex-direction: row-reverse;
-    gap: 40px;
-    padding-top: 80px;
+    flex-direction: column;
+    gap: 32px;
+    padding-top: 48px;
     padding-bottom: 80px;
+
     aside {
-        width: 300px;
-        position: sticky;
-        top: 100px;
-        align-self: flex-start;
-        flex-shrink: 0;
+        width: 100%;
+        position: static;
+        align-self: auto;
+        flex-shrink: 1;
     }
+
     @media(width >= $bp-medium) {
+        flex-direction: row-reverse;
+        gap: 40px;
+        padding-top: 80px;
+        padding-bottom: 80px;
+
+        aside {
+            width: 300px;
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+            flex-shrink: 0;
+        }
+    }
+
+    @media(width >= $bp-large) {
         padding-top: 120px;
-    padding-bottom: 120px;
-    } 
+        padding-bottom: 120px;
+    }
 }

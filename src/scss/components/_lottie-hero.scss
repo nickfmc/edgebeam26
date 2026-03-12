@@ -1,0 +1,29 @@
+// ++ LOTTIE HERO SEQUENCE ++++++++++++++++++++++++++++++++++++
+
+/**
+ * CSS grid stacking trick: all slides occupy the same grid cell
+ * so the wrapper naturally sizes to the tallest animation.
+ */
+
+.c-lottie-hero {
+    display: grid;
+    width: 100%;
+
+    &__slide {
+        grid-area: 1 / 1;
+        width: 100%;
+        opacity: 0;
+        transition: opacity var(--lottie-fade, 0.6s) ease;
+
+        // Ensure SVG fills the slide container
+        svg {
+            display: block;
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        &.is-active {
+            opacity: 1;
+        }
+    }
+}
