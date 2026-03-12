@@ -176,11 +176,6 @@ class TableOfContents {
         $toc_html = '<div class="c-table-of-contents" itemscope itemtype="https://schema.org/Table">';
         $toc_html .= '<div class="c-toc-header">';
         $toc_html .= '<h4 class="c-toc-title" itemprop="name">Table of Contents</h4>';
-        $toc_html .= '<button class="c-toc-toggle" aria-expanded="true" aria-controls="toc-list">';
-        $toc_html .= '<svg class="c-toc-chevron" width="13" height="8" viewBox="0 0 13 8" fill="none">';
-        $toc_html .= '<path d="M1 1L6.5 6.5L12 1" stroke="#1c5195" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
-        $toc_html .= '</svg>';
-        $toc_html .= '</button>';
         $toc_html .= '</div>';
         
         $toc_html .= '<nav class="c-toc-nav" id="toc-list" role="navigation" aria-label="Table of Contents">';

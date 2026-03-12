@@ -3281,7 +3281,7 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   color: #000;
   font-family: "Outfit", sans-serif;
   line-height: 1.55;
