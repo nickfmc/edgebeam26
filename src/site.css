@@ -10676,6 +10676,16 @@ body.has-bottom-banner {
   color: #fff !important;
 }
 
+.wpgb-facet li::before {
+  display: none !important;
+}
+
+.wpgb-facet.wpgb-style-1 [role=button].wpgb-button[aria-pressed=true] {
+  border: none !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
 /* ==========================================================================
    PRINT STYLES
    ========================================================================== */
