@@ -176,9 +176,12 @@ class TableOfContents {
         $toc_html = '<div class="c-table-of-contents" itemscope itemtype="https://schema.org/Table">';
         $toc_html .= '<div class="c-toc-header">';
         $toc_html .= '<h4 class="c-toc-title" itemprop="name">Table of Contents</h4>';
+        $toc_html .= '<button class="c-toc-toggle" aria-expanded="false" aria-controls="toc-list" aria-label="Toggle table of contents">';
+        $toc_html .= '<svg class="c-toc-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+        $toc_html .= '</button>';
         $toc_html .= '</div>';
         
-        $toc_html .= '<nav class="c-toc-nav" id="toc-list" role="navigation" aria-label="Table of Contents">';
+        $toc_html .= '<nav class="c-toc-nav is-collapsed" id="toc-list" role="navigation" aria-label="Table of Contents">';
         $toc_html .= '<ol class="c-toc-list" itemprop="hasPart">';
         
         foreach ($this->toc_items as $index => $item) {
@@ -263,15 +266,14 @@ function toc_smooth_scroll_script() {
     document.addEventListener('DOMContentLoaded', function() {
         // TOC toggle functionality
         const tocToggle = document.querySelector('.c-toc-toggle');
-        const tocList = document.querySelector('.c-toc-nav');
-        const tocChevron = document.querySelector('.c-toc-chevron');
+        const tocList   = document.querySelector('.c-toc-nav');
+        const tocWrapper = document.querySelector('.c-table-of-contents');
         
         if (tocToggle && tocList) {
             tocToggle.addEventListener('click', function() {
                 const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', !isExpanded);
-                tocList.style.display = isExpanded ? 'none' : 'block';
-                tocChevron.style.transform = isExpanded ? 'rotate(-90deg)' : 'rotate(0deg)';
+                this.setAttribute('aria-expanded', String(!isExpanded));
+                tocList.classList.toggle('is-collapsed', isExpanded);
             });
         }
         
@@ -316,8 +318,25 @@ function toc_smooth_scroll_script() {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === '#' + currentId) {
                     link.classList.add('active');
+                    // Keep the active link scrolled into view within the TOC nav
+                    if (tocList) {
+                        const linkTop    = link.offsetTop - tocList.offsetTop;
+                        const linkBottom = linkTop + link.offsetHeight;
+                        if (linkTop < tocList.scrollTop || linkBottom > tocList.scrollTop + tocList.clientHeight) {
+                            tocList.scrollTop = linkTop - tocList.clientHeight / 2 + link.offsetHeight / 2;
+                        }
+                    }
                 }
             });
+        }
+
+        // Show/hide scroll-fade gradient based on whether the nav actually overflows
+        function checkTocOverflow() {
+            if (!tocWrapper || !tocList) return;
+            const isScrollable = tocList.scrollHeight > tocList.clientHeight;
+            const isAtBottom   = tocList.scrollTop + tocList.clientHeight >= tocList.scrollHeight - 4;
+            tocWrapper.classList.toggle('is-toc-scrollable', isScrollable);
+            tocWrapper.classList.toggle('is-toc-at-bottom', isScrollable && isAtBottom);
         }
         
         // Throttled scroll listener
@@ -331,9 +350,15 @@ function toc_smooth_scroll_script() {
                 ticking = true;
             }
         });
+
+        if (tocList) {
+            tocList.addEventListener('scroll', checkTocOverflow);
+        }
+        window.addEventListener('resize', checkTocOverflow);
         
-        // Initialize active link
+        // Initialize
         updateActiveLink();
+        checkTocOverflow();
     });
     </script>
     <?php

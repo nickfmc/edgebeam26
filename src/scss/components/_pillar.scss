@@ -43,6 +43,29 @@
     border: 1px solid $color-gray-light;
     padding: 1.5rem;
     box-shadow: 0 4px 24px rgba($color-primary, 0.07);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    position: relative;
+
+    // Fade gradient — JS adds .is-toc-scrollable when the nav overflows
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 1.5rem;
+        left: 1.5rem;
+        right: 1.5rem;
+        height: 60px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+        border-radius: 0 0 10px 10px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        z-index: 1;
+    }
+
+    &.is-toc-scrollable::after { opacity: 1; }
+    &.is-toc-at-bottom::after  { opacity: 0; }
 
     .c-toc-header {
         display: flex;
@@ -51,6 +74,69 @@
         margin-bottom: 1.1rem;
         padding-bottom: 1rem;
         border-bottom: 2px solid $color-gray-light;
+        flex-shrink: 0;
+    }
+
+    .c-toc-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        background: none;
+        border: none;
+        padding: 0.25rem;
+        cursor: pointer;
+        color: $color-primary;
+        border-radius: 4px;
+        transition: background-color $transition-ease;
+        flex-shrink: 0;
+
+        &:hover {
+            background-color: rgba($color-primary, 0.07);
+        }
+
+        @media(width >= $bp-medium) {
+            display: none;
+        }
+    }
+
+    .c-toc-chevron {
+        display: block;
+        transition: transform 0.25s ease;
+    }
+
+    .c-toc-toggle[aria-expanded="true"] .c-toc-chevron {
+        transform: rotate(180deg);
+    }
+
+    .c-toc-nav {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        padding-bottom: 2rem;
+        scrollbar-width: thin;
+        scrollbar-color: rgba($color-primary, 0.25) transparent;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba($color-primary, 0.25);
+            border-radius: 4px;
+        }
+
+        // Mobile only: collapsed by default (JS toggles this class)
+        // Scoped to mobile so specificity never fights the desktop display value
+        @media(width < $bp-medium) {
+            &.is-collapsed {
+                display: none;
+            }
+        }
     }
 
     .c-toc-title {
@@ -196,6 +282,14 @@
             top: 100px;
             align-self: flex-start;
             flex-shrink: 0;
+
+            // Constrain the card directly — overflow: hidden makes max-height
+            // definite for flex children, so .c-toc-nav can scroll within it.
+            // overflow: hidden also clips the list neatly to the border-radius.
+            .c-table-of-contents {
+                max-height: calc(100vh - 120px);
+                overflow: hidden;
+            }
         }
     }
 

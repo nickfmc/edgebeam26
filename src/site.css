@@ -9652,6 +9652,37 @@ body.has-bottom-banner {
   padding: 1.5rem;
   -webkit-box-shadow: 0 4px 24px rgba(15, 16, 95, 0.07);
           box-shadow: 0 4px 24px rgba(15, 16, 95, 0.07);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 0;
+  position: relative;
+}
+.c-table-of-contents::after {
+  content: "";
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 60px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(rgb(255, 255, 255)));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+  border-radius: 0 0 10px 10px;
+  pointer-events: none;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+}
+.c-table-of-contents.is-toc-scrollable::after {
+  opacity: 1;
+}
+.c-table-of-contents.is-toc-at-bottom::after {
+  opacity: 0;
 }
 .c-table-of-contents .c-toc-header {
   display: -webkit-box;
@@ -9664,6 +9695,74 @@ body.has-bottom-banner {
   margin-bottom: 1.1rem;
   padding-bottom: 1rem;
   border-bottom: 2px solid #EAEAEA;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+.c-table-of-contents .c-toc-toggle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: auto;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  color: #0f105f;
+  border-radius: 4px;
+  -webkit-transition: background-color all 250ms ease;
+  transition: background-color all 250ms ease;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+.c-table-of-contents .c-toc-toggle:hover {
+  background-color: rgba(15, 16, 95, 0.07);
+}
+@media (width >= 768px) {
+  .c-table-of-contents .c-toc-toggle {
+    display: none;
+  }
+}
+.c-table-of-contents .c-toc-chevron {
+  display: block;
+  -webkit-transition: -webkit-transform 0.25s ease;
+  transition: -webkit-transform 0.25s ease;
+  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+}
+.c-table-of-contents .c-toc-toggle[aria-expanded=true] .c-toc-chevron {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.c-table-of-contents .c-toc-nav {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-bottom: 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(15, 16, 95, 0.25) transparent;
+}
+.c-table-of-contents .c-toc-nav::-webkit-scrollbar {
+  width: 4px;
+}
+.c-table-of-contents .c-toc-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.c-table-of-contents .c-toc-nav::-webkit-scrollbar-thumb {
+  background-color: rgba(15, 16, 95, 0.25);
+  border-radius: 4px;
+}
+@media (width < 768px) {
+  .c-table-of-contents .c-toc-nav.is-collapsed {
+    display: none;
+  }
 }
 .c-table-of-contents .c-toc-title {
   font-size: 0.7rem;
@@ -9813,6 +9912,10 @@ body.has-bottom-banner {
         align-self: flex-start;
     -ms-flex-negative: 0;
         flex-shrink: 0;
+  }
+  .c-pillar-content-inner aside .c-table-of-contents {
+    max-height: calc(100vh - 120px);
+    overflow: hidden;
   }
 }
 @media (width >= 992px) {
