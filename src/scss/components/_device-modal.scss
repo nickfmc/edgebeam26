@@ -1,0 +1,139 @@
+/* ==========================================================================
+   Device Type Modal — [device_type_modal] shortcode
+   ========================================================================== */
+
+// Scroll lock — applied to both html and body for cross-browser support (incl. iOS Safari).
+// JS saves scrollY and sets body { top: -scrollYpx } before adding this class,
+// then restores scroll position on close.
+html.popup-form-open {
+	overflow: hidden;
+}
+body.popup-form-open {
+	position: fixed;
+	width: 100%;
+	overflow-y: scroll; // keeps scrollbar visible to prevent layout shift
+}
+
+// Overlay (hidden by default, shown via .is-active added by JS)
+.c-popup-overlay.c-device-modal {
+	display: none;
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+	width: 100vw !important;
+	height: 100vh !important;
+	z-index: 9999 !important;
+	background: rgba(0, 0, 0, 0.8) !important;
+	align-items: center !important;
+	justify-content: center !important;
+
+	&.is-active {
+		display: flex !important;
+	}
+}
+
+// Inner dialog container
+.c-device-modal__dialog {
+	overscroll-behavior: contain; // prevent scroll chaining to the page behind
+	position: relative;
+	background: #fff;
+	border-radius: 8px;
+	max-width: 960px;
+	width: 90%;
+	max-height: 90vh;
+	overflow-y: auto;
+	margin: auto;
+
+	@media (max-width: 1024px) {
+		max-width: calc(100vw - 20px);
+		max-height: calc(100vh - 40px);
+	}
+}
+
+.c-device-modal__header {
+	padding: 1.5rem 1.5rem 0;
+}
+
+.c-device-modal__heading {
+	margin: 0;
+}
+
+.c-device-modal__trigger svg {
+    width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+.c-device-modal__close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: transparent;
+	border: none;
+	font-size: 1.5rem;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0.25rem 0.5rem;
+}
+
+// Device grid
+.c-device-modal__list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	gap: 1.5rem;
+	padding: 1.5rem;
+}
+
+.c-device-modal__item {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.c-device-modal__image {
+	img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+}
+
+.c-device-modal__content {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.c-device-modal__logo {
+	margin-bottom: 0.75rem;
+}
+
+.c-device-modal__logo-img {
+	max-height: 40px;
+	width: auto;
+}
+
+.c-device-modal__title {
+	font-size: 1rem;
+	margin: 0 0 0.25rem;
+}
+
+.c-device-modal__part-number {
+	font-size: 0.85rem;
+	color: #666;
+	margin: 0 0 0.5rem;
+}
+
+.c-device-modal__excerpt {
+	font-size: 0.875rem;
+	margin: 0 0 1rem;
+	flex: 1;
+}
+
+.c-device-modal__link {
+	margin-top: auto;
+	font-weight: 600;
+}

@@ -15,37 +15,35 @@ global $content_width;
 $content_width = 1180;
 
 
-// ****************** Grab custom data and input into Generate Block headline field ************
+// limit term list to parent-only terms
+add_filter( 'generateblocks_dynamic_tag_output', function( $output, $options ) {
+    if ( ! array_key_exists( 'parentonly', $options ) ) {
+        return $output;
+    }
 
-                  // function custom_field_gb_query() {
-                  //   // Start output buffering
-                  //   ob_start();
-                  //     //  shortcode content
-                      
+    $taxonomy = $options['tax'] ?? $options['taxonomy'] ?? 'category';
+    $post_id  = get_the_ID();
+    $terms    = get_the_terms( $post_id, $taxonomy );
 
-                  //   $output = ob_get_clean();
+    if ( ! $terms || is_wp_error( $terms ) ) {
+        return '';
+    }
 
-                  //   // Return the content as a string
-                  //   return $output;
-                  // }
-                  // add_shortcode('custom_field_gb_query', 'custom_field_gb_query');
+    $sep   = $options['sep'] ?? ', ';
+    $names = array();
 
+    foreach ( $terms as $term ) {
+        if ( $term->parent === 0 ) {
+            $names[] = '<span class="gb-term gb-term--' . sanitize_html_class( $term->slug ) . '">' . esc_html( $term->name ) . '</span>';
+        }
+    }
 
+    if ( empty( $names ) ) {
+        return '';
+    }
 
-                  // add_filter( 'render_block_generateblocks/headline', function( $block_content, $block ) {
-                  //   if ( 
-                  //     !is_admin() && 
-                  //     ! empty( $block['attrs']['className'] ) && 
-                  //     strpos( $block['attrs']['className'], 'is-field-name' ) !== false 
-                  //   ) {
-                  //     $post_id = get_the_ID();
-                  //     $block_content = do_shortcode('[custom_field_gb_query]');		
-                  //   }
-
-                  //   return $block_content;
-                  // }, 10, 2 );
-
-// ****************** Grab custom data and input into Generate Block headline field ************
+    return implode( $sep, $names );
+}, 10, 2 );
 
 // Calculate estimated read time for post
 function gdt_get_read_time() {
@@ -828,5 +826,272 @@ function lottie_hero_shortcode( $atts ) {
 	return $output;
 }
 add_shortcode( 'lottie_hero', 'lottie_hero_shortcode' );
+
+
+// ---------------------------------------------------------------------------
+// Shortcode: [device_type_modal]
+//
+// Outputs a trigger link that opens a popup modal listing all published device
+// posts assigned to the given device_type taxonomy term.
+//
+// Attributes:
+//   device_type    (required) — slug of the device_type taxonomy term
+//   link_text      — visible label on the trigger link (default "View Devices")
+//   link_class     — extra CSS class(es) added to the trigger <a>
+//   heading        — modal heading; defaults to the term's display name
+//   posts_per_page — number of devices to show (-1 = all, default)
+//
+// Example: [device_type_modal device_type="rugged-tablet" link_text="See Rugged Tablets"]
+// ---------------------------------------------------------------------------
+
+function gdt_device_type_modal_shortcode( $atts ) {
+	$atts = shortcode_atts(
+		array(
+			'device_type'    => '',
+			'link_text'      => 'View Devices',
+			'link_class'     => '',
+			'heading'        => '',
+			'posts_per_page' => -1,
+		),
+		$atts,
+		'device_type_modal'
+	);
+
+	$term_slug = sanitize_title( $atts['device_type'] );
+	if ( empty( $term_slug ) ) {
+		return '';
+	}
+
+	$term = get_term_by( 'slug', $term_slug, 'device_type' );
+	if ( ! $term || is_wp_error( $term ) ) {
+		return '';
+	}
+
+	$query = new WP_Query( array(
+		'post_type'      => 'device',
+		'post_status'    => 'publish',
+		'posts_per_page' => intval( $atts['posts_per_page'] ),
+		'tax_query'      => array(
+			array(
+				'taxonomy' => 'device_type',
+				'field'    => 'slug',
+				'terms'    => $term_slug,
+			),
+		),
+		'no_found_rows'  => true,
+	) );
+
+	if ( ! $query->have_posts() ) {
+		return '';
+	}
+
+	// Enqueue the shared JS + CSS once per page load.
+	static $gdt_device_modal_assets_registered = false;
+	if ( ! $gdt_device_modal_assets_registered ) {
+		$gdt_device_modal_assets_registered = true;
+		add_action( 'wp_footer', 'gdt_device_modal_assets', 20 );
+	}
+
+	$modal_id   = 'device-modal-' . esc_attr( $term_slug ) . '-' . wp_unique_id();
+	$heading    = ! empty( $atts['heading'] ) ? esc_html( $atts['heading'] ) : esc_html( $term->name );
+	$link_class = ! empty( $atts['link_class'] ) ? ' ' . esc_attr( $atts['link_class'] ) : '';
+
+	// Build device list items.
+	$devices_html = '';
+	while ( $query->have_posts() ) {
+		$query->the_post();
+		$post_id = get_the_ID();
+
+		$title_override = function_exists( 'get_field' ) ? get_field( 'title_overide', $post_id ) : '';
+		$part_number    = function_exists( 'get_field' ) ? get_field( 'part_number',   $post_id ) : '';
+		$company_logo   = function_exists( 'get_field' ) ? get_field( 'company_logo',  $post_id ) : '';
+
+		$display_title = ! empty( $title_override ) ? $title_override : get_the_title();
+		$permalink     = get_permalink();
+		$excerpt       = get_the_excerpt();
+
+		$devices_html .= '<div class="c-device-modal__item">';
+
+		// if ( has_post_thumbnail() ) {
+		// 	$devices_html .= '<div class="c-device-modal__image">'
+		// 		. '<a href="' . esc_url( $permalink ) . '" tabindex="-1" aria-hidden="true">'
+		// 		. get_the_post_thumbnail( $post_id, 'medium', array( 'loading' => 'lazy' ) )
+		// 		. '</a></div>';
+		// }
+
+		$devices_html .= '<div class="c-device-modal__content">';
+
+		if ( $company_logo ) {
+			// ACF 'company_logo' field returns an attachment ID.
+			$logo_img = wp_get_attachment_image(
+				(int) $company_logo,
+				'medium',
+				false,
+				array( 'class' => 'c-device-modal__logo-img', 'loading' => 'lazy' )
+			);
+			if ( $logo_img ) {
+				$devices_html .= '<div class="c-device-modal__logo">' . $logo_img . '</div>';
+			}
+		}
+
+		$devices_html .= '<h3 class="c-device-modal__title"><a href="' . esc_url( $permalink ) . '">' . esc_html( $display_title ) . '</a></h3>';
+
+		if ( $part_number ) {
+			$devices_html .= '<p class="c-device-modal__part-number">' . esc_html( $part_number ) . '</p>';
+		}
+
+		if ( $excerpt ) {
+			$devices_html .= '<p class="c-device-modal__excerpt">' . esc_html( $excerpt ) . '</p>';
+		}
+
+		// $devices_html .= '<a class="c-device-modal__link" href="' . esc_url( $permalink ) . '">Learn More</a>';
+		$devices_html .= '</div>'; // .c-device-modal__content
+		$devices_html .= '</div>'; // .c-device-modal__item
+	}
+	wp_reset_postdata();
+
+	// Trigger link.
+	$trigger = '<a href="#' . $modal_id . '"'
+		. ' class="c-device-modal__trigger' . $link_class . '"'
+		. ' data-modal-id="' . $modal_id . '"'
+		. ' aria-haspopup="dialog">'
+		. esc_html( $atts['link_text'] )
+		. '<span class="gb-shape"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path></svg></span>'
+		. '</a>';
+
+	// Modal overlay — JS moves it to <body> on open and restores it on close.
+	$overlay  = '<div class="c-popup-overlay c-device-modal" id="' . $modal_id . '"'
+		. ' role="dialog" aria-modal="true" aria-hidden="true" aria-label="' . esc_attr( $heading ) . '">';
+	$overlay .= '<div class="c-popup-form c-device-modal__dialog">';
+	$overlay .= '<button class="c-popup-close c-device-modal__close" aria-label="' . esc_attr__( 'Close' ) . '">'
+		. '<span aria-hidden="true">&times;</span></button>';
+	$overlay .= '<div class="c-device-modal__header"><h2 class="is-style-eyebrow c-device-modal__heading">Devices for ' . $heading . '</h2></div>';
+	$overlay .= '<div class="c-device-modal__list">' . $devices_html . '</div>';
+	$overlay .= '</div>'; // .c-popup-form
+	$overlay .= '</div>'; // .c-popup-overlay
+
+	return $trigger . $overlay;
+}
+add_shortcode( 'device_type_modal', 'gdt_device_type_modal_shortcode' );
+
+
+/**
+ * Outputs the shared CSS and JS for the device-type modal.
+ * Hooked to wp_footer once per page when the shortcode is used.
+ */
+function gdt_device_modal_assets() {
+	?>
+	<script>
+	(function () {
+		'use strict';
+
+		var modals    = {};
+		var lastFocus = null;
+
+		function lockScroll() {
+			var scrollY = window.scrollY || window.pageYOffset;
+			var scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+			document.body.dataset.scrollLockY = scrollY;
+			if ( scrollbarWidth > 0 ) {
+				document.body.style.paddingRight = scrollbarWidth + 'px';
+			}
+			document.body.style.top    = '-' + scrollY + 'px';
+			document.documentElement.classList.add( 'popup-form-open' );
+			document.body.classList.add( 'popup-form-open' );
+		}
+
+		function unlockScroll() {
+			var scrollY = parseInt( document.body.dataset.scrollLockY || '0', 10 );
+			document.documentElement.classList.remove( 'popup-form-open' );
+			document.body.classList.remove( 'popup-form-open' );
+			document.body.style.top          = '';
+			document.body.style.paddingRight = '';
+			window.scrollTo( 0, scrollY );
+		}
+
+		function openModal( overlay ) {
+			lastFocus = document.activeElement;
+			lockScroll();
+			document.body.appendChild( overlay );
+			overlay.classList.add( 'is-active' );
+			overlay.setAttribute( 'aria-hidden', 'false' );
+			var closeBtn = overlay.querySelector( '.c-device-modal__close' );
+			if ( closeBtn ) { closeBtn.focus(); }
+		}
+
+		function closeModal( overlay ) {
+			overlay.classList.remove( 'is-active' );
+			overlay.setAttribute( 'aria-hidden', 'true' );
+			unlockScroll();
+			var entry = modals[ overlay.id ];
+			if ( entry && entry.placeholder && entry.placeholder.parentNode ) {
+				entry.placeholder.parentNode.insertBefore( overlay, entry.placeholder );
+				entry.placeholder.parentNode.removeChild( entry.placeholder );
+			}
+			delete modals[ overlay.id ];
+			if ( lastFocus ) { lastFocus.focus(); lastFocus = null; }
+		}
+
+		document.addEventListener( 'click', function ( e ) {
+			// Trigger link opens the modal.
+			var trigger = e.target.closest( '.c-device-modal__trigger' );
+			if ( trigger ) {
+				e.preventDefault();
+				var id      = trigger.getAttribute( 'data-modal-id' );
+				var overlay = document.getElementById( id );
+				if ( ! overlay ) { return; }
+				// Place a comment node so we can restore the overlay's original
+				// DOM position when it closes.
+				var placeholder = document.createComment( 'device-modal:' + id );
+				overlay.parentNode.insertBefore( placeholder, overlay );
+				modals[ id ] = { placeholder: placeholder };
+				openModal( overlay );
+				return;
+			}
+
+			// Close button.
+			var closeBtn = e.target.closest( '.c-device-modal .c-device-modal__close' );
+			if ( closeBtn ) {
+				closeModal( closeBtn.closest( '.c-popup-overlay' ) );
+				return;
+			}
+
+			// Backdrop click (click directly on the overlay, not the inner dialog).
+			if (
+				e.target.classList.contains( 'c-popup-overlay' ) &&
+				e.target.classList.contains( 'c-device-modal' )
+			) {
+				closeModal( e.target );
+			}
+		} );
+
+		// Keyboard: Escape to close, Tab to trap focus.
+		document.addEventListener( 'keydown', function ( e ) {
+			var active = document.querySelector( '.c-device-modal.is-active' );
+			if ( ! active ) { return; }
+
+			if ( e.key === 'Escape' ) {
+				closeModal( active );
+				return;
+			}
+
+			if ( e.key === 'Tab' ) {
+				var focusable = active.querySelectorAll(
+					'a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])'
+				);
+				if ( ! focusable.length ) { return; }
+				var first = focusable[ 0 ];
+				var last  = focusable[ focusable.length - 1 ];
+				if ( e.shiftKey ) {
+					if ( document.activeElement === first ) { e.preventDefault(); last.focus(); }
+				} else {
+					if ( document.activeElement === last )  { e.preventDefault(); first.focus(); }
+				}
+			}
+		} );
+	}());
+	</script>
+	<?php
+}
 
 ?>

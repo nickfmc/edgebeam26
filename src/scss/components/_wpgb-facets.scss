@@ -10,6 +10,7 @@
  .wpgb-inline-list {
   list-style: none;
   li {
+    padding-top: 10px !important;
     &::before {
       display: none !important;
     }
@@ -132,7 +133,7 @@
 
 
   .wpgb-button {
-    padding: 10px 20px !important;
+    padding: 16px 28px !important;
     .wpgb-button-label {
       line-height: 1 !important;
       padding-left: 22px;
