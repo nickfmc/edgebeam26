@@ -4,6 +4,7 @@
 // ── ACF options ──────────────────────────────────────────────────────────────
 $show_toc              = get_field( 'show_toc' );
 $show_author_read_time = get_field( 'show_author_read_time' );
+$author_name           = get_field( 'author_name' ) ?: get_the_author();
 $hero_bg_position      = get_field( 'hero_bg_position' ) ?: 'center';
 
 // ── Hero background from featured image ──────────────────────────────────────
@@ -30,7 +31,7 @@ $hero_classes     = 'o-layout-row c-blog-header' . ( $hero_has_bg ? ' has-featur
     <h1 class="c-blog-title h2-style"><?php the_title(); ?></h1>
     <?php if ( $show_author_read_time ) : ?>
     <div class="c-post-meta">
-      <?php echo get_the_author(); ?>   |   <?php echo gdt_get_read_time(); ?> Min Read
+      <?php echo esc_html( $author_name ); ?>   |   <?php echo gdt_get_read_time(); ?> Min Read
     </div>
     <?php endif; ?>
   </header>
@@ -94,7 +95,7 @@ $hero_classes     = 'o-layout-row c-blog-header' . ( $hero_has_bg ? ' has-featur
 <div class="o-layout-row">
   <main id="main-content" class="editor-content post-editor-content" role="main" itemscope itemprop="mainContentOfPage" itemtype="https://schema.org/WebPageElement">
 
-    <article <?php post_class(); ?> role="article">
+    <article <?php post_class( 'c-single-article' ); ?> role="article">
       <?php the_content(); ?>
     </article>
 

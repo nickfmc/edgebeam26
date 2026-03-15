@@ -21,9 +21,9 @@
           </div>
         </div>
 
-        <!-- Solutions Menu (2 columns) with Devices underneath -->
-        <div class="c-footer-menu-section c-footer-menu-section--with-devices">
-          <nav class="c-footer-navigation c-footer-navigation--two-col" role="navigation">
+        <!-- Solutions Menu -->
+        <div class="c-footer-menu-section">
+          <nav class="c-footer-navigation" role="navigation" aria-label="Solutions">
             <?php 
             if ( has_nav_menu( 'footer-solutions' ) ) {
               wp_nav_menu( array(
@@ -35,9 +35,11 @@
             }
             ?>
           </nav>
-          
-          <!-- Devices Menu -->
-          <nav class="c-footer-navigation c-footer-navigation--devices" role="navigation">
+        </div>
+
+        <!-- Devices + About Menus (stacked) -->
+        <div class="c-footer-menu-section c-footer-menu-section--stacked">
+          <nav class="c-footer-navigation" role="navigation" aria-label="Devices">
             <?php 
             if ( has_nav_menu( 'footer-devices' ) ) {
               wp_nav_menu( array(
@@ -49,31 +51,12 @@
             }
             ?>
           </nav>
-        </div>
 
-        <!-- About Menu -->
-        <div class="c-footer-menu-section">
-          <nav class="c-footer-navigation" role="navigation">
+          <nav class="c-footer-navigation" role="navigation" aria-label="About">
             <?php 
             if ( has_nav_menu( 'footer-about' ) ) {
               wp_nav_menu( array(
                 'theme_location' => 'footer-about',
-                'container'      => false,
-                'menu_class'     => 'c-footer-menu',
-                'depth'          => 1,
-              ) );
-            }
-            ?>
-          </nav>
-        </div>
-
-        <!-- Deep Dive Menu -->
-        <div class="c-footer-menu-section">
-          <nav class="c-footer-navigation" role="navigation">
-            <?php 
-            if ( has_nav_menu( 'footer-deep-dive' ) ) {
-              wp_nav_menu( array(
-                'theme_location' => 'footer-deep-dive',
                 'container'      => false,
                 'menu_class'     => 'c-footer-menu',
                 'depth'          => 1,

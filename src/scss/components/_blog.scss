@@ -57,6 +57,10 @@
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
+    @media(width >= $bp-medium) {
+    margin-bottom: 40px;
+    
+    } 
 }
 
 .c-single-post__share-title {

@@ -243,6 +243,21 @@
     }
 }
 
+.c-single-article {
+    padding-top: 48px;
+    padding-bottom: 80px;
+
+    @media(width >= $bp-medium) {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    @media(width >= $bp-large) {
+        padding-top: 120px;
+        padding-bottom: 120px;
+    }
+}
+
 .c-pillar-content-inner {
     display: flex;
     flex-direction: column;

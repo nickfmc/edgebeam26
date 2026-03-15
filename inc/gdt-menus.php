@@ -10,9 +10,12 @@
 // registering WP nav menus
 register_nav_menus(
   array(
-    'main-menu' => 'Primary Menu',           // main nav menu
-    'tertiary-menu' => 'Tertiary Menu',      // tertiary nav menu
-    'mobile-menu' => 'Mobile Menu'      // mobile nav menu
+    'main-menu'        => 'Primary Menu',           // main nav menu
+    'tertiary-menu'    => 'Tertiary Menu',           // tertiary nav menu
+    'mobile-menu'      => 'Mobile Menu',             // mobile nav menu
+    'footer-solutions' => 'Footer: Solutions',       // footer col 2
+    'footer-devices'   => 'Footer: Devices',         // footer col 3 (top)
+    'footer-about'     => 'Footer: About',           // footer col 3 (bottom)
   )
 );
 
