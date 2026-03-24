@@ -791,15 +791,15 @@ add_shortcode( 'first_category_icon', 'gdt_first_category_icon_shortcode' );
  * Outputs a sequenced Lottie animation hero container.
  *
  * Attributes:
- *   files  Comma-separated filenames from /img/lottie/ (default: all three)
- *   fade   Crossfade duration in milliseconds (default: 600)
+ *   files  Comma-separated filenames from /img/lottie/ (default: all four)
+ *   fade   Crossfade duration in milliseconds (default: 600) 
  *
- * Example: [lottie_hero files="lottie1.json,lottie2.json,lottie3.json" fade="600"]
+ * Example: [lottie_hero files="home1.json,home2.json,home3.json,home4.json" fade="600"]
  */
 function lottie_hero_shortcode( $atts ) {
 	$atts = shortcode_atts(
 		array(
-			'files' => 'lottie1.json,lottie2.json,lottie3.json',
+			'files' => 'home1.json,home2.json,home3.json,home4.json',
 			'fade'  => 600,
 		),
 		$atts,
@@ -956,7 +956,10 @@ function gdt_device_type_modal_shortcode( $atts ) {
 		. ' data-modal-id="' . $modal_id . '"'
 		. ' aria-haspopup="dialog">'
 		. esc_html( $atts['link_text'] )
-		. '<span class="gb-shape"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path></svg></span>'
+		. '<span class="gb-shape"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" style="fill:none !important;">
+  <path d="M10.4492 2.94922L17.4999 9.99994L10.4492 17.0507" stroke="CurrentColor" stroke-width="2" stroke-linejoin="round"></path>
+  <path d="M17.4999 10L2.5 10" stroke="CurrentColor" stroke-width="2" stroke-linejoin="round"></path>
+</svg></span>'
 		. '</a>';
 
 	// Modal overlay — JS moves it to <body> on open and restores it on close.

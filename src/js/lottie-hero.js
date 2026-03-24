@@ -52,17 +52,16 @@ window.addEventListener('load', function () {
         // Guard: only act if this is actually the current animation
         if (animations[currentIndex] !== anim) return;
 
-        var nextIndex = (currentIndex + 1) % animations.length;
+        var nextIndex  = (currentIndex + 1) % animations.length;
+        var prevIndex  = currentIndex;
+        currentIndex   = nextIndex;
 
-        // Crossfade simultaneously
-        slides[currentIndex].classList.remove('is-active');
+        // Start the next animation immediately so it plays during the crossfade
+        animations[nextIndex].goToAndPlay(0, true);
+
+        // Crossfade: fade out the old slide, fade in the new one (CSS handles timing)
+        slides[prevIndex].classList.remove('is-active');
         slides[nextIndex].classList.add('is-active');
-
-        // Wait for fade to finish, then play the next animation
-        setTimeout(function () {
-          currentIndex = nextIndex;
-          animations[currentIndex].goToAndPlay(0, true);
-        }, fadeMs);
       });
     });
 

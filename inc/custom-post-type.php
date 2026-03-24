@@ -40,7 +40,7 @@ function gdt_device_reg() {
     'menu_icon'            => 'dashicons-smartphone',
     'rewrite'              => array( 'slug' => 'devices', 'with_front' => false ),
     'capability_type'      => 'post',
-    'has_archive'          => true,
+    'has_archive'          => false,
     'hierarchical'         => false,
     'supports'             => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'revisions' )
   );

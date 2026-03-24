@@ -247,17 +247,17 @@
         {
           "name": "Large",
           "slug": "large",
-          "size": "22px"
+          "size": "20px"
         },
         {
           "name": "X Large",
           "slug": "xlarge",
-          "size": "24px"
+          "size": "22px"
         },
         {
           "name": "XX Large",
           "slug": "xxlarge",
-          "size": "28px"
+          "size": "26px"
         }
       ],
       "fontStyle": true,

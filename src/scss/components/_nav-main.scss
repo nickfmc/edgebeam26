@@ -155,7 +155,7 @@
   }
   .c-main-menu ul li {
    &:first-of-type a {
-    color: var(--Blue-2, #001871);
+    color: #ffffff;
 font-size: 22px;
 font-style: normal;
 font-weight: 600;
@@ -166,7 +166,7 @@ letter-spacing: -0.22px;
   }
 
   .c-main-menu ul li a {
-    color: $color-primary;
+    color: #fff;
     font-size: 0.938rem;
     padding: 10px 0;
     width: 100%;
@@ -185,7 +185,7 @@ letter-spacing: -0.22px;
   .c-main-menu ul .current_page_item > a,
   .c-main-menu ul .current_page_parent > a,
   .c-main-menu ul .current_page_ancestor > a {
-    color: #000;
+    color: #ffffff;
     border-radius: var(--radius-md, 8px);
 
     // text-decoration: underline;

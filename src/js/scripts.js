@@ -41,6 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeButton = document.getElementById('close-banner');
   
   if (!banner || !closeButton) return;
+
+  // Don't show the banner if the user already dismissed it this session
+  if (sessionStorage.getItem('bannerDismissed') === '1') {
+    banner.classList.add('is-hidden');
+    return;
+  }
   
   // Show banner after a short delay
   setTimeout(() => {
@@ -63,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Close banner on button click
   closeButton.addEventListener('click', () => {
+    sessionStorage.setItem('bannerDismissed', '1');
     banner.classList.remove('is-visible');
     removeBodyPadding();
     

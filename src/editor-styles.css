@@ -3352,18 +3352,17 @@ h1 {
 }
 @media (width >= 768px) {
   h1 {
-    font-size: clamp(3.33rem, 2.6vw + 2.76rem, 4.78rem);
+    font-size: clamp(3.22rem, 1.4vw + 2.91rem, 4rem);
   }
 }
 
 h2 {
-  font-size: clamp(2.22rem, 2vw + 1.78rem, 3.33rem);
+  font-size: clamp(2.22rem, 1.4vw + 1.91rem, 3rem);
   margin: 0 0 1.5rem 0;
 }
 
 h3 {
   font-size: clamp(1.67rem, 1.8vw + 1.27rem, 2.67rem);
-  font-weight: 600;
   margin: 0 0 1rem 0;
 }
 
@@ -3373,7 +3372,7 @@ h4 {
 }
 
 h5 {
-  font-size: clamp(1.33rem, 0.4vw + 1.24rem, 1.56rem);
+  font-size: clamp(1.33rem, 0.2vw + 1.29rem, 1.44rem);
   margin: 0 0 1rem 0;
 }
 
@@ -3406,7 +3405,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
   .editor-content .h1-style,
   .h1-style,
   .is-style-h1-style {
-    font-size: clamp(3.33rem, 2.6vw + 2.76rem, 4.78rem);
+    font-size: clamp(3.22rem, 1.4vw + 2.91rem, 4rem);
   }
 }
 
@@ -3414,7 +3413,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .h2-style,
 .is-style-h2-style {
   line-height: 1.1;
-  font-size: clamp(2.22rem, 2vw + 1.78rem, 3.33rem);
+  font-size: clamp(2.22rem, 1.4vw + 1.91rem, 3rem);
   letter-spacing: -0.48px;
 }
 
@@ -3432,13 +3431,14 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
   line-height: 1.1;
   font-size: clamp(1.33rem, 1.2vw + 1.07rem, 2rem);
   letter-spacing: -0.48px;
+  font-weight: 500 !important;
 }
 
 .editor-content .h5-style,
 .h5-style,
 .is-style-h5-style {
   line-height: 1.1;
-  font-size: clamp(1.33rem, 0.4vw + 1.24rem, 1.56rem);
+  font-size: clamp(1.33rem, 0.2vw + 1.29rem, 1.44rem);
   letter-spacing: -0.48px;
 }
 
@@ -3621,10 +3621,11 @@ a[href^="mailto:"] {
    P TAGS
    ========================================================================== */
 p {
-  line-height: 1.8;
+  line-height: 1.7;
   letter-spacing: -0.18px;
   margin: 0 0 1rem 0;
   padding: 0;
+  font-weight: 300;
 }
 
 .has-large-body-font-size {
