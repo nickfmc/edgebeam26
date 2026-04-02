@@ -96,7 +96,7 @@ $modal_id = 'video-modal-' . uniqid();
                                 </svg>
                             <?php else : ?>
                                 <svg width="45" height="45" viewBox="0 0 45 45" fill="none">
-           ! empty( $cover_image ) && $has_video
+                                    <rect x="1" y="1" width="43" height="43" rx="21.5" stroke="white" stroke-width="2"/>
                                     <path d="M30.5 21.634C31.1667 22.0189 31.1667 22.9811 30.5 23.366L18.5 30.2942C17.8333 30.6791 17 30.198 17 29.4282L17 15.5718C17 14.802 17.8333 14.3209 18.5 14.7058L30.5 21.634Z" fill="white"/>
                                 </svg>
                             <?php endif; ?>
@@ -109,7 +109,7 @@ $modal_id = 'video-modal-' . uniqid();
 </div>
 
 <!-- Modal Structure moved outside block wrapper for full page overlay -->
-<?php if ( ( ! $use_testimonial_fields && ! empty( $cover_image ) && ! empty( $youtube_video_id ) ) || ( $use_testimonial_fields && ! empty( $cover_image ) && ! empty( $youtube_video_id ) ) ) : ?>
+<?php if ( ! empty( $cover_image ) && $has_video ) : ?>
 <div 
     class="c-popup-overlay c-video-modal-overlay" 
     id="<?php echo esc_attr( $modal_id ); ?>"
