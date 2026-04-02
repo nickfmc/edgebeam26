@@ -13,7 +13,9 @@
 $use_testimonial_fields = $attributes['useTestimonialFields'] ?? false;
 $cover_image = $attributes['coverImage'] ?? null;
 $title = $attributes['title'] ?? 'Watch Video';
+$video_type = $attributes['videoType'] ?? 'youtube';
 $youtube_video_id = $attributes['youtubeVideoId'] ?? '';
+$local_video = $attributes['localVideo'] ?? null;
 $transcript = $attributes['transcript'] ?? '';
 $alignment = $attributes['alignment'] ?? 'center';
 $use_alternate_style = $attributes['useAlternateStyle'] ?? false;
@@ -56,10 +58,23 @@ $modal_id = 'video-modal-' . uniqid();
 ?>
 <div <?php echo $wrapper_attributes; ?>>
     <div class="c-video-modal__container">
-        <?php if ( ( ! $use_testimonial_fields && ! empty( $cover_image ) && ! empty( $youtube_video_id ) ) || ( $use_testimonial_fields && ! empty( $cover_image ) && ! empty( $youtube_video_id ) ) ) : ?>
+        <?php 
+        // Check if we have the necessary data to display video
+        $has_video = false;
+        if ( ! $use_testimonial_fields ) {
+            $has_video = ( $video_type === 'youtube' && ! empty( $youtube_video_id ) ) || 
+                        ( $video_type === 'local' && ! empty( $local_video ) );
+        } else {
+            $has_video = ! empty( $youtube_video_id );
+        }
+        
+        if ( ! empty( $cover_image ) && $has_video ) : 
+        ?>
             <div 
                 class="c-video-modal__cover" 
+                data-video-type="<?php echo esc_attr( $video_type ); ?>"
                 data-video-id="<?php echo esc_attr( $youtube_video_id ); ?>"
+                data-local-video="<?php echo esc_attr( ! empty( $local_video ) ? wp_json_encode( $local_video ) : '' ); ?>"
                 data-transcript="<?php echo esc_attr( $transcript ); ?>"
                 data-modal-id="<?php echo esc_attr( $modal_id ); ?>"
                 data-use-testimonial-fields="<?php echo esc_attr( $use_testimonial_fields ? 'true' : 'false' ); ?>"
@@ -94,7 +109,7 @@ $modal_id = 'video-modal-' . uniqid();
 </div>
 
 <!-- Modal Structure moved outside block wrapper for full page overlay -->
-<?php if ( ( ! $use_testimonial_fields && ! empty( $cover_image ) && ! empty( $youtube_video_id ) ) || ( $use_testimonial_fields && ! empty( $cover_image ) && ! empty( $youtube_video_id ) ) ) : ?>
+<?php if ( ! empty( $cover_image ) && $has_video ) : ?>
 <div 
     class="c-popup-overlay c-video-modal-overlay" 
     id="<?php echo esc_attr( $modal_id ); ?>"
