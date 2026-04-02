@@ -96,7 +96,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .editor-content .h4-style,
 .h4-style,
 .is-style-h4-style {
-  line-height: $line-height-tight;
+  line-height: 1.2;
   font-size: clamped(24px, 36px);
   letter-spacing: -0.48px;
   font-weight: 500 !important;

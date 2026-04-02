@@ -63,17 +63,7 @@
               
               <article <?php post_class('c-search-card'); ?> role="article">
                 
-                <div class="c-search-card__image">
-                  <?php if (has_post_thumbnail()) : ?>
-                    <?php the_post_thumbnail('medium', array('class' => 'c-search-card__thumbnail')); ?>
-                  <?php else : ?>
-                    <div class="c-search-card__placeholder">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 16L8.586 11.414C9.367 10.633 10.633 10.633 11.414 11.414L16 16M14 14L15.586 12.414C16.367 11.633 17.633 11.633 18.414 12.414L20 14M14 8H14.01M6 20H18C19.105 20 20 19.105 20 18V6C20 4.895 19.105 4 18 4H6C4.895 4 4 4.895 4 6V18C4 19.105 4.895 20 6 20Z" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </div>
-                  <?php endif; ?>
-                </div>
+                
                 
                 <div class="c-search-card__content">
                   <header class="c-search-card__header">

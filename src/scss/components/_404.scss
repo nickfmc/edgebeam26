@@ -17,6 +17,7 @@
   align-items: center;
   gap: var(--spacing-4xl, 32px);
   align-self: stretch;
+  flex-direction: column;
   > div {
     display: flex;
   padding-right: var(--spacing-4xl, 32px);
@@ -24,6 +25,12 @@
   align-items: flex-start;
   gap: var(--spacing-6xl, 48px);
   flex: 1 0 0;
+  }
+  @media(width >= $bp-medium) {
+  flex-direction: row;
+  } 
+  svg {
+    max-width: 100%;
   }
   }
   

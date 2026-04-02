@@ -3428,7 +3428,7 @@ p:not(.is-style-eyebrow) + h6, p:not(.is-style-eyebrow) + .h6-style, ol + h6, ol
 .editor-content .h4-style,
 .h4-style,
 .is-style-h4-style {
-  line-height: 1.1;
+  line-height: 1.2;
   font-size: clamp(1.33rem, 1.2vw + 1.07rem, 2rem);
   letter-spacing: -0.48px;
   font-weight: 500 !important;

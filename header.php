@@ -20,9 +20,12 @@
 
   <?php wp_head(); // wordpress head functions -- DONOTREMOVE ?>
 
-  <?php // START Google Analytics here ?>
-  <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HF3P5GCYB"></script> <script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-1HF3P5GCYB'); </script>
+  <?php // START Google Analytics here ?> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HF3P5GCYB"></script> <script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-1HF3P5GCYB'); </script>
   <?php // END Analytics ?>
+  <!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51157240.js"></script>
+<!-- End of HubSpot Embed Code -->
   <!-- GSAP Core Library (Required) -->
 
 

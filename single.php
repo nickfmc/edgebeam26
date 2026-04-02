@@ -130,8 +130,23 @@ $hero_classes     = 'o-layout-row c-blog-header' . ( $hero_has_bg ? ' has-featur
 
 <?php endif; ?>
 
-<?php endwhile; ?>
-<?php get_template_part( 'template-part/post/post-nav' ); ?>
+<?php endwhile; ?> 
+
+<?php get_template_part( 'template-part/post/related-resources' ); ?>
+<?php
+// Display the Animated Gradient Connect synced pattern
+$pattern = get_posts( array(
+	'post_type'      => 'wp_block',
+	'title'          => 'Animated Gradient Connect',
+	'posts_per_page' => 1,
+	'orderby'        => 'ID',
+	'order'          => 'DESC'
+) );
+
+if ( $pattern ) {
+	echo do_blocks( $pattern[0]->post_content );
+}
+?>
 <?php else : ?>
 <?php get_template_part( 'template-part/post/not-found' ); ?>
 <?php endif; ?>

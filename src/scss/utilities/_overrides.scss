@@ -124,3 +124,41 @@ border: 1px solid #D9D9D9;
 p + .c-btn--secondary {
   margin-top: 20px;
 }
+
+.wpgb-button.wpgb-load-more {
+  border-radius: 50% !important;
+  background-color: var(--color-blue-1) !important;
+  color: #fff !important;
+  width: 45px !important;
+  height: 45px !important;
+  position: relative !important;
+  padding: 0 !important;
+  transition: $transition-ease !important;
+  &::after,
+  &::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    background-color: #fff !important;
+  }
+  &::after {
+    width: 15px !important;
+    height: 2px !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  &::before {
+    width: 2px !important;
+    height: 15px !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  &:hover {
+    background-color: var(--color-blue-2) !important;
+    transform: translateY(-4px);
+     transition: $transition-ease !important;
+    &::after,
+    &::before {
+      background-color: #fff !important;
+    }
+   }
+}

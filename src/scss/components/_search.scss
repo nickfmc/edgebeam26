@@ -251,7 +251,7 @@ justify-content: flex-end;
 // Individual Search Result Card
 .c-search-card {
   display: grid;
-  grid-template-columns: 72px 1fr;
+  grid-template-columns: 1fr;
   gap: 32px;
   padding: 32px;
   background: var(--color-white, #ffffff);

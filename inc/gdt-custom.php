@@ -1097,4 +1097,79 @@ function gdt_device_modal_assets() {
 	<?php
 }
 
+/** 
+ * Get Related Posts for Single Post
+ * 
+ * Returns 2 posts with fallback logic:
+ * - 2+ posts in same category: return those from the category
+ * - 1 post in same category: return it + 1 latest post
+ * - 0 posts in same category: return 2 latest posts (excluding current)
+ */
+function gdt_get_related_posts( $post_id = 0, $count = 2 ) {
+	if ( ! $post_id ) {
+		$post_id = get_the_ID();
+	}
+
+	if ( ! $post_id ) {
+		return array();
+	}
+
+	// Get the first category of the current post
+	$categories = get_the_category( $post_id );
+	$related_posts = array();
+
+	if ( ! empty( $categories ) ) {
+		$first_category_id = $categories[0]->term_id;
+
+		// Query posts in the same category
+		$args = array(
+			'posts_per_page' => $count,
+			'post__not_in'   => array( $post_id ),
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'category',
+					'field'    => 'term_id',
+					'terms'    => $first_category_id,
+				),
+			),
+		);
+
+		$category_posts = get_posts( $args );
+
+		// Logic: If we have 2+ posts from category, use those
+		if ( count( $category_posts ) >= $count ) {
+			return array_slice( $category_posts, 0, $count );
+		}
+
+		// If we have 1 post from category, use it + latest posts
+		if ( count( $category_posts ) === 1 ) {
+			$related_posts = $category_posts;
+			$needed = $count - 1;
+
+			// Get latest posts excluding current and category ones
+			$latest_args = array(
+				'posts_per_page' => $needed,
+				'post__not_in'   => array_merge( array( $post_id ), wp_list_pluck( $category_posts, 'ID' ) ),
+				'orderby'        => 'date',
+				'order'          => 'DESC',
+			);
+
+			$latest_posts = get_posts( $latest_args );
+			$related_posts = array_merge( $related_posts, $latest_posts );
+
+			return $related_posts;
+		}
+	}
+
+	// If no category posts or no categories, get latest posts
+	$latest_args = array(
+		'posts_per_page' => $count,
+		'post__not_in'   => array( $post_id ),
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+	);
+
+	return get_posts( $latest_args );
+}
+
 ?>
