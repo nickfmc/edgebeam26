@@ -114,7 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update ARIA attributes
         modal.setAttribute('aria-hidden', 'true');
-        video (works for both YouTube iframe and HTML5 video)
+        
+        // Stop video (works for both YouTube iframe and HTML5 video)
         const videoContainer = modal.querySelector('.c-video-modal__video-wrapper');
         if (videoContainer) {
             // Check if there's an HTML5 video element and pause it
@@ -123,13 +124,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 videoElement.pause();
                 videoElement.currentTime = 0;
             }
-            // Clear containerst.remove('popup-form-open');
-        
-        // Stop YouTube video
-        const videoContainer = modal.querySelector('.c-video-modal__video-wrapper');
-        if (videoContainer) {
+            // Clear container
             videoContainer.innerHTML = '';
         }
+        
+        // Allow body scroll
+        document.body.classList.remove('popup-form-open');
         
         // Remove focus trap
         removeFocusTrap(modal);
@@ -236,6 +236,13 @@ document.addEventListener('DOMContentLoaded', function() {
         iframe.style.left = '0';
         iframe.style.width = '100%';
         iframe.style.height = '100%';
+        iframe.frameBorder = '0';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        
+        wrapper.appendChild(iframe);
+        container.appendChild(wrapper);
+    }
     
     function loadLocalVideo(videoData, containerId) {
         const container = document.getElementById(containerId);
@@ -266,13 +273,6 @@ document.addEventListener('DOMContentLoaded', function() {
         video.setAttribute('controlsList', 'nodownload');
         
         wrapper.appendChild(video);
-        container.appendChild(wrapper);
-    }
-        iframe.frameBorder = '0';
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-        iframe.allowFullscreen = true;
-        
-        wrapper.appendChild(iframe);
         container.appendChild(wrapper);
     }
 });
