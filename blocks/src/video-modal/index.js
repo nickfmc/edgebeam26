@@ -59,7 +59,23 @@ registerBlockType( blockData.name, {
         };
 
         const onRemoveVideo = () => {
-            setAttributes({>
+            setAttributes({
+                localVideo: null
+            });
+        };
+
+        return (
+            <>
+                <InspectorControls>
+                    <PanelBody title={ __( 'Video Settings', 'gdt-theme' ) }>
+                        <CheckboxControl
+                            label={ __( 'Use Testimonial Fields', 'gdt-theme' ) }
+                            checked={ useTestimonialFields }
+                            onChange={ ( value ) => setAttributes( { useTestimonialFields: value } ) }
+                            help={ __( 'When enabled, uses featured image and ACF video_url field from the current post.', 'gdt-theme' ) }
+                        />
+                        { ! useTestimonialFields && (
+                            <>
                                 <SelectControl
                                     label={ __( 'Video Source', 'gdt-theme' ) }
                                     value={ videoType }
@@ -121,23 +137,7 @@ registerBlockType( blockData.name, {
                                         </MediaUploadCheck>
                                     </div>
                                 ) }
-                            <
-            <>
-                <InspectorControls>
-                    <PanelBody title={ __( 'Video Settings', 'gdt-theme' ) }>
-                        <CheckboxControl
-                            label={ __( 'Use Testimonial Fields', 'gdt-theme' ) }
-                            checked={ useTestimonialFields }
-                            onChange={ ( value ) => setAttributes( { useTestimonialFields: value } ) }
-                            help={ __( 'When enabled, uses featured image and ACF video_url field from the current post.', 'gdt-theme' ) }
-                        />
-                        { ! useTestimonialFields && (
-                            <TextControl
-                                label={ __( 'YouTube Video URL or ID', 'gdt-theme' ) }
-                                value={ youtubeVideoId }
-                                onChange={ ( value ) => setAttributes( { youtubeVideoId: extractYouTubeId(value) } ) }
-                                help={ __( 'Enter YouTube video URL or video ID', 'gdt-theme' ) }
-                            />
+                            </>
                         ) }
                         <SelectControl
                             label={ __( 'Alignment', 'gdt-theme' ) }
@@ -197,13 +197,9 @@ registerBlockType( blockData.name, {
                                                         <ResponsiveWrapper
                                                             naturalWidth={ 400 }
                                                             naturalHeight={ 300 }
-                                                    (videoType === 'youtube' ? youtubeVideoId : localVideo) && (
-                            <div className="c-video-modal__preview-info">
-                                { videoType === 'youtube' ? (
-                                    <p><strong>{ __( 'YouTube Video ID:', 'gdt-theme' ) }</strong> { youtubeVideoId }</p>
-                                ) : (
-                                    <p><strong>{ __( 'Local Video:', 'gdt-theme' ) }</strong> { __( 'File selected', 'gdt-theme' ) }</p>
-                                ) }
+                                                        >
+                                                            <img 
+                                                                src={ coverImage.url } 
                                                                 alt={ coverImage.alt || __( 'Video cover image', 'gdt-theme' ) }
                                                             />
                                                         </ResponsiveWrapper>
@@ -211,20 +207,18 @@ registerBlockType( blockData.name, {
                                                             { ! useAlternateStyle && (
                                                                 <RichText
                                                                     tagName="div"
-                                                         videoType, youtubeVideoId, localVideo, transcript, alignment, useAlternateStyle } = attributes;
-        const blockProps = useBlockProps.save({
-            className: `c-video-modal c-video-modal--${alignment}${useAlternateStyle ? ' c-video-modal--alternate' : ''}`,
-        });
-
-        return (
-            <div { ...blockProps }>
-                <div className="c-video-modal__container">
-                    { ( ! useTestimonialFields && coverImage ) || useTestimonialFields ? (
-                        <div 
-                            className="c-video-modal__cover" 
-                            data-video-type={ videoType }
-                            data-video-id={ youtubeVideoId }
-                            data-local-video={ localVideo ? JSON.stringify(localVideo) : ''  </div>
+                                                                    className="c-video-modal__title"
+                                                                    value={ title }
+                                                                    onChange={ ( value ) => setAttributes( { title: value } ) }
+                                                                    placeholder={ __( 'Enter video title...', 'gdt-theme' ) }
+                                                                />
+                                                            ) }
+                                                            <div className="c-video-modal__play-button">
+                                                                <svg width="45" height="45" viewBox="0 0 45 45" fill="none">
+                                                                    <rect x="1" y="1" width="43" height="43" rx="21.5" stroke="white" strokeWidth="2"/>
+                                                                    <path d="M30.5 21.634C31.1667 22.0189 31.1667 22.9811 30.5 23.366L18.5 30.2942C17.8333 30.6791 17 30.198 17 29.4282L17 15.5718C17 14.802 17.8333 14.3209 18.5 14.7058L30.5 21.634Z" fill="white"/>
+                                                                </svg>
+                                                            </div>
                                                         </div>
                                                         <div className="c-video-modal__image-controls">
                                                             <Button 
@@ -260,9 +254,13 @@ registerBlockType( blockData.name, {
                             </div>
                         )}
                         
-                        { ! useTestimonialFields && youtubeVideoId && (
+                        { ! useTestimonialFields && (videoType === 'youtube' ? youtubeVideoId : localVideo) && (
                             <div className="c-video-modal__preview-info">
-                                <p><strong>{ __( 'YouTube Video ID:', 'gdt-theme' ) }</strong> { youtubeVideoId }</p>
+                                { videoType === 'youtube' ? (
+                                    <p><strong>{ __( 'YouTube Video ID:', 'gdt-theme' ) }</strong> { youtubeVideoId }</p>
+                                ) : (
+                                    <p><strong>{ __( 'Local Video:', 'gdt-theme' ) }</strong> { __( 'File selected', 'gdt-theme' ) }</p>
+                                ) }
                                 { transcript && (
                                     <p><strong>{ __( 'Transcript:', 'gdt-theme' ) }</strong> { transcript.substring(0, 100) }{ transcript.length > 100 ? '...' : '' }</p>
                                 )}
@@ -274,7 +272,7 @@ registerBlockType( blockData.name, {
         );
     },
     save: function( { attributes } ) {
-        const { useTestimonialFields, coverImage, title, youtubeVideoId, transcript, alignment, useAlternateStyle } = attributes;
+        const { useTestimonialFields, coverImage, title, videoType, youtubeVideoId, localVideo, transcript, alignment, useAlternateStyle } = attributes;
         const blockProps = useBlockProps.save({
             className: `c-video-modal c-video-modal--${alignment}${useAlternateStyle ? ' c-video-modal--alternate' : ''}`,
         });
@@ -285,7 +283,9 @@ registerBlockType( blockData.name, {
                     { ( ! useTestimonialFields && coverImage ) || useTestimonialFields ? (
                         <div 
                             className="c-video-modal__cover" 
+                            data-video-type={ videoType }
                             data-video-id={ youtubeVideoId }
+                            data-local-video={ localVideo ? JSON.stringify(localVideo) : '' }
                             data-transcript={ transcript }
                             data-use-testimonial-fields={ useTestimonialFields }
                             data-use-alternate-style={ useAlternateStyle }
