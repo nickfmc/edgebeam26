@@ -7,12 +7,23 @@ document.addEventListener('DOMContentLoaded', function() {
     videoModalCovers.forEach(function(cover) {
         // Add click event to open modal
         cover.addEventListener('click', function() {
+            const videoType = this.getAttribute('data-video-type') || 'youtube';
             const videoId = this.getAttribute('data-video-id');
+            const localVideoData = this.getAttribute('data-local-video');
             const modalId = this.getAttribute('data-modal-id');
             const modal = document.getElementById(modalId);
             
-            if (modal && videoId) {
-                openVideoModal(modal, videoId, modalId);
+            if (modal) {
+                if (videoType === 'local' && localVideoData) {
+                    try {
+                        const localVideo = JSON.parse(localVideoData);
+                        openVideoModal(modal, null, modalId, 'local', localVideo);
+                    } catch(e) {
+                        console.error('Error parsing local video data:', e);
+                    }
+                } else if (videoType === 'youtube' && videoId) {
+                    openVideoModal(modal, videoId, modalId, 'youtube', null);
+                }
             }
         });
     });
@@ -55,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Store focus before modal opens
     let lastFocusedElement = null;
     
-    function openVideoModal(modal, videoId, modalId) {
+    function openVideoModal(modal, videoId, modalId, videoType, localVideo) {
         // Store the currently focused element
         lastFocusedElement = document.activeElement;
         
@@ -78,8 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show modal
         modal.classList.add('is-active');
         
-        // Load YouTube video
-        loadYouTubeVideo(videoId, modalId + '-video');
+        // Load appropriate video type
+        if (videoType === 'local' && localVideo) {
+            loadLocalVideo(localVideo, modalId + '-video');
+        } else if (videoType === 'youtube' && videoId) {
+            loadYouTubeVideo(videoId, modalId + '-video');
+        }
         
         // Set up focus trap
         setupFocusTrap(modal);
@@ -99,9 +114,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update ARIA attributes
         modal.setAttribute('aria-hidden', 'true');
-        
-        // Allow body scroll
-        document.body.classList.remove('popup-form-open');
+        video (works for both YouTube iframe and HTML5 video)
+        const videoContainer = modal.querySelector('.c-video-modal__video-wrapper');
+        if (videoContainer) {
+            // Check if there's an HTML5 video element and pause it
+            const videoElement = videoContainer.querySelector('video');
+            if (videoElement) {
+                videoElement.pause();
+                videoElement.currentTime = 0;
+            }
+            // Clear containerst.remove('popup-form-open');
         
         // Stop YouTube video
         const videoContainer = modal.querySelector('.c-video-modal__video-wrapper');
@@ -214,6 +236,38 @@ document.addEventListener('DOMContentLoaded', function() {
         iframe.style.left = '0';
         iframe.style.width = '100%';
         iframe.style.height = '100%';
+    
+    function loadLocalVideo(videoData, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container || !videoData || !videoData.url) return;
+        
+        // Create responsive video wrapper
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'relative';
+        wrapper.style.width = '100%';
+        wrapper.style.height = '0';
+        wrapper.style.paddingBottom = '56.25%'; // 16:9 aspect ratio
+        wrapper.style.backgroundColor = '#000';
+        
+        // Create HTML5 video element
+        const video = document.createElement('video');
+        video.src = videoData.url;
+        video.style.position = 'absolute';
+        video.style.top = '0';
+        video.style.left = '0';
+        video.style.width = '100%';
+        video.style.height = '100%';
+        video.controls = true;
+        video.autoplay = true;
+        video.preload = 'metadata';
+        
+        // Add common video attributes
+        video.setAttribute('playsinline', '');
+        video.setAttribute('controlsList', 'nodownload');
+        
+        wrapper.appendChild(video);
+        container.appendChild(wrapper);
+    }
         iframe.frameBorder = '0';
         iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
         iframe.allowFullscreen = true;

@@ -6,8 +6,8 @@
   "title": "Video Modal",
   "category": "gdt-blocks",
   "icon": "video-alt3",
-  "description": "A video modal block with cover image, title, YouTube video, and transcript. Can also be used for testimonials with featured image and ACF video_url field.",
-  "keywords": ["video", "modal", "youtube", "transcript", "gdt"],
+  "description": "A video modal block with cover image, title, YouTube or local video file, and transcript. Can also be used for testimonials with featured image and ACF video_url field.",
+  "keywords": ["video", "modal", "youtube", "local", "transcript", "gdt"],
   "textdomain": "gdt-theme",
   "attributes": {
     "useTestimonialFields": {
@@ -22,9 +22,17 @@
       "type": "string",
       "default": "Watch Video"
     },
+    "videoType": {
+      "type": "string",
+      "default": "youtube"
+    },
     "youtubeVideoId": {
       "type": "string",
       "default": ""
+    },
+    "localVideo": {
+      "type": "object",
+      "default": null
     },
     "transcript": {
       "type": "string",
