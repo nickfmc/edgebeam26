@@ -80,7 +80,7 @@
       <div class="o-wrapper-wide">
         <div class="c-footer-copyright-container">
           <div class="c-copywrite">
-            Copyright © 2026 EdgeBeam Wireless. All Rights Reserved. Terms and Conditions. Privacy Policy.
+            Copyright © 2026 EdgeBeam Wireless. All Rights Reserved. <a style="color: #fff !important; text-decoration:underline;" href="/privacy-policy/">Privacy Policy</a>.
           </div>
         </div>
       </div>

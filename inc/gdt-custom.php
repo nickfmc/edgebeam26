@@ -537,29 +537,61 @@ function gdt_get_first_category_icon( $post_id = 0, $show_name = false, $wrapper
 	$first_category = $categories[0];
 	
 	// Get ACF fields
-	$category_icon = get_field( 'category_icon', 'category_' . $first_category->term_id );
+	$category_icon  = get_field( 'category_icon',  'category_' . $first_category->term_id );
 	$category_color = get_field( 'category_color', 'category_' . $first_category->term_id );
+	$tile_image     = get_field( 'tile_image',      $post_id );
 	
 	if ( ! $category_icon ) {
 		return '';
 	}
 	
-	// Build output
-	$output = '<div class="' . esc_attr( $wrapper_class ) . '"';
-	$output .= ' data-post-id="' . esc_attr( $post_id ) . '" data-category="' . esc_attr( $first_category->slug ) . '"';
-	
-	if ( $category_color ) {
-		$output .= ' style="background-color: ' . esc_attr( $category_color ) . ';"';
+	if ( $tile_image ) {
+		// Split layout: colored icon pane (50%) + white logo pane (50%)
+		// Handle all three ACF image return formats: array, attachment ID, or URL string
+		if ( is_array( $tile_image ) ) {
+			$tile_image_url = $tile_image['url'] ?? '';
+			$tile_image_alt = $tile_image['alt'] ?? '';
+		} elseif ( is_numeric( $tile_image ) ) {
+			$src = wp_get_attachment_image_src( (int) $tile_image, 'full' );
+			$tile_image_url = $src ? $src[0] : '';
+			$tile_image_alt = get_post_meta( (int) $tile_image, '_wp_attachment_image_alt', true );
+		} else {
+			$tile_image_url = (string) $tile_image;
+			$tile_image_alt = '';
+		}
+
+		$output  = '<div class="' . esc_attr( $wrapper_class ) . ' ' . esc_attr( $wrapper_class ) . '--has-tile"';
+		$output .= ' data-post-id="' . esc_attr( $post_id ) . '" data-category="' . esc_attr( $first_category->slug ) . '">';
+
+		// Left pane — icon on category color background (50%)
+		$left_style = $category_color ? ' style="background-color: ' . esc_attr( $category_color ) . ';"' : '';
+		$output .= '<div class="' . esc_attr( $wrapper_class ) . '__icon-pane"' . $left_style . '>';
+		$output .= '<img src="' . esc_url( $category_icon ) . '" alt="' . esc_attr( $first_category->name ) . '" class="category-icon" />';
+		if ( $show_name ) {
+			$output .= '<span class="category-name">' . esc_html( $first_category->name ) . '</span>';
+		}
+		$output .= '</div>';
+
+		// Right pane — tile image (logo) on white background (50%)
+		$output .= '<div class="' . esc_attr( $wrapper_class ) . '__logo-pane">';
+		$output .= '<img src="' . esc_url( $tile_image_url ) . '" alt="' . esc_attr( $tile_image_alt ) . '" class="category-tile-image" />';
+		$output .= '</div>';
+
+		$output .= '</div>';
+	} else {
+		// Standard full-width layout
+		$output  = '<div class="' . esc_attr( $wrapper_class ) . '"';
+		$output .= ' data-post-id="' . esc_attr( $post_id ) . '" data-category="' . esc_attr( $first_category->slug ) . '"';
+		if ( $category_color ) {
+			$output .= ' style="background-color: ' . esc_attr( $category_color ) . ';"';
+		}
+		$output .= '>';
+		$output .= '<img src="' . esc_url( $category_icon ) . '" alt="' . esc_attr( $first_category->name ) . '" class="category-icon" />';
+		if ( $show_name ) {
+			$output .= '<span class="category-name">' . esc_html( $first_category->name ) . '</span>';
+		}
+		$output .= '</div>';
 	}
-	
-	$output .= '>';
-	$output .= '<img src="' . esc_url( $category_icon ) . '" alt="' . esc_attr( $first_category->name ) . '" class="category-icon" />';
-	
-	if ( $show_name ) {
-		$output .= '<span class="category-name">' . esc_html( $first_category->name ) . '</span>';
-	}
-	
-	$output .= '</div>';
 	
 	return $output;
 }
@@ -1171,5 +1203,114 @@ function gdt_get_related_posts( $post_id = 0, $count = 2 ) {
 
 	return get_posts( $latest_args );
 }
+
+// ---------------------------------------------------------------------------
+// Shortcode: [post_excerpt_or_link]
+//
+// Displays the post excerpt, unless the post has the 'media-coverage' category,
+// in which case it displays an external link to the ACF 'article_link' field.
+//
+// Usage: [post_excerpt_or_link] (inside a WordPress loop)
+// ---------------------------------------------------------------------------
+
+function gdt_post_excerpt_or_link_shortcode( $atts ) {
+	// Get current post ID
+	$post_id = get_the_ID();
+	if ( ! $post_id ) {
+		return '';
+	}
+
+	// Check if post has 'media-coverage' category
+	$categories = get_the_category( $post_id );
+	$is_media_coverage = false;
+	
+	if ( ! empty( $categories ) ) {
+		foreach ( $categories as $category ) {
+			if ( 'media-coverage' === $category->slug ) {
+				$is_media_coverage = true;
+				break;
+			}
+		}
+	}
+
+	if ( $is_media_coverage ) {
+		// Display external link for media-coverage posts
+		$article_link = function_exists( 'get_field' ) ? get_field( 'article_link', $post_id ) : '';
+		if ( $article_link ) {
+			$output = '<a href="' . esc_url( $article_link ) . '" target="_blank" rel="noopener noreferrer" class="media-coverage-link">';
+			$output .= 'Read Full Article';
+			$output .= '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;margin-left:0.25em;vertical-align:middle;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
+			$output .= '</a>';
+			return $output;
+		}
+		return '';
+	} else {
+		// Display excerpt for non-media-coverage posts
+		$excerpt = get_the_excerpt( $post_id );
+		if ( $excerpt ) {
+			return '<div class="post-excerpt">' . wp_kses_post( $excerpt ) . '</div>';
+		}
+		return '';
+	}
+}
+add_shortcode( 'post_excerpt_or_link', 'gdt_post_excerpt_or_link_shortcode' );
+
+/**
+ * Process shortcodes in GenerateBlocks text blocks
+ * This enables shortcodes to work properly in GB query loops
+ */
+add_filter( 'render_block_generateblocks/text', function( $block_content, $block ) {
+	// Only process if content might contain shortcodes
+	if ( strpos( $block_content, '[' ) !== false ) {
+		// Set up post context if available from block
+		if ( ! empty( $block['context']['postId'] ) ) {
+			global $post;
+			$original_post = $post;
+			$post = get_post( $block['context']['postId'] );
+			setup_postdata( $post );
+			
+			$block_content = do_shortcode( $block_content );
+			
+			// Restore original post
+			$post = $original_post;
+			if ( $post ) {
+				setup_postdata( $post );
+			} else {
+				wp_reset_postdata();
+			}
+		} else {
+			$block_content = do_shortcode( $block_content );
+		}
+	}
+	
+	return $block_content;
+}, 10, 2 );
+
+/**
+ * Process shortcodes in GenerateBlocks headline blocks
+ */
+add_filter( 'render_block_generateblocks/headline', function( $block_content, $block ) {
+	if ( strpos( $block_content, '[' ) !== false ) {
+		if ( ! empty( $block['context']['postId'] ) ) {
+			global $post;
+			$original_post = $post;
+			$post = get_post( $block['context']['postId'] );
+			setup_postdata( $post );
+			
+			$block_content = do_shortcode( $block_content );
+			
+			$post = $original_post;
+			if ( $post ) {
+				setup_postdata( $post );
+			} else {
+				wp_reset_postdata();
+			}
+		} else {
+			$block_content = do_shortcode( $block_content );
+		}
+	}
+	
+	return $block_content;
+}, 10, 2 );
 
 ?>

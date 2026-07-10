@@ -18,11 +18,11 @@
 
 
 // custom excerpt length **************
-function gdt_custom_excerpt_length($length)
-{
-  return 66;
-}
-add_filter('excerpt_length', 'gdt_custom_excerpt_length', 999);
+// function gdt_custom_excerpt_length($length)
+// {
+//   return 66;
+// }
+// add_filter('excerpt_length', 'gdt_custom_excerpt_length', 999);
 
 
 // This removes the annoying [...] to a Read More link
